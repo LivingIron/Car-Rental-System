@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="400" maxWidth="520" minHeight="400" minWidth="520" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #ECECE7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #ECECE7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="228.0" BorderPane.alignment="CENTER">
          <children>
@@ -48,7 +47,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="exitButton" layoutX="66.0" layoutY="328.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: #24F1CB;" text="Exit" textFill="WHITE">
+            <Button fx:id="exitButton" layoutX="66.0" layoutY="328.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: #24F1CB;" text="Exit" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -59,7 +58,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" layoutX="57.0" layoutY="369.0" prefHeight="17.0" prefWidth="179.0" text="Invalid Login. Please try again." textFill="#ff1616" />
+            <Label fx:id="loginMessageErrorLabel" alignment="CENTER" layoutX="57.0" layoutY="369.0" prefHeight="17.0" prefWidth="179.0" textFill="#ff1616" />
          </children>
       </AnchorPane>
    </center>

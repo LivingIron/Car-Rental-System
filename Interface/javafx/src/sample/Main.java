@@ -15,6 +15,7 @@ public class Main extends Application {
         primaryStage.setTitle("Car Rental System");
         primaryStage.setScene(new Scene(root, 520, 400));
         primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
 
