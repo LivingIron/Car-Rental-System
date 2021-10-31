@@ -36,7 +36,7 @@
             <TextField fx:id="usernameTextField" layoutX="61.0" layoutY="160.0" prefHeight="26.0" prefWidth="173.0" promptText="Username" />
             <Label layoutX="120.0" layoutY="200.0" text="Password:" />
             <PasswordField fx:id="enterPasswordField" layoutX="60.0" layoutY="229.0" prefHeight="26.0" prefWidth="173.0" promptText="Password" />
-            <Button fx:id="loginButton" layoutX="66.0" layoutY="286.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: #24F1CB;" text="Login" textFill="WHITE">
+            <Button fx:id="loginButton" layoutX="66.0" layoutY="286.0" mnemonicParsing="false" onAction="#loginButtonOnAction"  prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: #24F1CB;" text="Login" textFill="WHITE">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
