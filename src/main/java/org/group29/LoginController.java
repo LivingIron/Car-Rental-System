@@ -1,10 +1,17 @@
 package org.group29;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 
 public class LoginController {
     @FXML
@@ -16,10 +23,24 @@ public class LoginController {
     @FXML
     private PasswordField enterPasswordField;
 
+    private void closeStage()
+    {
+        ((Stage) usernameTextField.getScene().getWindow()).close();
+    }
 
-    public void loginButtonOnAction(){
+    public void loginButtonOnAction() throws IOException {
         loginMessageErrorLabel.setText("Logging in ...");
-        JavaPostgreSQL.loginToDatabase(usernameTextField.getText(),enterPasswordField.getText());
+        if(JavaPostgreSQL.loginToDatabase(usernameTextField.getText(),enterPasswordField.getText())) {
+            Stage stage = new Stage();
+            stage.setTitle("Admin Panel");
+            Pane myPane;
+            myPane = FXMLLoader.load(getClass().getResource("AdminLogged.fxml"));
+            Scene scene = new Scene(myPane);
+            stage.setScene(scene);
+
+            closeStage();
+            stage.show();
+        }
     }
 
     public void cancelButtonOnAction(){
