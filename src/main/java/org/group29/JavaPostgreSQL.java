@@ -6,9 +6,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JavaPostgreSQL {
-    private static String databaseUrl = "jdbc:postgresql://localhost:5432/CarRental";
-    private static String databaseUser = "postgres";
-    private static String databasePassword = "1234";
+    private static final String databaseUrl = "jdbc:postgresql://localhost:5432/CarRental";
+    private static final String databaseUser = "postgres";
+    private static final String databasePassword = "1234";
 
     public static void writeToDatabase(String userName, String userPassword){
         String query = String.format("INSERT INTO users(username, password) VALUES (%s, %s)", "'" + userName + "'", "'" + userPassword + "'");
@@ -71,6 +71,4 @@ public class JavaPostgreSQL {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
-
-
 }
