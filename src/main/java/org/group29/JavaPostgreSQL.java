@@ -8,31 +8,26 @@ import java.util.logging.Logger;
 public class JavaPostgreSQL {
 
     public static void writeToDatabase(String userName, String userPassword){
-
         String url = "jbdc:postgresql://localhost:5432/CarRental";
         String user = "postgres";
-        String password = "7232";
+        String password = "1234";
 
-        String query = "INSERT INTO users(username , password) VALUES (?, ?)";
-        try(Connection con =DriverManager.getConnection(url,user,password);
-            PreparedStatement pst=con.prepareStatement(query)) {
+        String query = String.format("INSERT INTO users(username, password) VALUES (%s, %s)", "'" + userName + "'", "'" + userPassword + "'");
+        try(Connection con = DriverManager.getConnection(url, user, password)){
+            con.prepareStatement(query).executeUpdate();
 
-
-            pst.setString(1,userName);
-            pst.setString(2,userPassword);
-            pst.executeUpdate();
             System.out.println("Successfully created.");
-
-        } catch(SQLException ex){
+        }
+        catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE,ex.getMessage(),ex);
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
 
-    public static void loginToDatabase(String userName, String userPassword) {
+    public static boolean loginToDatabase(String userName, String userPassword) {
         String url = "jdbc:postgresql://localhost:5432/CarRental";
         String user = "postgres";
-        String password = "7232";
+        String password = "1234";
 
         String query = String.format("SELECT password FROM users WHERE username = %s", "'" + userName + "'");
         try(Connection con = DriverManager.getConnection(url, user, password)){
@@ -49,12 +44,15 @@ public class JavaPostgreSQL {
                     String retrievedPassword= res.getString("password");
                     if(retrievedPassword.equals(userPassword)){
                         System.out.println("LOGGED IN!!!!");
+                        return true;
                     }
                 }
             }
-        }catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE,ex.getMessage(),ex);
         }
+        catch(SQLException ex){
+            Logger lgr = Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return false;
     }
 }

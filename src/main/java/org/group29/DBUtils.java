@@ -12,7 +12,7 @@ import java.io.IOException;
 public class DBUtils {
 
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String username, String password){
-        Parent root = null;
+        Parent root;
 
         try {
             FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
@@ -23,10 +23,9 @@ public class DBUtils {
             stage.setTitle(title);
             stage.setScene(new Scene(root,600,400));
             stage.show();
-        }catch (IOException e){
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
-
     }
-
 }
