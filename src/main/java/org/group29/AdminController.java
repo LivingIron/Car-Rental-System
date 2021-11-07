@@ -16,9 +16,19 @@ public class AdminController {
 
     @FXML
     private Button AdminExitButton;
+    @FXML
+    private Button FirmNameAddButton;
+    @FXML
+    private TextField FirmNameTextField;
+
+
 
     public void cancelButtonOnAction(){
         Stage stage = (Stage) AdminExitButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void addFirmOnAction(){
+        JavaPostgreSQL.AddFirm(FirmNameTextField.getText());
     }
 }
