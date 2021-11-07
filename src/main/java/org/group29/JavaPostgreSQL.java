@@ -56,6 +56,7 @@ public class JavaPostgreSQL {
         return false;
     }
 
+    //to be fixed
     public static void AddFirm(String firmName){
         String url = "jbdc:postgresql://localhost:5432/CarRental";
         String user = "postgres";
