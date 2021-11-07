@@ -6,14 +6,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JavaPostgreSQL {
+    private static String databaseUrl = "jdbc:postgresql://localhost:5432/CarRental";
+    private static String databaseUser = "postgres";
+    private static String databasePassword = "1234";
 
     public static void writeToDatabase(String userName, String userPassword){
-        String url = "jbdc:postgresql://localhost:5432/CarRental";
-        String user = "postgres";
-        String password = "1234";
-
         String query = String.format("INSERT INTO users(username, password) VALUES (%s, %s)", "'" + userName + "'", "'" + userPassword + "'");
-        try(Connection con = DriverManager.getConnection(url, user, password)){
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             con.prepareStatement(query).executeUpdate();
 
             System.out.println("Successfully created.");
@@ -25,12 +24,8 @@ public class JavaPostgreSQL {
     }
 
     public static boolean loginToDatabase(String userName, String userPassword) {
-        String url = "jdbc:postgresql://localhost:5432/CarRental";
-        String user = "postgres";
-        String password = "1234";
-
         String query = String.format("SELECT password FROM users WHERE username = %s", "'" + userName + "'");
-        try(Connection con = DriverManager.getConnection(url, user, password)){
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             ResultSet res = con.prepareStatement(query).executeQuery();
 
             if(!res.isBeforeFirst()){
@@ -56,14 +51,9 @@ public class JavaPostgreSQL {
         return false;
     }
 
-    //to be fixed
     public static void AddFirm(String firmName){
-        String url = "jdbc:postgresql://localhost:5432/CarRental";
-        String user = "postgres";
-        String password = "1234";
-
         String query = String.format("SELECT firm_name FROM firm WHERE firm_name=%s", "'" + firmName + "'");
-        try(Connection con = DriverManager.getConnection(url, user, password)){
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
 
             ResultSet res = con.prepareStatement(query).executeQuery();
             if(!res.isBeforeFirst()){
