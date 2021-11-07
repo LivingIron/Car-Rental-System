@@ -31,18 +31,21 @@ public class LoginController {
     public void loginButtonOnAction() throws IOException {
         loginMessageErrorLabel.setText("Logging in ...");
         if(JavaPostgreSQL.loginToDatabase(usernameTextField.getText(),enterPasswordField.getText())) {
-            Stage stage = new Stage();
-            stage.setTitle("Admin Panel");
-            Pane myPane;
-            myPane = FXMLLoader.load(getClass().getResource("AdminLogged.fxml"));
-            Scene scene = new Scene(myPane);
-            stage.setScene(scene);
 
-            closeStage();
+            if(usernameTextField.getText().equals("admin")){
+                Stage stage = new Stage();
+                Pane myPane;
+                myPane = FXMLLoader.load(getClass().getResource("AdminLogged.fxml"));
+                Scene scene = new Scene(myPane);
 
-            stage.setResizable(false);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.show();
+                stage.setTitle("Admin Panel");
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.initStyle(StageStyle.UNDECORATED);
+
+                closeStage();
+                stage.show();
+            }
         }
     }
 
