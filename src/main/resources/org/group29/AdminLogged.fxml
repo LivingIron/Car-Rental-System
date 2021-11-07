@@ -21,10 +21,14 @@
                   <Font name="SansSerif" size="28.0" />
                </font>
             </Text>
-            <Button layoutX="26.0" layoutY="248.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" text="Click to add Firm" />
-            <Button layoutX="26.0" layoutY="307.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" text="Click to add Operator" />
-            <Button layoutX="26.0" layoutY="368.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" text="Click to add Vehicle" />
+            <Button layoutX="26.0" layoutY="248.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="186.0" text="Click to add Firm" />
+            <Button layoutX="26.0" layoutY="307.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="186.0" text="Click to add Operator" />
+            <Button layoutX="26.0" layoutY="368.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="186.0" text="Click to add Vehicle" />
+            <Button layoutX="68.0" layoutY="466.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Exit" />
          </children>
       </AnchorPane>
    </right>
+   <left>
+      <AnchorPane prefHeight="520.0" prefWidth="564.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER" />
+   </left>
 </BorderPane>
