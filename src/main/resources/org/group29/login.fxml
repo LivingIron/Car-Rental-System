@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #ECECE7;" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.LoginController">
+   <left>
+      <AnchorPane prefHeight="407.0" prefWidth="228.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="400.0" fitWidth="293.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/loginscreen.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="323.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="62.0" fitWidth="62.0" layoutX="115.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/loginscreenlock.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="120.0" layoutY="129.0" text="Username:" />
+            <TextField fx:id="usernameTextField" layoutX="61.0" layoutY="160.0" prefHeight="26.0" prefWidth="173.0" promptText="Username" />
+            <Label layoutX="120.0" layoutY="200.0" text="Password:" />
+            <PasswordField fx:id="enterPasswordField" layoutX="60.0" layoutY="229.0" prefHeight="26.0" prefWidth="173.0" promptText="Password" />
+            <Button fx:id="loginButton" layoutX="66.0" layoutY="286.0" mnemonicParsing="false" onAction="#loginButtonOnAction"  prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: #24F1CB;" text="Login" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <DropShadow height="9.28" radius="4.14" width="9.28" />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="exitButton" layoutX="66.0" layoutY="328.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="164.0" style="-fx-background-color: #24F1CB;" text="Exit" textFill="WHITE">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <DropShadow height="9.28" radius="4.14" width="9.28" />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label fx:id="loginMessageErrorLabel" alignment="CENTER" layoutX="57.0" layoutY="369.0" prefHeight="17.0" prefWidth="179.0" textFill="#ff1616" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
