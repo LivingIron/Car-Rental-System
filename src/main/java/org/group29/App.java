@@ -1,4 +1,4 @@
-package sample;
+package org.group29;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,11 +7,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class Main extends Application {
+import java.io.IOException;
+
+public class App extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+    public void start(Stage primaryStage) throws IOException {
+        Parent root = loadFXML("login");
         primaryStage.setTitle("Car Rental System");
         primaryStage.setScene(new Scene(root, 520, 400));
         primaryStage.setResizable(false);
@@ -19,8 +21,13 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
+
 }

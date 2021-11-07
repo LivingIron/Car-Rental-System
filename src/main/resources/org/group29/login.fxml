@@ -12,13 +12,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #ECECE7;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #ECECE7;" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="228.0" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="400.0" fitWidth="293.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/loginscreen.png" />
+                  <Image url="@img/loginscreen.png" />
                </image>
             </ImageView>
          </children>
@@ -29,7 +29,7 @@
          <children>
             <ImageView fitHeight="62.0" fitWidth="62.0" layoutX="115.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/loginscreenlock.png" />
+                  <Image url="@img/loginscreenlock.png" />
                </image>
             </ImageView>
             <Label layoutX="120.0" layoutY="129.0" text="Username:" />
