@@ -5,14 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/img/admin_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/AdminLogged.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/AdminLogged.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -91,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636310990543</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fixed some filenames added buttons to Admin FXML">
+      <created>1636317367493</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1636317367493</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -110,6 +124,7 @@
     <MESSAGE value="Changed directories" />
     <MESSAGE value="Added unrevisioned files" />
     <MESSAGE value="Fixed merge issues , made admin panel unresizable and undecorated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed merge issues , made admin panel unresizable and undecorated" />
+    <MESSAGE value="Fixed some filenames added buttons to Admin FXML" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed some filenames added buttons to Admin FXML" />
   </component>
 </project>
