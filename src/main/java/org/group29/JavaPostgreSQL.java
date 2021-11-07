@@ -58,22 +58,19 @@ public class JavaPostgreSQL {
 
     //to be fixed
     public static void AddFirm(String firmName){
-        String url = "jbdc:postgresql://localhost:5432/CarRental";
+        String url = "jdbc:postgresql://localhost:5432/CarRental";
         String user = "postgres";
         String password = "1234";
 
-        String query = String.format("SELECT firm_name FROM firm WHERE firm_name =", "'" + firmName + "'");
+        String query = String.format("SELECT firm_name FROM firm WHERE firm_name=%s", "'" + firmName + "'");
         try(Connection con = DriverManager.getConnection(url, user, password)){
 
             ResultSet res = con.prepareStatement(query).executeQuery();
             if(!res.isBeforeFirst()){
-
-                String AddFirm = "INSERT INTO firm(firm_name) VALUES (?)";
-                PreparedStatement pst=con.prepareStatement(AddFirm);
-                pst.setString(1,firmName);
-                pst.executeUpdate(AddFirm);
-
-            }else{
+                String insertStatement = String.format("INSERT INTO firm(firm_name) VALUES (%s)", "'" + firmName + "'");
+                con.prepareStatement(insertStatement).executeUpdate();
+            }
+            else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Firm name is taken");
                 alert.show();
