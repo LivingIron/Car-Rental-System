@@ -5,13 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -32,16 +39,38 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Programs\Java\Projects\Course-Project-Java\src\main\resources\org\group29\img" />
       <recent name="F:\Programs\Java\Projects\Course-Project-Java\Interface" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.group29.App" />
+      <module name="Course-Project-Java" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.group29.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b255dccf-b850-497b-93cb-dcfcb1bd65af" name="Default Changelist" comment="" />
+      <changelist id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="" />
       <created>1635076444632</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -54,7 +83,42 @@
       <option name="project" value="LOCAL" />
       <updated>1635076673922</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added unrevisioned files">
+      <created>1636309771657</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1636309771657</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fixed merge issues , made admin panel unresizable and undecorated">
+      <created>1636310990543</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1636310990543</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixed some filenames added buttons to Admin FXML">
+      <created>1636317367493</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1636317367493</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Made exit button on administrator page functional">
+      <created>1636317943520</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1636317943520</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added logic for adding a firm button">
+      <created>1636320779748</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1636320779748</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -71,6 +135,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changed directories" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed directories" />
+    <MESSAGE value="Added unrevisioned files" />
+    <MESSAGE value="Fixed merge issues , made admin panel unresizable and undecorated" />
+    <MESSAGE value="Fixed some filenames added buttons to Admin FXML" />
+    <MESSAGE value="Made exit button on administrator page functional" />
+    <MESSAGE value="Added logic for adding a firm button" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added logic for adding a firm button" />
   </component>
 </project>
