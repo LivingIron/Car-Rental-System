@@ -77,8 +77,6 @@ public class JavaPostgreSQL {
                 alert.setContentText("Firm name is taken");
                 alert.show();
             }
-
-
         }
         catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
