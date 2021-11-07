@@ -23,7 +23,7 @@ public class LoginController {
 
     public void loginButtonOnAction(){
         loginMessageErrorLabel.setText("Logging in ...");
-        JavaPostgreSql.loginToDatabase(usernameTextField.getText(),enterPasswordField.getText());
+        JavaPostgreSql.loginToDatabase(usernameTextField.getText(),usernameTextField.getText());
 
     }
 

@@ -46,28 +46,34 @@ public class JavaPostgreSql {
         String pass = userPassword;
         ResultSet res=null;
 
-        String query = "SELECT password,username FROM users WHERE username = ? AND password = ? ";
+        String query = "SELECT password,username FROM users WHERE username = ? AND password = ? ; ";
         try(Connection con =DriverManager.getConnection(url,user,password);
             PreparedStatement pst=con.prepareStatement(query)) {
-
 
             pst.setString(1,name);
             pst.setString(2,pass);
             res=pst.executeQuery();
 
-            if(!res.isBeforeFirst()){
+            if(res.next()==false){
                 System.out.println("User not found in the database");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Provided Credentials are incorrect");
                 alert.show();
             }else{
-                while (res.next()){
-                String retrievedUserName= res.getString("username");
-                String retrievedPassword= res.getString("password");
-                if(retrievedUserName.equals(user) && retrievedPassword.equals(password)){
-                    System.out.println("LOGGED IN!!!!");
+
+
+                if(res.getString("username").equals(userName) && res.getString("password").equals(userPassword)){
+                    System.out.println("Logged In");
+
+                }else {
+                    System.out.println(res.getString("username"));
+                    System.out.println(res.getString("password"));
+                    System.out.println(userName);
+                    System.out.println(userPassword);
+                    System.out.println("Not equal ?");
                 }
-                }
+
+
             }
 
 
