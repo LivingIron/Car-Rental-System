@@ -39,6 +39,9 @@ public class LoginController {
             stage.setScene(scene);
 
             closeStage();
+
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
         }
     }
