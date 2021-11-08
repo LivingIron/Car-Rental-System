@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
-    </list>
+    <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -156,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636392259089</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Removed deprecated function for registering operators">
+      <created>1636392341026</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1636392341026</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,6 +187,7 @@
     <MESSAGE value="Merged branches" />
     <MESSAGE value="Made buttons functional so you can switch between admin operations" />
     <MESSAGE value="Made Add Operator functional" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made Add Operator functional" />
+    <MESSAGE value="Removed deprecated function for registering operators" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed deprecated function for registering operators" />
   </component>
 </project>

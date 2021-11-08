@@ -41,7 +41,7 @@
       <AnchorPane prefHeight="493.0" prefWidth="482.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane fx:id="VehiclePane" disable="true" layoutX="20.0" layoutY="20.0" prefHeight="460.0" prefWidth="441.0" />
-            <AnchorPane fx:id="OperatorPane" prefHeight="445.0" prefWidth="438.0">
+            <AnchorPane fx:id="OperatorPane" disable="true" prefHeight="445.0" prefWidth="438.0" visible="false">
                <children>
                   <ImageView layoutX="179.0" layoutY="21.0">
                      <image>
@@ -74,7 +74,7 @@
                   </Label>
                   <Button fx:id="AddOperatorButton" layoutX="164.0" layoutY="387.0" mnemonicParsing="false" onAction="#addOperatorOnAction" prefHeight="25.0" prefWidth="110.0" text="Add Operator" />
                </children></AnchorPane>
-            <AnchorPane fx:id="FirmPane" disable="true" prefHeight="458.0" prefWidth="440.0" visible="false">
+            <AnchorPane fx:id="FirmPane" prefHeight="458.0" prefWidth="440.0">
                <children>
                   <TextField fx:id="FirmNameTextField" layoutX="117.0" layoutY="212.0" prefHeight="35.0" prefWidth="209.0" promptText="Enter Firm Name" />
                   <Label layoutX="191.0" layoutY="146.0" text="Firm">
