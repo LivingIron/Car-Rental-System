@@ -10,19 +10,6 @@ public class JavaPostgreSQL {
     private static final String databaseUser = "postgres";
     private static final String databasePassword = "1234";
 
-    public static void writeToDatabase(String userName, String userPassword){
-        String query = String.format("INSERT INTO users(username, password) VALUES (%s, %s)", "'" + userName + "'", "'" + userPassword + "'");
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-            con.prepareStatement(query).executeUpdate();
-
-            System.out.println("Successfully created.");
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-    }
-
     public static boolean loginToDatabase(String userName, String userPassword) {
         String query = String.format("SELECT password FROM users WHERE username = %s", "'" + userName + "'");
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
