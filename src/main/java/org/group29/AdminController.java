@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.security.PrivateKey;
+
 public class AdminController {
 
     @FXML
@@ -33,7 +35,16 @@ public class AdminController {
     private AnchorPane OperatorPane;
     @FXML
     private AnchorPane VehiclePane;
-
+    @FXML
+    private TextField OperatorUsername;
+    @FXML
+    private PasswordField OperatorPassword;
+    @FXML
+    private PasswordField OperatorConfirmPassword;
+    @FXML
+    private TextField OperatorFirmName;
+    @FXML
+    private Button AddOperatorButton;
 
     public void cancelButtonOnAction(){
         Stage stage = (Stage) AdminExitButton.getScene().getWindow();
@@ -42,6 +53,10 @@ public class AdminController {
 
     public void addFirmOnAction(){
         JavaPostgreSQL.AddFirm(FirmNameTextField.getText());
+    }
+
+    public void addOperatorOnAction(){
+        JavaPostgreSQL.AddOperator(OperatorUsername.getText(),OperatorPassword.getText(),OperatorConfirmPassword.getText(),OperatorFirmName.getText());
     }
 
     public  void SwitchToFirmOnAction(){

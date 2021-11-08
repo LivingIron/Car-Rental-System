@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/img/Firm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/img/operator_icon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/AdminLogged.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/AdminLogged.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +33,14 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1zx4XY0a4riiGOZxZA1ruzo5m7X" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -137,7 +146,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636322178359</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Made buttons functional so you can switch between admin operations">
+      <created>1636387461111</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1636387461111</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -161,6 +177,7 @@
     <MESSAGE value="Added logic for adding a firm button" />
     <MESSAGE value="Switched branches" />
     <MESSAGE value="Merged branches" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merged branches" />
+    <MESSAGE value="Made buttons functional so you can switch between admin operations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made buttons functional so you can switch between admin operations" />
   </component>
 </project>
