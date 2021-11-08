@@ -24,9 +24,9 @@
                   <Font name="SansSerif" size="21.0" />
                </font>
             </Text>
-            <Button layoutX="26.0" layoutY="204.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="186.0" text="Click to add Firm" />
-            <Button layoutX="26.0" layoutY="263.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="186.0" text="Click to add Operator" />
-            <Button layoutX="26.0" layoutY="324.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="186.0" text="Click to add Vehicle" />
+            <Button fx:id="SwitchToFirm" layoutX="26.0" layoutY="204.0" mnemonicParsing="false" prefHeight="30.0" onAction="#SwitchToFirmOnAction"  prefWidth="186.0" text="Click to add Firm" />
+            <Button fx:id="SwitchToOperator" layoutX="26.0" layoutY="263.0" mnemonicParsing="false" onAction="#SwitchToOperatorOnAction" prefHeight="30.0" prefWidth="186.0" text="Click to add Operator" />
+            <Button fx:id="SwitchToVehicle" layoutX="26.0" layoutY="324.0" mnemonicParsing="false" onAction="#SwitchToVehicleOnAction" prefHeight="30.0" prefWidth="186.0" text="Click to add Vehicle" />
             <Button fx:id="AdminExitButton" layoutX="68.0" layoutY="422.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="100.0" text="Exit" />
             <ImageView layoutX="87.0" layoutY="21.0">
                <image>
@@ -39,9 +39,9 @@
    <center>
       <AnchorPane prefHeight="493.0" prefWidth="482.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane disable="true" layoutX="20.0" layoutY="20.0" prefHeight="460.0" prefWidth="441.0" />
-            <AnchorPane disable="true" prefHeight="445.0" prefWidth="438.0" />
-            <AnchorPane prefHeight="458.0" prefWidth="440.0">
+            <AnchorPane fx:id="VehiclePane" disable="true" layoutX="20.0" layoutY="20.0" prefHeight="460.0" prefWidth="441.0" />
+            <AnchorPane fx:id="OperatorPane" disable="true" prefHeight="445.0" prefWidth="438.0" />
+            <AnchorPane fx:id="FirmPane" prefHeight="458.0" prefWidth="440.0">
                <children>
                   <TextField fx:id="FirmNameTextField" layoutX="117.0" layoutY="212.0" prefHeight="35.0" prefWidth="209.0" promptText="Enter Firm Name" />
                   <Label layoutX="170.0" layoutY="154.0" text="Firm Name">
@@ -49,7 +49,7 @@
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Button fx:id="FIrmNameAddButton" layoutX="171.0" layoutY="277.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Add Firm" onAction="#addFirmOnAction"  />
+                  <Button fx:id="FIrmNameAddButton" layoutX="171.0" layoutY="277.0" mnemonicParsing="false" onAction="#addFirmOnAction" prefHeight="35.0" prefWidth="100.0" text="Add Firm" />
                </children>
             </AnchorPane>
          </children></AnchorPane>
