@@ -15,8 +15,6 @@ import java.io.IOException;
 
 public class LoginController {
     @FXML
-    private Button exitButton;
-    @FXML
     private Label loginMessageErrorLabel;
     @FXML
     private TextField usernameTextField;
@@ -50,8 +48,8 @@ public class LoginController {
         }
     }
 
-    public void cancelButtonOnAction(){
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
+    @FXML
+    private void cancelButtonOnAction(){
+        closeStage();
     }
 }
