@@ -11,23 +11,21 @@ public class JavaPostgreSQL {
     private static final String databasePassword = "1234";
 
     public static boolean loginToDatabase(String userName, String userPassword) {
-        String query = String.format("SELECT password FROM users WHERE username = %s", "'" + userName + "'");
+        String query = "SELECT password FROM users WHERE username = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-            ResultSet res = con.prepareStatement(query).executeQuery();
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, userName);
+            ResultSet res = statement.executeQuery();
 
             if(!res.isBeforeFirst()){
-                System.out.println("User not found in the database");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Provided Credentials are incorrect");
                 alert.show();
             }
             else{
                 while (res.next()){
-                    String retrievedPassword= res.getString("password");
-                    if(retrievedPassword.equals(userPassword)){
-                        System.out.println("LOGGED IN!!!!");
-                        return true;
-                    }
+                    String retrievedPassword = res.getString("password");
+                    if(retrievedPassword.equals(userPassword)) return true;
                 }
             }
         }
@@ -38,14 +36,18 @@ public class JavaPostgreSQL {
         return false;
     }
 
-    public static void AddFirm(String firmName){
-        String query = String.format("SELECT firm_name FROM firm WHERE firm_name=%s", "'" + firmName + "'");
+    public static void addFirm(String firmName){
+        String query = "SELECT 1 FROM firm WHERE firm_name = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, firmName);
+            ResultSet res = statement.executeQuery();
 
-            ResultSet res = con.prepareStatement(query).executeQuery();
             if(!res.isBeforeFirst()){
-                String insertStatement = String.format("INSERT INTO firm(firm_name) VALUES (%s)", "'" + firmName + "'");
-                con.prepareStatement(insertStatement).executeUpdate();
+                String insertString = "INSERT INTO firm(firm_name) VALUES (?)";
+                PreparedStatement insertStatement = con.prepareStatement(insertString);
+                insertStatement.setString(1, firmName);
+                insertStatement.executeUpdate();
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -59,30 +61,28 @@ public class JavaPostgreSQL {
         }
     }
 
-    public static void AddOperator(String operatorUsername,String operatorPassword,String operatorConfirmPassword,String operatorFirm){
-
-        String query = String.format("SELECT username FROM users WHERE username=%s", "'" + operatorUsername + "'");
+    public static void addOperator(String operatorUsername, String operatorPassword, String operatorFirm){
+        String query = "SELECT 1 FROM users WHERE username = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, operatorUsername);
+            ResultSet res = statement.executeQuery();
 
-            ResultSet res=con.prepareStatement(query).executeQuery();
             if(!res.isBeforeFirst()){
+                int firmID = firmNameToId(operatorFirm);
 
-                if(operatorPassword.equals(operatorConfirmPassword)){
-
-                    int firmIndex = FirmNameToId(operatorFirm);
-
-                    if(firmIndex==0){
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setContentText("Firm does not exist !");
-                        alert.show();
-                    }else{
-                        con.prepareStatement(String.format("INSERT INTO users (username,password,id_firm) VALUES (%s,%s,%s)","'" +operatorUsername +"'","'"+operatorPassword+"'","'"+firmIndex+"'")).executeUpdate();
-                    }
-
-                }else{
+                if(firmID == 0){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Passwords dont match!");
+                    alert.setContentText("Firm does not exist!");
                     alert.show();
+                }
+                else{
+                    String insertString = "INSERT INTO users (username, password, id_firm) VALUES (?, ?, ?)";
+                    PreparedStatement insertStatement = con.prepareStatement(insertString);
+                    insertStatement.setString(1, operatorUsername);
+                    insertStatement.setString(2, operatorPassword);
+                    insertStatement.setInt(3, firmID);
+                    insertStatement.executeUpdate();
                 }
             }
             else{
@@ -97,13 +97,12 @@ public class JavaPostgreSQL {
         }
     }
 
-
     // Function that takes the firmName , joins users to firm and searches and compares the firmname
     // If the function succeeds it returns the index of the firm , otherwise it returns 0
 
     /*-----      Needs to be repurposed to work with all tables when searching for firm id      -----*/
 
-    public static int FirmNameToId(String firmName){
+    public static int firmNameToId(String firmName){
         if(firmName.equals("AdminCompany")) return 1;
         int firmIndex = 0;
 
