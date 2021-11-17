@@ -1,19 +1,9 @@
 package org.group29;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.security.PrivateKey;
 
 public class AdminController {
 
@@ -52,11 +42,17 @@ public class AdminController {
     }
 
     public void addFirmOnAction(){
-        JavaPostgreSQL.AddFirm(FirmNameTextField.getText());
+        JavaPostgreSQL.addFirm(FirmNameTextField.getText());
     }
 
     public void addOperatorOnAction(){
-        JavaPostgreSQL.AddOperator(OperatorUsername.getText(),OperatorPassword.getText(),OperatorConfirmPassword.getText(),OperatorFirmName.getText());
+        if(!OperatorPassword.getText().equals(OperatorConfirmPassword.getText())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Passwords dont match!");
+            alert.show();
+            return;
+        }
+        JavaPostgreSQL.addOperator(OperatorUsername.getText(),OperatorPassword.getText(),OperatorFirmName.getText());
     }
 
     public  void SwitchToFirmOnAction(){
