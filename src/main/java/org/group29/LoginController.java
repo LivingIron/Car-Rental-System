@@ -28,7 +28,8 @@ public class LoginController {
         ((Stage) usernameTextField.getScene().getWindow()).close();
     }
 
-    public void loginButtonOnAction() throws IOException {
+    @FXML
+    private void login() throws IOException {
         loginMessageErrorLabel.setText("Logging in ...");
         if(JavaPostgreSQL.loginToDatabase(usernameTextField.getText(),enterPasswordField.getText())) {
 
