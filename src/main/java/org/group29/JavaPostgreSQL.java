@@ -69,9 +69,9 @@ public class JavaPostgreSQL {
 
                 if(operatorPassword.equals(operatorConfirmPassword)){
 
-                    String firmIndex= FirmNameToId(operatorFirm);
+                    int firmIndex = FirmNameToId(operatorFirm);
 
-                    if(firmIndex=="0"){
+                    if(firmIndex==0){
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("Firm does not exist !");
                         alert.show();
@@ -103,28 +103,27 @@ public class JavaPostgreSQL {
 
     /*-----      Needs to be repurposed to work with all tables when searching for firm id      -----*/
 
-    public static String FirmNameToId(String firmName){
-        String firmIndex="0";
+    public static int FirmNameToId(String firmName){
+        if(firmName.equals("AdminCompany")) return 1;
+        int firmIndex = 0;
 
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-           ResultSet res= con.prepareStatement(String.format("SELECT users.id_firm,firm.firm_name,firm.id FROM users FULL JOIN firm ON users.id_firm = firm.id ")).executeQuery();
-           boolean found=false;
+           ResultSet res = con.prepareStatement("SELECT users.id_firm,firm.firm_name,firm.id FROM users FULL JOIN firm ON users.id_firm = firm.id ").executeQuery();
 
            while (res.next()){
-                if(res.getString("firm_name").equals(firmName)){
-                    found=true;
-                    firmIndex=res.getString("id");
+               Object item = res.getObject("firm_name");
+               String strValue = (item == null ? null : item.toString());
+               if(strValue != null && strValue.equals(firmName)){
+                    firmIndex = res.getInt("id");
                     break;
-                }
-            }
-            if(found == false || firmName .equals("AdminCompany")) firmIndex = "0";
-            return firmIndex;
+               }
+           }
+           return firmIndex;
         }
         catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        return "0";
+        return 0;
     }
 }
