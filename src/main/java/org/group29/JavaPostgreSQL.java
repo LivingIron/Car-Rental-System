@@ -2,6 +2,7 @@ package org.group29;
 
 import javafx.scene.control.Alert;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -124,5 +125,23 @@ public class JavaPostgreSQL {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return 0;
+    }
+
+    public static String[] getFirmNames(){
+        ArrayList<String> firmNames = new ArrayList<>();
+        String query = "SELECT firm_name FROM firm";
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                firmNames.add(res.getString("firm_name"));
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return firmNames.toArray(new String[0]);
     }
 }
