@@ -39,7 +39,7 @@
    </right>
    <center>
       <AnchorPane prefHeight="493.0" prefWidth="482.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
-         <AnchorPane fx:id="VehiclePane" layoutX="20.0" layoutY="20.0" prefHeight="460.0" prefWidth="441.0">
+         <AnchorPane fx:id="VehiclePane" disable="true" layoutX="20.0" layoutY="20.0" prefHeight="460.0" prefWidth="441.0" visible="false">
             <children>
                <Label layoutX="161.0" layoutY="6.0" prefHeight="31.0" prefWidth="120.0" text="Add Vehicle" textAlignment="CENTER" textFill="#000000c0">
                   <font>
@@ -70,7 +70,7 @@
                   </toggleGroup>
                </RadioButton>
                <RadioButton fx:id="RadioNonSmoking" layoutX="222.0" layoutY="389.0" mnemonicParsing="false" text="Non smoking" toggleGroup="$smoking" />
-               <Button fx:id="AddBehicleButton" layoutX="163.0" layoutY="415.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Add Vehicle" />
+               <Button fx:id="AddBehicleButton" layoutX="163.0" layoutY="415.0" mnemonicParsing="false" onAction="#addVehicleOnAction" prefHeight="25.0" prefWidth="116.0" text="Add Vehicle" />
                <ComboBox fx:id="VehicleFirmComboBox" layoutX="130.0" layoutY="206.0" prefHeight="31.0" prefWidth="184.0" promptText="Select firm .." />
                <Label layoutX="141.0" layoutY="175.0" prefHeight="31.0" prefWidth="160.0" text="Select Firm" textAlignment="CENTER" textFill="#000000c0">
                   <font>
@@ -83,7 +83,7 @@
                   </font>
                </Label>
             </children></AnchorPane>
-         <AnchorPane fx:id="OperatorPane" prefHeight="445.0" prefWidth="438.0" visible="false">
+         <AnchorPane fx:id="OperatorPane" disable="true" prefHeight="445.0" prefWidth="438.0" visible="false">
             <ImageView layoutX="179.0" layoutY="21.0">
                <Image url="@img/operator_icon.png" />
             </ImageView>
@@ -113,7 +113,7 @@
             </Label>
             <Button fx:id="AddOperatorButton" layoutX="164.0" layoutY="387.0" mnemonicParsing="false" onAction="#addOperatorOnAction" prefHeight="25.0" prefWidth="110.0" text="Add Operator" />
          </AnchorPane>
-         <AnchorPane fx:id="FirmPane" prefHeight="458.0" prefWidth="440.0" visible="false">
+         <AnchorPane fx:id="FirmPane" prefHeight="458.0" prefWidth="440.0">
             <TextField fx:id="FirmNameTextField" layoutX="117.0" layoutY="212.0" prefHeight="35.0" prefWidth="209.0" promptText="Enter Firm Name" />
             <Label layoutX="191.0" layoutY="146.0" text="Firm">
                <font>

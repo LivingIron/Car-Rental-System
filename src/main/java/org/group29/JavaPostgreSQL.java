@@ -2,6 +2,8 @@ package org.group29;
 
 import javafx.scene.control.Alert;
 import org.group29.entities.Firm;
+import org.group29.entities.VehicleCategory;
+import org.group29.entities.VehicleClass;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -91,6 +93,25 @@ public class JavaPostgreSQL {
         }
     }
 
+    public static void addVehicleAdmin(int vehicleClass,int vehicleCategory, int vehicleFirmId,String vehicleCharacteristics,boolean vehicleForSmokers){
+       try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+           String query = "INSERT INTO car(class,category,characteristics,smoking,firm_id) VALUES (?, ?, ?, ?, ?)";
+           PreparedStatement insertStatement=con.prepareStatement(query);
+           insertStatement.setInt(1,vehicleClass);
+           insertStatement.setInt(2,vehicleCategory);
+           insertStatement.setInt(3,vehicleFirmId);
+           insertStatement.setString(4,vehicleCharacteristics);
+           insertStatement.setBoolean(5,vehicleForSmokers);
+           insertStatement.executeUpdate();
+
+       }catch (SQLException ex){
+           Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+           lgr.log(Level.SEVERE, ex.getMessage(), ex);
+       }
+    }
+
+
+
     public static Firm[] getFirms(){
         ArrayList<Firm> firms = new ArrayList<>();
         String query = "SELECT id, firm_name FROM firm";
@@ -111,40 +132,40 @@ public class JavaPostgreSQL {
         return firms.toArray(new Firm[0]);
     }
 
-    public static String[] getCategoryNames(){
-        ArrayList<String> categoryNames = new ArrayList<>();
-        String query = "SELECT name_category FROM car_category";
+    public static VehicleCategory[] getCategoryNames(){
+        ArrayList<VehicleCategory> categoryNames = new ArrayList<>();
+        String query = "SELECT id_category,name_category FROM car_category";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
-                    categoryNames.add(res.getString("name_category"));
+                    categoryNames.add(new VehicleCategory(res.getInt("id_category"),res.getString("name_category")));
             }
         }
         catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        return categoryNames.toArray(new String[0]);
+        return categoryNames.toArray(new VehicleCategory[0]);
     }
 
-    public static String[] getClassNames(){
-        ArrayList<String> classNames = new ArrayList<>();
-        String query = "SELECT name_class FROM car_class";
+    public static VehicleClass[] getClassNames(){
+        ArrayList<VehicleClass> classNames = new ArrayList<>();
+        String query = "SELECT id_class,name_class FROM car_class";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
-                classNames.add(res.getString("name_class"));
+                classNames.add(new VehicleClass(res.getInt("id_class"),res.getString("name_class")));
             }
         }
         catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        return classNames.toArray(new String[0]);
+        return classNames.toArray(new VehicleClass[0]);
     }
 
 

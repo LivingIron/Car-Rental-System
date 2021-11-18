@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/entities/VehicleCategory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/entities/VehicleClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/AdminLogged.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/AdminLogged.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -193,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637239764060</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Made all comboxes populate on click">
+      <created>1637248964511</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1637248964511</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -224,6 +234,7 @@
     <MESSAGE value="Added a new function to search for the Firm ID" />
     <MESSAGE value="Changed getFirmNames to exclude AdminCompany from the combobox" />
     <MESSAGE value="Added vehicle page , need to fix updates to the comboboxes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added vehicle page , need to fix updates to the comboboxes" />
+    <MESSAGE value="Made all comboxes populate on click" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made all comboxes populate on click" />
   </component>
 </project>

@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.group29.entities.Firm;
+import org.group29.entities.VehicleCategory;
+import org.group29.entities.VehicleClass;
 
 public class AdminController {
 
@@ -20,7 +22,13 @@ public class AdminController {
     @FXML
     private Button SwitchToVehicle;
     @FXML
+    private RadioButton RadioSmoking;
+    @FXML
+    private RadioButton RadioNonSmoking;
+    @FXML
     private TextField FirmNameTextField;
+    @FXML
+    private TextArea VehicleTextArea;
     @FXML
     private AnchorPane FirmPane;
     @FXML
@@ -40,9 +48,9 @@ public class AdminController {
     @FXML
     private ComboBox<Firm> FirmComboBox;
     @FXML
-    private ComboBox<String> ClassComboBox;
+    private ComboBox<VehicleClass> ClassComboBox;
     @FXML
-    private ComboBox<String> CategoryComboBox;
+    private ComboBox<VehicleCategory> CategoryComboBox;
     @FXML
     private ComboBox<Firm> VehicleFirmComboBox;
 
@@ -57,12 +65,12 @@ public class AdminController {
     }
 
     private void populateClassComboBox(){
-        String[] strings = JavaPostgreSQL.getClassNames();
+        VehicleClass[] strings = JavaPostgreSQL.getClassNames();
         ClassComboBox.setItems(FXCollections.observableArrayList(strings));
     }
 
     private void populateCategoryComboBox(){
-        String[] strings = JavaPostgreSQL.getCategoryNames();
+        VehicleCategory[] strings = JavaPostgreSQL.getCategoryNames();
         CategoryComboBox.setItems(FXCollections.observableArrayList(strings));
     }
 
@@ -89,6 +97,52 @@ public class AdminController {
             return;
         }
         JavaPostgreSQL.addOperator(OperatorUsername.getText(),OperatorPassword.getText(),FirmComboBox.getValue().getId());
+    }
+
+    public void addVehicleOnAction(){
+        if(ClassComboBox.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please select a Class!");
+            alert.show();
+            return;
+        }
+        if(CategoryComboBox.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please select a Category!");
+            alert.show();
+            return;
+        }
+        if(VehicleFirmComboBox.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please select a firm!");
+            alert.show();
+            return;
+        }
+        if(VehicleTextArea.getText().equals("")){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please fill out the vehicle characteristics!");
+            alert.show();
+            return;
+        }
+        if(!RadioSmoking.isSelected() && !RadioNonSmoking.isSelected()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please select if the vehicle is for smokers or not!");
+            alert.show();
+            return;
+        }
+        boolean isForSmokers;
+        if(RadioSmoking.isSelected()){
+            isForSmokers=true;
+        }else{
+            isForSmokers=false;
+        }
+
+        JavaPostgreSQL.addVehicleAdmin(ClassComboBox.getValue().getId(),
+                                       CategoryComboBox.getValue().getId(),
+                                       VehicleFirmComboBox.getValue().getId(),
+                                       VehicleTextArea.getText(),
+                                       isForSmokers);
+
     }
 
     public  void SwitchToFirmOnAction(){
