@@ -5,4 +5,5 @@ module org.group29 {
 
     opens org.group29 to javafx.fxml;
     exports org.group29;
+    exports org.group29.entities;
 }

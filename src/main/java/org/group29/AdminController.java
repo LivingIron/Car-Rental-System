@@ -5,8 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.util.Arrays;
+import org.group29.entities.Firm;
 
 public class AdminController {
 
@@ -21,17 +20,7 @@ public class AdminController {
     @FXML
     private Button SwitchToVehicle;
     @FXML
-    private Button AddOperatorButton;
-    @FXML
-    private RadioButton RadioSmoking;
-    @FXML
-    private RadioButton RadioNonSmoking;
-    @FXML
     private TextField FirmNameTextField;
-    @FXML
-    private TextField OperatorFirmName;
-    @FXML
-    private TextArea VehicleTextArea;
     @FXML
     private AnchorPane FirmPane;
     @FXML
@@ -45,36 +34,16 @@ public class AdminController {
     @FXML
     private PasswordField OperatorConfirmPassword;
     @FXML
-    private ComboBox<String> FirmComboBox;
+    private TextField OperatorFirmName;
     @FXML
-    private ComboBox<String> ClassComboBox;
+    private Button AddOperatorButton;
     @FXML
-    private ComboBox<String> CategoryComboBox;
-    @FXML
-    private ComboBox<String> VehicleFirmComboBox;
+    private ComboBox<Firm> FirmComboBox;
 
     private void populateFirmComboBox(){
-        String[] firmNames = JavaPostgreSQL.getFirmNames();
-        FirmComboBox.setItems(FXCollections.observableArrayList(firmNames));
+        Firm[] firms = JavaPostgreSQL.getFirms();
+        FirmComboBox.setItems(FXCollections.observableArrayList(firms));
     }
-    private void populateClassComboBox(){
-        String[] classNames = JavaPostgreSQL.getClassNames();
-        System.out.println(Arrays.toString(classNames));
-        ClassComboBox.setItems(FXCollections.observableArrayList(classNames));
-    }
-    private void populateCategoryComboBox(){
-        String[] categoryNames = JavaPostgreSQL.getCategoryNames();
-        System.out.println(Arrays.toString(categoryNames));
-        CategoryComboBox.setItems(FXCollections.observableArrayList(categoryNames));
-    }
-    private void populateVehicleFirmComboBox(){
-        String[] vehicleFirmNames = JavaPostgreSQL.getFirmNames();
-        System.out.println(Arrays.toString(vehicleFirmNames));
-        VehicleFirmComboBox.setItems(FXCollections.observableArrayList(vehicleFirmNames));
-    }
-
-
-
 
     public void cancelButtonOnAction(){
         Stage stage = (Stage) AdminExitButton.getScene().getWindow();
@@ -98,7 +67,7 @@ public class AdminController {
             alert.show();
             return;
         }
-        JavaPostgreSQL.addOperator(OperatorUsername.getText(),OperatorPassword.getText(),FirmComboBox.getValue());
+        JavaPostgreSQL.addOperator(OperatorUsername.getText(),OperatorPassword.getText(),FirmComboBox.getValue().getId());
     }
 
     public  void SwitchToFirmOnAction(){
@@ -122,9 +91,6 @@ public class AdminController {
     }
 
     public  void SwitchToVehicleOnAction(){
-        populateCategoryComboBox();
-        //populateClassComboBox();
-        //populateVehicleFirmComboBox();
         FirmPane.setDisable(true);
         FirmPane.setVisible(false);
         OperatorPane.setDisable(true);

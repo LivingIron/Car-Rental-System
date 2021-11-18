@@ -1,6 +1,8 @@
 package org.group29;
 
 import javafx.scene.control.Alert;
+import org.group29.entities.Firm;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -62,7 +64,7 @@ public class JavaPostgreSQL {
         }
     }
 
-    public static void addOperator(String operatorUsername, String operatorPassword, String operatorFirm){
+    public static void addOperator(String operatorUsername, String operatorPassword, int operatorFirmId){
         String query = "SELECT 1 FROM users WHERE username = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
@@ -70,21 +72,12 @@ public class JavaPostgreSQL {
             ResultSet res = statement.executeQuery();
 
             if(!res.isBeforeFirst()){
-                int firmID = firmNameToId(operatorFirm);
-
-                if(firmID == 0){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Firm does not exist!");
-                    alert.show();
-                }
-                else{
-                    String insertString = "INSERT INTO users (username, password, id_firm) VALUES (?, ?, ?)";
-                    PreparedStatement insertStatement = con.prepareStatement(insertString);
-                    insertStatement.setString(1, operatorUsername);
-                    insertStatement.setString(2, operatorPassword);
-                    insertStatement.setInt(3, firmID);
-                    insertStatement.executeUpdate();
-                }
+                String insertString = "INSERT INTO users (username, password, id_firm) VALUES (?, ?, ?)";
+                PreparedStatement insertStatement = con.prepareStatement(insertString);
+                insertStatement.setString(1, operatorUsername);
+                insertStatement.setString(2, operatorPassword);
+                insertStatement.setInt(3, operatorFirmId);
+                insertStatement.executeUpdate();
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -98,47 +91,16 @@ public class JavaPostgreSQL {
         }
     }
 
-    // Function that takes the firmName , joins users to firm and searches and compares the firmname
-    // If the function succeeds it returns the index of the firm , otherwise it returns 0
-
-    /*-----      Needs to be repurposed to work with all tables when searching for firm id      -----*/
-
-    public static int firmNameToId(String firmName){
-        if(firmName.equals("AdminCompany")) return 1;
-        int firmIndex = 0;
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-           ResultSet res = con.prepareStatement("SELECT users.id_firm,firm.firm_name,firm.id FROM users FULL JOIN firm ON users.id_firm = firm.id ").executeQuery();
-
-           while (res.next()){
-               Object item = res.getObject("firm_name");
-               String strValue = (item == null ? null : item.toString());
-               if(strValue != null && strValue.equals(firmName)){
-                    firmIndex = res.getInt("id");
-                    break;
-               }
-           }
-           return firmIndex;
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-        return 0;
-    }
-
-    public static String[] getFirmNames(){
-        ArrayList<String> firmNames = new ArrayList<>();
-        String query = "SELECT firm_name FROM firm";
+    public static Firm[] getFirms(){
+        ArrayList<Firm> firms = new ArrayList<>();
+        String query = "SELECT id, firm_name FROM firm";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
-                if(res.getString("firm_name").equals("AdminCompany")) {
-                    System.out.println("Skipping admin firm ..");
-                }else {
-                    firmNames.add(res.getString("firm_name"));
+                if(res.getInt("id") != 1){
+                    firms.add(new Firm(res.getInt("id"), res.getString("firm_name")));
                 }
             }
         }
@@ -146,7 +108,7 @@ public class JavaPostgreSQL {
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        return firmNames.toArray(new String[0]);
+        return firms.toArray(new Firm[0]);
     }
 
     public static String[] getCategoryNames(){
