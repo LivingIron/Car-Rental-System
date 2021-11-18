@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.group29.entities.Firm;
 
 public class AdminController {
 
@@ -37,11 +38,11 @@ public class AdminController {
     @FXML
     private Button AddOperatorButton;
     @FXML
-    private ComboBox<String> FirmComboBox;
+    private ComboBox<Firm> FirmComboBox;
 
     private void populateFirmComboBox(){
-        String[] firmNames = JavaPostgreSQL.getFirmNames();
-        FirmComboBox.setItems(FXCollections.observableArrayList(firmNames));
+        Firm[] firms = JavaPostgreSQL.getFirms();
+        FirmComboBox.setItems(FXCollections.observableArrayList(firms));
     }
 
     public void cancelButtonOnAction(){
@@ -66,7 +67,7 @@ public class AdminController {
             alert.show();
             return;
         }
-        JavaPostgreSQL.addOperator(OperatorUsername.getText(),OperatorPassword.getText(),FirmComboBox.getValue());
+        JavaPostgreSQL.addOperator(OperatorUsername.getText(),OperatorPassword.getText(),FirmComboBox.getValue().getId());
     }
 
     public  void SwitchToFirmOnAction(){
