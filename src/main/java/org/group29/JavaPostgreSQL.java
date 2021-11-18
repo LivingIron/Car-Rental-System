@@ -148,4 +148,43 @@ public class JavaPostgreSQL {
         }
         return firmNames.toArray(new String[0]);
     }
+
+    public static String[] getCategoryNames(){
+        ArrayList<String> categoryNames = new ArrayList<>();
+        String query = "SELECT name_category FROM car_category";
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                    categoryNames.add(res.getString("name_category"));
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return categoryNames.toArray(new String[0]);
+    }
+
+    public static String[] getClassNames(){
+        ArrayList<String> classNames = new ArrayList<>();
+        String query = "SELECT name_class FROM car_class";
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                classNames.add(res.getString("name_class"));
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return classNames.toArray(new String[0]);
+    }
+
+
+
 }
