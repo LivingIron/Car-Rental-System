@@ -135,7 +135,11 @@ public class JavaPostgreSQL {
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
-                firmNames.add(res.getString("firm_name"));
+                if(res.getString("firm_name").equals("AdminCompany")) {
+                    System.out.println("Skipping admin firm ..");
+                }else {
+                    firmNames.add(res.getString("firm_name"));
+                }
             }
         }
         catch(SQLException ex){

@@ -171,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636392805419</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Added a new function to search for the Firm ID">
+      <created>1636393768634</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1636393768634</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -199,6 +206,7 @@
     <MESSAGE value="Made Add Operator functional" />
     <MESSAGE value="Removed deprecated function for registering operators" />
     <MESSAGE value="Switched default login to be &quot;Add firm&quot; screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Switched default login to be &quot;Add firm&quot; screen" />
+    <MESSAGE value="Added a new function to search for the Firm ID" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a new function to search for the Firm ID" />
   </component>
 </project>
