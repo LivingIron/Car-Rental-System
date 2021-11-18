@@ -46,19 +46,19 @@
                      <Font name="System Bold" size="21.0" />
                   </font>
                </Label>
-               <ComboBox layoutX="130.0" layoutY="76.0" prefHeight="31.0" prefWidth="184.0" promptText="Select class .." />
+               <ComboBox fx:id="ClassComboBox" layoutX="130.0" layoutY="76.0" prefHeight="31.0" prefWidth="184.0" promptText="Select class .." />
                <Label layoutX="160.0" layoutY="45.0" prefHeight="31.0" prefWidth="125.0" text="Select vehicle class" textAlignment="CENTER" textFill="#000000c0">
                   <font>
                      <Font size="15.0" />
                   </font>
                </Label>
-               <ComboBox layoutX="131.0" layoutY="138.0" prefHeight="31.0" prefWidth="184.0" promptText="Select category .." />
+               <ComboBox fx:id="CategoryComboBox" layoutX="131.0" layoutY="138.0" prefHeight="31.0" prefWidth="184.0" promptText="Select category .." />
                <Label layoutX="142.0" layoutY="107.0" prefHeight="31.0" prefWidth="160.0" text="Select vehicle category" textAlignment="CENTER" textFill="#000000c0">
                   <font>
                      <Font size="15.0" />
                   </font>
                </Label>
-               <TextArea layoutX="128.0" layoutY="268.0" prefHeight="67.0" prefWidth="188.0" promptText="Enter characteristics" />
+               <TextArea fx:id="VehicleTextArea" layoutX="128.0" layoutY="268.0" prefHeight="67.0" prefWidth="188.0" promptText="Enter characteristics" />
                <Label layoutX="143.0" layoutY="237.0" prefHeight="31.0" prefWidth="160.0" text="Vehicle characteristics" textAlignment="CENTER" textFill="#000000c0">
                   <font>
                      <Font size="15.0" />
@@ -70,8 +70,8 @@
                   </toggleGroup>
                </RadioButton>
                <RadioButton fx:id="RadioNonSmoking" layoutX="222.0" layoutY="389.0" mnemonicParsing="false" text="Non smoking" toggleGroup="$smoking" />
-               <Button layoutX="163.0" layoutY="415.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Add Vehicle" />
-               <ComboBox layoutX="130.0" layoutY="206.0" prefHeight="31.0" prefWidth="184.0" promptText="Select FIrm .." />
+               <Button fx:id="AddBehicleButton" layoutX="163.0" layoutY="415.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Add Vehicle" />
+               <ComboBox fx:id="VehicleFirmComboBox" layoutX="130.0" layoutY="206.0" prefHeight="31.0" prefWidth="184.0" promptText="Select firm .." />
                <Label layoutX="141.0" layoutY="175.0" prefHeight="31.0" prefWidth="160.0" text="Select Firm" textAlignment="CENTER" textFill="#000000c0">
                   <font>
                      <Font size="15.0" />

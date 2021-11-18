@@ -39,10 +39,31 @@ public class AdminController {
     private Button AddOperatorButton;
     @FXML
     private ComboBox<Firm> FirmComboBox;
+    @FXML
+    private ComboBox<String> ClassComboBox;
+    @FXML
+    private ComboBox<String> CategoryComboBox;
+    @FXML
+    private ComboBox<Firm> VehicleFirmComboBox;
 
     private void populateFirmComboBox(){
         Firm[] firms = JavaPostgreSQL.getFirms();
         FirmComboBox.setItems(FXCollections.observableArrayList(firms));
+    }
+
+    private void populateVehicleFirmComboBox(){
+        Firm[] firms = JavaPostgreSQL.getFirms();
+        VehicleFirmComboBox.setItems(FXCollections.observableArrayList(firms));
+    }
+
+    private void populateClassComboBox(){
+        String[] strings = JavaPostgreSQL.getClassNames();
+        ClassComboBox.setItems(FXCollections.observableArrayList(strings));
+    }
+
+    private void populateCategoryComboBox(){
+        String[] strings = JavaPostgreSQL.getCategoryNames();
+        CategoryComboBox.setItems(FXCollections.observableArrayList(strings));
     }
 
     public void cancelButtonOnAction(){
@@ -91,6 +112,9 @@ public class AdminController {
     }
 
     public  void SwitchToVehicleOnAction(){
+        populateClassComboBox();
+        populateCategoryComboBox();
+        populateVehicleFirmComboBox();
         FirmPane.setDisable(true);
         FirmPane.setVisible(false);
         OperatorPane.setDisable(true);
