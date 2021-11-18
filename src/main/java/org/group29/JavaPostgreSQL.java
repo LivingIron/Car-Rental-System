@@ -41,6 +41,12 @@ public class JavaPostgreSQL {
         return false;
     }
 
+
+    /*================================================================================================================*/
+    /*============================= Admin panel functions for interacting with DB=====================================*/
+    /*================================================================================================================*/
+
+
     public static void addFirm(String firmName){
         String query = "SELECT 1 FROM firm WHERE firm_name = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
@@ -99,9 +105,9 @@ public class JavaPostgreSQL {
            PreparedStatement insertStatement=con.prepareStatement(query);
            insertStatement.setInt(1,vehicleClass);
            insertStatement.setInt(2,vehicleCategory);
-           insertStatement.setInt(3,vehicleFirmId);
-           insertStatement.setString(4,vehicleCharacteristics);
-           insertStatement.setBoolean(5,vehicleForSmokers);
+           insertStatement.setInt(5,vehicleFirmId);
+           insertStatement.setString(3,vehicleCharacteristics);
+           insertStatement.setBoolean(4,vehicleForSmokers);
            insertStatement.executeUpdate();
 
        }catch (SQLException ex){
@@ -111,6 +117,10 @@ public class JavaPostgreSQL {
     }
 
 
+
+    /*================================================================================================================*/
+    /*============================== Functions For getting data from comboBoxes ======================================*/
+    /*================================================================================================================*/
 
     public static Firm[] getFirms(){
         ArrayList<Firm> firms = new ArrayList<>();
@@ -168,5 +178,27 @@ public class JavaPostgreSQL {
         return classNames.toArray(new VehicleClass[0]);
     }
 
+
+    /*================================================================================================================*/
+    /*================================================ Miscellaneous =================================================*/
+    /*================================================================================================================*/
+
+    public static int getFirmId(String operatorUsername){
+        String query = "SELECT id_firm, username FROM users WHERE username= ?";
+        int idToReturn=0;
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1,operatorUsername);
+            ResultSet res = statement.executeQuery();
+            while(res.next()){
+               idToReturn=res.getInt("id_firm");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return idToReturn;
+    }
 
 }

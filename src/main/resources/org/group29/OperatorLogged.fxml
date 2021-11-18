@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.OperatorController">
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #24F1CA;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="29.0" layoutY="135.0" text="Welcome" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="35.0" layoutY="193.0" text="Placeholder" textFill="WHITE">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Button layoutX="35.0" layoutY="269.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="133.0" text="Home" />
+            <Button fx:id="OperatorCloseButton" layoutX="35.0" layoutY="345.0" mnemonicParsing="false" onAction="#exitSceneOnAction" prefHeight="35.0" prefWidth="133.0" text="Exit" />
+            <ImageView fitHeight="109.0" fitWidth="109.0" layoutX="47.0" layoutY="14.0">
+               <image>
+                  <Image url="@img/operator_icon_2.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </right>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="176.0" layoutY="107.0" text="Select Action">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="93.0" fitWidth="93.0" layoutX="204.0" layoutY="14.0">
+               <image>
+                  <Image url="@img/icons_gear.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="32.0" layoutY="174.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register car" />
+            <Button layoutX="32.0" layoutY="229.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register client" />
+            <Button layoutX="32.0" layoutY="285.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Rent a car" />
+            <Button layoutX="32.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Return a car" />
+            <Button layoutX="32.0" layoutY="397.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Calculate price" />
+            <Button layoutX="297.0" layoutY="174.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check available cars" />
+            <Button layoutX="297.0" layoutY="229.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check renting history" />
+            <Button layoutX="297.0" layoutY="285.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check operator history" />
+            <Button layoutX="297.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check client ratings" />
+            <Button layoutX="297.0" layoutY="397.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check stats of cars" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
