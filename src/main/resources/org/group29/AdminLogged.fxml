@@ -18,23 +18,51 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.AdminController">
    <right>
       <AnchorPane opacity="0.87" prefHeight="503.0" prefWidth="237.0" style="-fx-background-color: #24F1CA;" BorderPane.alignment="CENTER">
-         <Text fill="WHITE" layoutX="35.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="167.43724821121526">
-            <font>
-               <Font name="SansSerif" size="39.0" />
-            </font>
-         </Text>
-         <Text fill="WHITE" layoutX="56.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator">
-            <font>
-               <Font name="SansSerif" size="21.0" />
-            </font>
-         </Text>
-         <Button fx:id="SwitchToFirm" layoutX="26.0" layoutY="204.0" mnemonicParsing="false" onAction="#SwitchToFirmOnAction" prefHeight="30.0" prefWidth="186.0" text="Click to add Firm" />
-         <Button fx:id="SwitchToOperator" layoutX="26.0" layoutY="263.0" mnemonicParsing="false" onAction="#SwitchToOperatorOnAction" prefHeight="30.0" prefWidth="186.0" text="Click to add Operator" />
-         <Button fx:id="SwitchToVehicle" layoutX="26.0" layoutY="324.0" mnemonicParsing="false" onAction="#SwitchToVehicleOnAction" prefHeight="30.0" prefWidth="186.0" text="Click to add Vehicle" />
-         <Button fx:id="AdminExitButton" layoutX="68.0" layoutY="422.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="25.0" prefWidth="100.0" text="Exit" />
-         <ImageView layoutX="87.0" layoutY="21.0">
-            <Image url="@img/admin_icon.png" />
-         </ImageView>
+         <VBox prefHeight="493.0" prefWidth="237.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+               <VBox alignment="CENTER" fillWidth="false" prefWidth="237.0" spacing="5.0">
+                  <children>
+                     <ImageView>
+                        <Image url="@img/admin_icon.png" />
+                     </ImageView>
+                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="167.43724821121526">
+                        <font>
+                           <Font name="SansSerif" size="39.0" />
+                        </font>
+                     </Text>
+                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator">
+                        <font>
+                           <Font name="SansSerif" size="21.0" />
+                        </font>
+                     </Text>
+                  </children>
+                  <padding>
+                     <Insets bottom="20.0" top="20.0" />
+                  </padding>
+                  <VBox.margin>
+                     <Insets top="20.0" />
+                  </VBox.margin>
+               </VBox>
+               <VBox alignment="CENTER" prefWidth="237.0" spacing="50.0">
+                  <children>
+                     <VBox alignment="CENTER" spacing="30.0" VBox.vgrow="ALWAYS">
+                        <children>
+                           <Button fx:id="SwitchToFirm" mnemonicParsing="false" onAction="#SwitchToFirmOnAction" prefHeight="30.0" prefWidth="186.0" text="Click to add Firm" />
+                           <Button fx:id="SwitchToOperator" mnemonicParsing="false" onAction="#SwitchToOperatorOnAction" prefHeight="30.0" prefWidth="186.0" text="Click to add Operator" />
+                           <Button fx:id="SwitchToVehicle" mnemonicParsing="false" onAction="#SwitchToVehicleOnAction" prefHeight="30.0" prefWidth="186.0" text="Click to add Vehicle" />
+                        </children>
+                     </VBox>
+                     <Button fx:id="AdminExitButton" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="30.0" prefWidth="100.0" text="Exit" VBox.vgrow="ALWAYS" />
+                  </children>
+                  <padding>
+                     <Insets bottom="20.0" top="20.0" />
+                  </padding>
+                  <VBox.margin>
+                     <Insets bottom="20.0" />
+                  </VBox.margin>
+               </VBox>
+            </children>
+         </VBox>
       </AnchorPane>
    </right>
    <center>
