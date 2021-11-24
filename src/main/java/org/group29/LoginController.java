@@ -44,7 +44,12 @@ public class LoginController {
 
                 closeStage();
                 stage.show();
-            }else{
+            }
+            else {
+                Data.operatorUser = usernameTextField.getText();
+                Data.operatorPass = enterPasswordField.getText();
+                Data.operatorId = JavaPostgreSQL.getFirmId(usernameTextField.getText());
+
                 Stage stage = new Stage();
                 Pane myPane;
                 myPane = FXMLLoader.load(getClass().getResource("OperatorLogged.fxml"));
@@ -54,10 +59,6 @@ public class LoginController {
                 stage.setScene(scene);
                 stage.setResizable(false);
                 stage.initStyle(StageStyle.UNDECORATED);
-
-                Data.operatorUser=usernameTextField.getText();
-                Data.operatorPass=enterPasswordField.getText();
-                Data.operatorId=JavaPostgreSQL.getFirmId(usernameTextField.getText());
 
                 closeStage();
                 stage.show();

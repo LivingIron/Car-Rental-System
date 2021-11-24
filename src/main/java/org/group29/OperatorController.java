@@ -20,6 +20,13 @@ public class OperatorController {
 
     @FXML
     private Button OperatorCloseButton;
+    @FXML
+    private Label NameText;
+
+    @FXML
+    private void initialize(){
+        NameText.setText(Data.operatorUser);
+    }
 
     public void exitSceneOnAction(){
         Stage stage = (Stage) OperatorCloseButton.getScene().getWindow();
