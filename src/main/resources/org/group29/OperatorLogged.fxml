@@ -48,7 +48,7 @@
                   </VBox>
                   <VBox alignment="CENTER" spacing="40.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="30.0" prefWidth="133.0" text="Home" />
+                        <Button fx:id="HomeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="133.0" text="Home" />
                         <Button fx:id="OperatorCloseButton" mnemonicParsing="false" onAction="#exitSceneOnAction" prefHeight="30.0" prefWidth="133.0" text="Exit" />
                      </children>
                      <VBox.margin>
@@ -63,7 +63,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="RegisterCarPane" prefHeight="500.0" prefWidth="500.0">
+            <AnchorPane fx:id="RegisterCarPane" prefHeight="500.0" prefWidth="500.0" visible="false" disable="true">
                <children>
                   <ComboBox fx:id="ClassComboBox" layoutX="158.0" layoutY="100.0" prefHeight="31.0" prefWidth="184.0" promptText="Select class .." />
                   <Label layoutX="188.0" layoutY="59.0" prefHeight="31.0" prefWidth="125.0" text="Select vehicle class" textAlignment="CENTER" textFill="#000000c0">
@@ -187,7 +187,7 @@
                      </font>
                   </Label>
                </children></AnchorPane>
-            <AnchorPane fx:id="MainMenuPane" prefHeight="509.0" prefWidth="514.0" visible="false">
+            <AnchorPane fx:id="MainMenuPane" prefHeight="509.0" prefWidth="514.0" visible="true">
                <children>
                   <Label layoutX="193.0" layoutY="130.0" text="Select Action">
                      <font>
@@ -199,16 +199,16 @@
                         <Image url="@img/icons_gear.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="RegisterCarButton" layoutX="38.0" layoutY="176.0" mnemonicParsing="false" onAction="#switchToRegisterCar" prefHeight="42.0" prefWidth="172.0" text="Register car" />
-                  <Button fx:id="RegisterClientButton" layoutX="38.0" layoutY="234.0" mnemonicParsing="false" onAction="#switchToRegisterClient" prefHeight="42.0" prefWidth="172.0" text="Register client" />
-                  <Button fx:id="RentCarButton" layoutX="38.0" layoutY="288.0" mnemonicParsing="false" onAction="#switchToRentCar" prefHeight="42.0" prefWidth="172.0" text="Rent a car" />
-                  <Button fx:id="ReturnCarButton" layoutX="38.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToReturnCar" prefHeight="42.0" prefWidth="172.0" text="Return a car" />
-                  <Button fx:id="CalculatePriceButton" layoutX="38.0" layoutY="395.0" mnemonicParsing="false" onAction="#switchToCalculatePrice" prefHeight="42.0" prefWidth="172.0" text="Calculate price" />
-                  <Button fx:id="CheckAvailableCarsButton" layoutX="316.0" layoutY="171.0" mnemonicParsing="false" onAction="#switchToAvailableCars" prefHeight="42.0" prefWidth="172.0" text="Check available cars" />
-                  <Button fx:id="CheckRentingHistoryButton" layoutX="316.0" layoutY="234.0" mnemonicParsing="false" onAction="#switchToRentingHistory" prefHeight="42.0" prefWidth="172.0" text="Check renting history" />
-                  <Button fx:id="CheckOperatorHistoryButton" layoutX="316.0" layoutY="288.0" mnemonicParsing="false" onAction="#switchToOperatorHistory" prefHeight="42.0" prefWidth="172.0" text="Check operator history" />
-                  <Button fx:id="CheckClientRatingsButton" layoutX="316.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToClientRatings" prefHeight="42.0" prefWidth="172.0" text="Check client ratings" />
-                  <Button fx:id="CheckStatsOfCarsButton" layoutX="316.0" layoutY="395.0" mnemonicParsing="false" onAction="#switchToCarStats" prefHeight="42.0" prefWidth="172.0" text="Check stats of cars" />
+                  <Button fx:id="RegisterCarButton" layoutX="38.0" layoutY="176.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register car" />
+                  <Button fx:id="RegisterClientButton" layoutX="38.0" layoutY="234.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register client" />
+                  <Button fx:id="RentCarButton" layoutX="38.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Rent a car" />
+                  <Button fx:id="ReturnCarButton" layoutX="38.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Return a car" />
+                  <Button fx:id="CalculatePriceButton" layoutX="38.0" layoutY="395.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Calculate price" />
+                  <Button fx:id="CheckAvailableCarsButton" layoutX="316.0" layoutY="171.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check available cars" />
+                  <Button fx:id="CheckRentingHistoryButton" layoutX="316.0" layoutY="234.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check renting history" />
+                  <Button fx:id="CheckOperatorHistoryButton" layoutX="316.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check operator history" />
+                  <Button fx:id="CheckClientRatingsButton" layoutX="316.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check client ratings" />
+                  <Button fx:id="CheckStatsOfCarsButton" layoutX="316.0" layoutY="395.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check stats of cars" />
                </children>
             </AnchorPane>
          </children>

@@ -2,26 +2,21 @@ package org.group29;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import org.group29.LoginController;
-import org.group29.entities.Firm;
 import org.group29.entities.VehicleCategory;
 import org.group29.entities.VehicleClass;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Vector;
 
 
 public class OperatorController {
 
     /*---------------Buttons----------------*/
+    @FXML
+    private Button HomeButton;
     @FXML
     private Button OperatorCloseButton;
     @FXML
@@ -103,22 +98,26 @@ public class OperatorController {
     private Label NameText;
 
 
-    private Vector<AnchorPane> AllPanes = new Vector<>();
+    private AnchorPane[] Panes;
 
     public void initialize(){
         NameText.setText(Data.operatorUser);
-        AllPanes.add(RegisterCarPane);
-        AllPanes.add(RegisterClientPane);
-        AllPanes.add(RentCarPane);
-        AllPanes.add(ReturnCarPane);
-        AllPanes.add(CalculatePricePane);
-        AllPanes.add(CheckAvailableCarsPane);
-        AllPanes.add(CheckRentingHistoryPane);
-        AllPanes.add(CheckOperatorHistoryPane);
-        AllPanes.add(CheckClientRatingsPane);
-        AllPanes.add(CheckStatsOfCarsPane);
-        AllPanes.add(MainMenuPane);
-        switchToMainMenu();
+
+        Panes = new AnchorPane[] { RegisterCarPane, RegisterClientPane, RentCarPane,
+                ReturnCarPane, CalculatePricePane, CheckAvailableCarsPane, CheckRentingHistoryPane,
+                CheckOperatorHistoryPane, CheckClientRatingsPane, CheckStatsOfCarsPane, MainMenuPane };
+
+        HomeButton.setOnAction(e -> switchPane(MainMenuPane));
+        RegisterCarButton.setOnAction(e -> switchPane(RegisterCarPane));
+        RegisterClientButton.setOnAction(e -> switchPane(RegisterClientPane));
+        RentCarButton.setOnAction(e -> switchPane(RentCarPane));
+        ReturnCarButton.setOnAction(e -> switchPane(ReturnCarPane));
+        CalculatePriceButton.setOnAction(e -> switchPane(CalculatePricePane));
+        CheckAvailableCarsButton.setOnAction(e -> switchPane(CheckAvailableCarsPane));
+        CheckRentingHistoryButton.setOnAction(e -> switchPane(CheckRentingHistoryPane));
+        CheckOperatorHistoryButton.setOnAction(e -> switchPane(CheckOperatorHistoryPane));
+        CheckClientRatingsButton.setOnAction(e -> switchPane(CheckClientRatingsPane));
+        CheckStatsOfCarsButton.setOnAction(e -> switchPane(CheckStatsOfCarsPane));
     }
 
 
@@ -135,7 +134,6 @@ public class OperatorController {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Please fill all the empty fields!");
             alert.show();
-            return;
         }else{
             JavaPostgreSQL.addClient(clientNameTextField.getText(),clientPhoneTextField.getText());
         }
@@ -166,12 +164,7 @@ public class OperatorController {
             alert.show();
             return;
         }
-        boolean isForSmokers;
-        if(RadioSmoking.isSelected()){
-            isForSmokers=true;
-        }else{
-            isForSmokers=false;
-        }
+        boolean isForSmokers = RadioSmoking.isSelected();
 
         JavaPostgreSQL.addVehicle(ClassComboBox.getValue().getId(),
                 CategoryComboBox.getValue().getId(),
@@ -182,79 +175,30 @@ public class OperatorController {
 
     /*-------------------------------Functions for switching between panes-----------------------------------*/
 
-
-
     public void disableAllPanes(){
-        for(AnchorPane temp : AllPanes){
-            temp.setDisable(true);
-            temp.setVisible(false);
+        for(AnchorPane pane : Panes){
+            pane.setDisable(true);
+            pane.setVisible(false);
         }
     }
 
-    public void activatePane(AnchorPane temp){
-        temp.setVisible(true);
-        temp.setDisable(false);
+    public void activatePane(AnchorPane pane){
+        pane.setVisible(true);
+        pane.setDisable(false);
+
+        if(pane.equals(RegisterCarPane)){
+            populateClassComboBox();
+            populateCategoryComboBox();
+        }
     }
 
-    public void switchToMainMenu(){
+    public void switchPane(AnchorPane pane){
         disableAllPanes();
-        activatePane(MainMenuPane);
+        activatePane(pane);
     }
-
-    public void switchToRegisterCar(){
-        disableAllPanes();
-        activatePane(RegisterCarPane);
-        populateClassComboBox();
-        populateCategoryComboBox();
-    }
-
-    public void switchToRegisterClient(){
-        disableAllPanes();
-        activatePane(RegisterClientPane);
-    }
-
-    public void switchToRentCar(){
-        disableAllPanes();
-        activatePane(RentCarPane);
-    }
-
-    public void switchToReturnCar(){
-        disableAllPanes();
-        activatePane(ReturnCarPane);
-    }
-
-    public void switchToCalculatePrice(){
-        disableAllPanes();
-        activatePane(CalculatePricePane);
-    }
-
-    public void switchToAvailableCars(){
-        disableAllPanes();
-        activatePane(CheckAvailableCarsPane);
-    }
-
-    public void switchToRentingHistory(){
-        disableAllPanes();
-        activatePane(CheckRentingHistoryPane);
-    }
-
-    public void switchToOperatorHistory(){
-        disableAllPanes();
-        activatePane(CheckOperatorHistoryPane);
-    }
-
-    public void switchToClientRatings(){
-        disableAllPanes();
-        activatePane(CheckClientRatingsPane);
-    }
-
-    public void switchToCarStats(){
-        disableAllPanes();
-        activatePane(CheckStatsOfCarsPane);
-    }
-
 
     /*-------------------------------Functions for populating ComboBoxes-----------------------------------*/
+
     private void populateClassComboBox(){
         VehicleClass[] strings = JavaPostgreSQL.getClassNames();
         ClassComboBox.setItems(FXCollections.observableArrayList(strings));
