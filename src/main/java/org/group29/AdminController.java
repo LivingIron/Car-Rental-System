@@ -137,7 +137,7 @@ public class AdminController {
             isForSmokers=false;
         }
 
-        JavaPostgreSQL.addVehicleAdmin(ClassComboBox.getValue().getId(),
+        JavaPostgreSQL.addVehicle(ClassComboBox.getValue().getId(),
                                        CategoryComboBox.getValue().getId(),
                                        VehicleFirmComboBox.getValue().getId(),
                                        VehicleTextArea.getText(),

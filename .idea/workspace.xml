@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/OperatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/OperatorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/OperatorLogged.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/OperatorLogged.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637258691746</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Made all buttons switch to corresponding panes and Made &quot;Add Client&quot; button fully functional">
+      <created>1638131383929</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1638131383929</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -254,7 +260,8 @@
     <MESSAGE value="Made all comboxes populate on click" />
     <MESSAGE value="Added new VehicleCategory and VehicleClass classes , added functions to populate comboxes , added functionality to button to add vehicle , needs fixing" />
     <MESSAGE value="Added Operator login screen and made exit button functional, also added Data class to pass data between the scene easily" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Operator login screen and made exit button functional, also added Data class to pass data between the scene easily" />
+    <MESSAGE value="Made all buttons switch to corresponding panes and Made &quot;Add Client&quot; button fully functional" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made all buttons switch to corresponding panes and Made &quot;Add Client&quot; button fully functional" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -99,7 +99,7 @@ public class JavaPostgreSQL {
         }
     }
 
-    public static void addVehicleAdmin(int vehicleClass,int vehicleCategory, int vehicleFirmId,String vehicleCharacteristics,boolean vehicleForSmokers){
+    public static void addVehicle(int vehicleClass,int vehicleCategory, int vehicleFirmId,String vehicleCharacteristics,boolean vehicleForSmokers){
        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
            String query = "INSERT INTO car(class,category,characteristics,smoking,firm_id) VALUES (?, ?, ?, ?, ?)";
            PreparedStatement insertStatement=con.prepareStatement(query);
