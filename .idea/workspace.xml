@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/AdminLogged.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/AdminLogged.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638131383929</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Changed name from AddVehicleAdmin to AddVehicle to not be confusing when used in operator panel">
+      <created>1638131571934</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1638131571934</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -261,7 +268,8 @@
     <MESSAGE value="Added new VehicleCategory and VehicleClass classes , added functions to populate comboxes , added functionality to button to add vehicle , needs fixing" />
     <MESSAGE value="Added Operator login screen and made exit button functional, also added Data class to pass data between the scene easily" />
     <MESSAGE value="Made all buttons switch to corresponding panes and Made &quot;Add Client&quot; button fully functional" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made all buttons switch to corresponding panes and Made &quot;Add Client&quot; button fully functional" />
+    <MESSAGE value="Changed name from AddVehicleAdmin to AddVehicle to not be confusing when used in operator panel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed name from AddVehicleAdmin to AddVehicle to not be confusing when used in operator panel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

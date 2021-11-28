@@ -15,6 +15,11 @@ public class JavaPostgreSQL {
     private static final String databaseUser = "postgres";
     private static final String databasePassword = "1234";
 
+    /*================================================================================================================*/
+    /*============================= General Functions for working with the DB ========================================*/
+    /*================================================================================================================*/
+
+
     public static boolean loginToDatabase(String userName, String userPassword) {
         String query = "SELECT password FROM users WHERE username = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
@@ -41,6 +46,23 @@ public class JavaPostgreSQL {
         return false;
     }
 
+
+    public static void addVehicle(int vehicleClass,int vehicleCategory, int vehicleFirmId,String vehicleCharacteristics,boolean vehicleForSmokers){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "INSERT INTO car(class,category,characteristics,smoking,firm_id) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement insertStatement=con.prepareStatement(query);
+            insertStatement.setInt(1,vehicleClass);
+            insertStatement.setInt(2,vehicleCategory);
+            insertStatement.setInt(5,vehicleFirmId);
+            insertStatement.setString(3,vehicleCharacteristics);
+            insertStatement.setBoolean(4,vehicleForSmokers);
+            insertStatement.executeUpdate();
+
+        }catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
 
     /*================================================================================================================*/
     /*============================= Admin panel functions for interacting with DB=====================================*/
@@ -99,22 +121,6 @@ public class JavaPostgreSQL {
         }
     }
 
-    public static void addVehicle(int vehicleClass,int vehicleCategory, int vehicleFirmId,String vehicleCharacteristics,boolean vehicleForSmokers){
-       try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
-           String query = "INSERT INTO car(class,category,characteristics,smoking,firm_id) VALUES (?, ?, ?, ?, ?)";
-           PreparedStatement insertStatement=con.prepareStatement(query);
-           insertStatement.setInt(1,vehicleClass);
-           insertStatement.setInt(2,vehicleCategory);
-           insertStatement.setInt(5,vehicleFirmId);
-           insertStatement.setString(3,vehicleCharacteristics);
-           insertStatement.setBoolean(4,vehicleForSmokers);
-           insertStatement.executeUpdate();
-
-       }catch (SQLException ex){
-           Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-           lgr.log(Level.SEVERE, ex.getMessage(), ex);
-       }
-    }
 
 
     /*================================================================================================================*/
