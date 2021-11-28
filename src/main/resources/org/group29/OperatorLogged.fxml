@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -43,7 +44,7 @@
                   </VBox>
                   <VBox alignment="CENTER" spacing="40.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="133.0" text="Home" />
+                        <Button mnemonicParsing="false" onAction="#switchToMainMenu" prefHeight="30.0" prefWidth="133.0" text="Home" />
                         <Button fx:id="OperatorCloseButton" mnemonicParsing="false" onAction="#exitSceneOnAction" prefHeight="30.0" prefWidth="133.0" text="Exit" />
                      </children>
                      <VBox.margin>
@@ -58,26 +59,124 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="176.0" layoutY="107.0" text="Select Action">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="93.0" fitWidth="93.0" layoutX="204.0" layoutY="14.0">
-               <image>
-                  <Image url="@img/icons_gear.png" />
-               </image>
-            </ImageView>
-            <Button layoutX="32.0" layoutY="174.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register car" />
-            <Button layoutX="32.0" layoutY="229.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register client" />
-            <Button layoutX="32.0" layoutY="285.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Rent a car" />
-            <Button layoutX="32.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Return a car" />
-            <Button layoutX="32.0" layoutY="397.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Calculate price" />
-            <Button layoutX="297.0" layoutY="174.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check available cars" />
-            <Button layoutX="297.0" layoutY="229.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check renting history" />
-            <Button layoutX="297.0" layoutY="285.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check operator history" />
-            <Button layoutX="297.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check client ratings" />
-            <Button layoutX="297.0" layoutY="397.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check stats of cars" />
+            <AnchorPane fx:id="RegisterCarPane" prefHeight="500.0" prefWidth="500.0" visible="false">
+               <children>
+                  <Label layoutX="183.0" layoutY="29.0" prefHeight="40.0" prefWidth="170.0" text="Register Car">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane fx:id="RegisterClientPane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0">
+               <children>
+                  <Label layoutX="162.0" layoutY="117.0" text="Enter client's name :">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="152.0" layoutY="14.0" prefHeight="40.0" prefWidth="197.0" text="Register Client">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="clientNameTextField" layoutX="152.0" layoutY="157.0" prefHeight="32.0" prefWidth="198.0" promptText="Enter client .." />
+                  <Label layoutX="157.0" layoutY="211.0" prefHeight="30.0" prefWidth="186.0" text="Enter client's phone:">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="clientPhoneTextField" layoutX="151.0" layoutY="252.0" prefHeight="32.0" prefWidth="198.0" promptText="Enter phone.." />
+                  <Button layoutX="214.0" layoutY="314.0" mnemonicParsing="false" onAction="#addClientOnAction" prefHeight="35.0" prefWidth="73.0" text="Add" />
+               </children></AnchorPane>
+            <AnchorPane fx:id="RentCarPane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" visible="false">
+               <children>
+                  <Label layoutX="179.0" layoutY="14.0" prefHeight="40.0" prefWidth="143.0" text="Rent a car">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane fx:id="ReturnCarPane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" visible="false">
+               <children>
+                  <Label layoutX="165.0" layoutY="18.0" prefHeight="40.0" prefWidth="170.0" text="Return a car">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane fx:id="CalculatePricePane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" visible="false">
+               <children>
+                  <Label layoutX="149.0" layoutY="14.0" prefHeight="40.0" prefWidth="203.0" text="Calculate price">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane fx:id="CheckAvailableCarsPane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" visible="false">
+               <children>
+                  <Label layoutX="115.0" layoutY="14.0" prefHeight="40.0" prefWidth="271.0" text="Check available cars">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane fx:id="CheckRentingHistoryPane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" visible="false">
+               <children>
+                  <Label layoutX="107.0" layoutY="14.0" prefHeight="40.0" prefWidth="286.0" text="Check renting history">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane fx:id="CheckOperatorHistoryPane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" visible="false">
+               <children>
+                  <Label layoutX="96.0" layoutY="8.0" prefHeight="40.0" prefWidth="309.0" text="Check operator history">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane fx:id="CheckClientRatingsPane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" visible="false">
+               <children>
+                  <Label layoutX="117.0" layoutY="14.0" prefHeight="40.0" prefWidth="267.0" text="Check client ratings">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="CheckStatsOfCarsPane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" visible="false">
+               <children>
+                  <Label layoutX="123.0" prefHeight="40.0" prefWidth="255.0" text="Check stats of cars">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <AnchorPane fx:id="MainMenuPane" prefHeight="509.0" prefWidth="514.0" visible="false">
+               <children>
+                  <Label layoutX="193.0" layoutY="130.0" text="Select Action">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="93.0" fitWidth="93.0" layoutX="224.0" layoutY="29.0">
+                     <image>
+                        <Image url="@img/icons_gear.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="RegisterCarButton" layoutX="38.0" layoutY="176.0" mnemonicParsing="false" onAction="#switchToRegisterCar" prefHeight="42.0" prefWidth="172.0" text="Register car" />
+                  <Button fx:id="RegisterClientButton" layoutX="38.0" layoutY="234.0" mnemonicParsing="false" onAction="#switchToRegisterClient" prefHeight="42.0" prefWidth="172.0" text="Register client" />
+                  <Button fx:id="RentCarButton" layoutX="38.0" layoutY="288.0" mnemonicParsing="false" onAction="#switchToRentCar" prefHeight="42.0" prefWidth="172.0" text="Rent a car" />
+                  <Button fx:id="ReturnCarButton" layoutX="38.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToReturnCar" prefHeight="42.0" prefWidth="172.0" text="Return a car" />
+                  <Button fx:id="CalculatePriceButton" layoutX="38.0" layoutY="395.0" mnemonicParsing="false" onAction="#switchToCalculatePrice" prefHeight="42.0" prefWidth="172.0" text="Calculate price" />
+                  <Button fx:id="CheckAvailableCarsButton" layoutX="316.0" layoutY="171.0" mnemonicParsing="false" onAction="#switchToAvailableCars" prefHeight="42.0" prefWidth="172.0" text="Check available cars" />
+                  <Button fx:id="CheckRentingHistoryButton" layoutX="316.0" layoutY="234.0" mnemonicParsing="false" onAction="#switchToRentingHistory" prefHeight="42.0" prefWidth="172.0" text="Check renting history" />
+                  <Button fx:id="CheckOperatorHistoryButton" layoutX="316.0" layoutY="288.0" mnemonicParsing="false" onAction="#switchToOperatorHistory" prefHeight="42.0" prefWidth="172.0" text="Check operator history" />
+                  <Button fx:id="CheckClientRatingsButton" layoutX="316.0" layoutY="341.0" mnemonicParsing="false" onAction="#switchToClientRatings" prefHeight="42.0" prefWidth="172.0" text="Check client ratings" />
+                  <Button fx:id="CheckStatsOfCarsButton" layoutX="316.0" layoutY="395.0" mnemonicParsing="false" onAction="#switchToCarStats" prefHeight="42.0" prefWidth="172.0" text="Check stats of cars" />
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </center>

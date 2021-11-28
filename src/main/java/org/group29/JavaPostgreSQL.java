@@ -117,6 +117,41 @@ public class JavaPostgreSQL {
     }
 
 
+    /*================================================================================================================*/
+    /*============================ Operator panel functions for interacting with DB ==================================*/
+    /*================================================================================================================*/
+
+
+    public static void addClient(String clientName,String clientPhone){
+        String query = "SELECT 1 FROM client WHERE name = ? AND phone = ? AND firm_id = ?";
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, clientName);
+            statement.setString(2, clientPhone);
+            statement.setInt(3, Data.operatorId);
+            ResultSet res = statement.executeQuery();
+
+            if(!res.isBeforeFirst()){
+                String insertString = "INSERT INTO client(name,phone,firm_id) VALUES (?, ? ,?)";
+                PreparedStatement insertStatement = con.prepareStatement(insertString);
+                insertStatement.setString(1, clientName);
+                insertStatement.setString(2, clientPhone);
+                insertStatement.setInt(3, Data.operatorId);
+                insertStatement.executeUpdate();
+            }
+            else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Client already exists");
+                alert.show();
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+
 
     /*================================================================================================================*/
     /*============================== Functions For getting data from comboBoxes ======================================*/

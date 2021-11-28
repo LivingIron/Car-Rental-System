@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/Data.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/OperatorController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/OperatorLogged.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/img/icons_gear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/img/operator_icon_2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/OperatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/OperatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/OperatorLogged.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/OperatorLogged.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637251469061</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Added Operator login screen and made exit button functional, also added Data class to pass data between the scene easily">
+      <created>1637258691746</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1637258691746</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -251,6 +253,18 @@
     <MESSAGE value="Added vehicle page , need to fix updates to the comboboxes" />
     <MESSAGE value="Made all comboxes populate on click" />
     <MESSAGE value="Added new VehicleCategory and VehicleClass classes , added functions to populate comboxes , added functionality to button to add vehicle , needs fixing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added new VehicleCategory and VehicleClass classes , added functions to populate comboxes , added functionality to button to add vehicle , needs fixing" />
+    <MESSAGE value="Added Operator login screen and made exit button functional, also added Data class to pass data between the scene easily" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Operator login screen and made exit button functional, also added Data class to pass data between the scene easily" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/group29/AdminController.java</url>
+          <line>102</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
