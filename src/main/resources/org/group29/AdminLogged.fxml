@@ -70,91 +70,168 @@
    </right>
    <center>
       <AnchorPane prefHeight="493.0" prefWidth="482.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
-         <AnchorPane fx:id="VehiclePane" disable="true" layoutX="20.0" layoutY="20.0" prefHeight="460.0" prefWidth="441.0" visible="false">
+         <AnchorPane fx:id="VehiclePane" disable="true" prefHeight="493.0" prefWidth="462.0" visible="false">
             <children>
-               <Label layoutX="161.0" layoutY="6.0" prefHeight="31.0" prefWidth="120.0" text="Add Vehicle" textAlignment="CENTER" textFill="#000000c0">
-                  <font>
-                     <Font name="System Bold" size="21.0" />
-                  </font>
-               </Label>
-               <ComboBox fx:id="ClassComboBox" layoutX="130.0" layoutY="76.0" prefHeight="31.0" prefWidth="184.0" promptText="Select class .." />
-               <Label layoutX="160.0" layoutY="45.0" prefHeight="31.0" prefWidth="125.0" text="Select vehicle class" textAlignment="CENTER" textFill="#000000c0">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
-               <ComboBox fx:id="CategoryComboBox" layoutX="131.0" layoutY="138.0" prefHeight="31.0" prefWidth="184.0" promptText="Select category .." />
-               <Label layoutX="142.0" layoutY="107.0" prefHeight="31.0" prefWidth="160.0" text="Select vehicle category" textAlignment="CENTER" textFill="#000000c0">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
-               <TextArea fx:id="VehicleTextArea" layoutX="128.0" layoutY="268.0" prefHeight="67.0" prefWidth="188.0" promptText="Enter characteristics" />
-               <Label layoutX="143.0" layoutY="237.0" prefHeight="31.0" prefWidth="160.0" text="Vehicle characteristics" textAlignment="CENTER" textFill="#000000c0">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
-               <RadioButton fx:id="RadioSmoking" layoutX="127.0" layoutY="389.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="68.0" text="Smoking">
-                  <toggleGroup>
-                     <ToggleGroup fx:id="smoking" />
-                  </toggleGroup>
-               </RadioButton>
-               <RadioButton fx:id="RadioNonSmoking" layoutX="222.0" layoutY="389.0" mnemonicParsing="false" text="Non smoking" toggleGroup="$smoking" />
-               <Button fx:id="AddBehicleButton" layoutX="163.0" layoutY="415.0" mnemonicParsing="false" onAction="#addVehicleOnAction" prefHeight="25.0" prefWidth="116.0" text="Add Vehicle" />
-               <ComboBox fx:id="VehicleFirmComboBox" layoutX="130.0" layoutY="206.0" prefHeight="31.0" prefWidth="184.0" promptText="Select firm .." />
-               <Label layoutX="141.0" layoutY="175.0" prefHeight="31.0" prefWidth="160.0" text="Select Firm" textAlignment="CENTER" textFill="#000000c0">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
-               <Label layoutX="138.0" layoutY="347.0" prefHeight="31.0" prefWidth="171.0" text="Allowed to smoke or not" textAlignment="CENTER" textFill="#000000c0">
-                  <font>
-                     <Font size="15.0" />
-                  </font>
-               </Label>
+               <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="493.0" prefWidth="462.0" AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="20.0">
+                  <children>
+                     <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Add Vehicle" textAlignment="CENTER" textFill="#000000c0" VBox.vgrow="ALWAYS">
+                        <font>
+                           <Font name="System Bold" size="21.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets bottom="5.0" />
+                        </VBox.margin>
+                     </Label>
+                     <VBox maxWidth="184.0" VBox.vgrow="ALWAYS">
+                        <children>
+                           <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Select vehicle class" textAlignment="CENTER" textFill="#000000c0">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Label>
+                           <ComboBox fx:id="ClassComboBox" prefHeight="30.0" prefWidth="184.0" promptText="Select class .." />
+                        </children>
+                     </VBox>
+                     <VBox fillWidth="false" maxWidth="184.0" VBox.vgrow="ALWAYS">
+                        <children>
+                           <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Select vehicle category" textAlignment="CENTER" textFill="#000000c0">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Label>
+                           <ComboBox fx:id="CategoryComboBox" prefHeight="30.0" prefWidth="184.0" promptText="Select category .." />
+                        </children>
+                     </VBox>
+                     <VBox fillWidth="false" maxWidth="184.0" VBox.vgrow="ALWAYS">
+                        <children>
+                           <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Select Firm" textAlignment="CENTER" textFill="#000000c0">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Label>
+                           <ComboBox fx:id="VehicleFirmComboBox" prefHeight="30.0" prefWidth="184.0" promptText="Select firm .." />
+                        </children>
+                     </VBox>
+                     <VBox fillWidth="false" maxWidth="184.0" VBox.vgrow="ALWAYS">
+                        <children>
+                           <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Vehicle characteristics" textAlignment="CENTER" textFill="#000000c0">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Label>
+                           <TextArea fx:id="VehicleTextArea" maxWidth="184.0" prefHeight="70.0" prefWidth="184.0" promptText="Enter characteristics" />
+                        </children>
+                     </VBox>
+                     <VBox fillWidth="false" maxWidth="184.0" VBox.vgrow="ALWAYS">
+                        <children>
+                           <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Allowed to smoke or not" textAlignment="CENTER" textFill="#000000c0">
+                              <font>
+                                 <Font size="15.0" />
+                              </font>
+                           </Label>
+                           <HBox alignment="CENTER" maxWidth="184.0" spacing="20.0">
+                              <children>
+                                 <RadioButton fx:id="RadioSmoking" mnemonicParsing="false" prefHeight="17.0" prefWidth="68.0" text="Smoking">
+                                    <toggleGroup>
+                                       <ToggleGroup fx:id="smoking" />
+                                    </toggleGroup>
+                                 </RadioButton>
+                                 <RadioButton fx:id="RadioNonSmoking" mnemonicParsing="false" text="Non smoking" toggleGroup="$smoking" />
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+                     <Button fx:id="AddBehicleButton" alignment="CENTER" mnemonicParsing="false" onAction="#addVehicleOnAction" prefHeight="30.0" prefWidth="184.0" text="Add Vehicle" VBox.vgrow="ALWAYS">
+                        <VBox.margin>
+                           <Insets top="5.0" />
+                        </VBox.margin>
+                     </Button>
+                  </children>
+               </VBox>
             </children></AnchorPane>
-         <AnchorPane fx:id="OperatorPane" disable="true" prefHeight="445.0" prefWidth="438.0" visible="false">
-            <ImageView layoutX="179.0" layoutY="21.0">
-               <Image url="@img/operator_icon.png" />
-            </ImageView>
-            <TextField fx:id="OperatorUsername" layoutX="117.0" layoutY="146.0" prefHeight="25.0" prefWidth="200.0" promptText="Enter operator username" />
-            <Label layoutX="137.0" layoutY="112.0" text="Operator Username">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <Label layoutX="138.0" layoutY="180.0" text="Operator Password">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="OperatorPassword" layoutX="120.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" promptText="Enter Operator password" />
-            <Label layoutX="141.0" layoutY="242.0" text="Confirm Password">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="OperatorConfirmPassword" layoutX="120.0" layoutY="276.0" prefHeight="25.0" prefWidth="200.0" promptText="Re-enter password" />
-            <ComboBox fx:id="FirmComboBox" layoutX="120.0" layoutY="342.0" prefHeight="25.0" prefWidth="200.0" promptText="Select Firm" />
-            <Label layoutX="199.0" layoutY="314.0" text="Firm">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Label>
-            <Button fx:id="AddOperatorButton" layoutX="164.0" layoutY="387.0" mnemonicParsing="false" onAction="#addOperatorOnAction" prefHeight="25.0" prefWidth="110.0" text="Add Operator" />
+         <AnchorPane fx:id="OperatorPane" disable="true" prefHeight="493.0" prefWidth="462.0" visible="false">
+            <VBox alignment="CENTER" fillWidth="false" layoutX="117.0" layoutY="21.0" prefHeight="493.0" prefWidth="462.0" spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <ImageView VBox.vgrow="ALWAYS">
+                     <Image url="@img/operator_icon.png" />
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <VBox fillWidth="false" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER" prefWidth="184.0" text="Operator Username" textAlignment="CENTER">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="OperatorUsername" prefHeight="30.0" prefWidth="184.0" promptText="Enter operator username" />
+                     </children>
+                  </VBox>
+                  <VBox fillWidth="false" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER" prefWidth="184.0" text="Operator Password">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="OperatorPassword" prefHeight="30.0" prefWidth="184.0" promptText="Enter Operator password" />
+                     </children>
+                  </VBox>
+                  <VBox fillWidth="false" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER" prefWidth="184.0" text="Confirm Password">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="OperatorConfirmPassword" prefHeight="30.0" prefWidth="184.0" promptText="Re-enter password" />
+                     </children>
+                  </VBox>
+                  <VBox fillWidth="false" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label alignment="CENTER" prefWidth="184.0" text="Firm">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="FirmComboBox" prefHeight="30.0" prefWidth="184.0" promptText="Select Firm" />
+                     </children>
+                  </VBox>
+                  <Button fx:id="AddOperatorButton" mnemonicParsing="false" onAction="#addOperatorOnAction" prefHeight="30.0" prefWidth="110.0" text="Add Operator" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
          </AnchorPane>
-         <AnchorPane fx:id="FirmPane" prefHeight="458.0" prefWidth="440.0">
-            <TextField fx:id="FirmNameTextField" layoutX="117.0" layoutY="212.0" prefHeight="35.0" prefWidth="209.0" promptText="Enter Firm Name" />
-            <Label layoutX="191.0" layoutY="146.0" text="Firm">
-               <font>
-                  <Font name="System Bold" size="27.0" />
-               </font>
-            </Label>
-            <Button fx:id="FirmNameAddButton" layoutX="171.0" layoutY="277.0" mnemonicParsing="false" onAction="#addFirmOnAction" prefHeight="35.0" prefWidth="100.0" text="Add Firm" />
-            <ImageView fitHeight="89.0" fitWidth="89.0" layoutX="177.0" layoutY="40.0">
-               <Image url="@img/Firm.png" />
-            </ImageView>
+         <AnchorPane fx:id="FirmPane" prefHeight="493.0" prefWidth="462.0">
+            <VBox alignment="CENTER" fillWidth="false" prefHeight="493.0" prefWidth="462.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <ImageView fitHeight="89.0" fitWidth="89.0">
+                     <Image url="@img/Firm.png" />
+                  </ImageView>
+                  <Label text="Firm">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="-20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="FirmNameTextField" prefHeight="35.0" prefWidth="209.0" promptText="Enter Firm Name">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+                  <Button fx:id="FirmNameAddButton" mnemonicParsing="false" onAction="#addFirmOnAction" prefHeight="35.0" prefWidth="100.0" text="Add Firm">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
          </AnchorPane>
       </AnchorPane>
    </center>
