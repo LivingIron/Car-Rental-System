@@ -83,17 +83,13 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <RadioButton fx:id="RadioSmoking" layoutX="154.0" layoutY="390.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="68.0" text="Smoking">
+                  <RadioButton fx:id="RadioSmoking" layoutX="154.0" layoutY="390.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="68.0" selected="true" text="Smoking">
                      <toggleGroup>
-                        <ToggleGroup fx:id="smoking" />
+                        <ToggleGroup fx:id="Smoker" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="RadioNonSmoking" layoutX="263.0" layoutY="390.0" mnemonicParsing="false" text="Non smoking">
-                     <toggleGroup>
-                        <ToggleGroup fx:id="smoking" />
-                     </toggleGroup>
-                  </RadioButton>
-                  <Button fx:id="AddVehicleButton" layoutX="193.0" layoutY="432.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="Add Vehicle" />
+                  <RadioButton fx:id="RadioNonSmoking" layoutX="263.0" layoutY="390.0" mnemonicParsing="false" text="Non smoking" toggleGroup="$Smoker" />
+                  <Button fx:id="AddVehicleButton" layoutX="193.0" layoutY="432.0" mnemonicParsing="false" onAction="#addVehicleOnAction" prefHeight="25.0" prefWidth="116.0" text="Add Vehicle" />
                   <Label layoutX="173.0" layoutY="350.0" prefHeight="31.0" prefWidth="171.0" text="Allowed to smoke or not" textAlignment="CENTER" textFill="#000000c0">
                      <font>
                         <Font size="15.0" />

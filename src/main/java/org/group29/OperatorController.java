@@ -1,5 +1,6 @@
 package org.group29;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.group29.LoginController;
+import org.group29.entities.Firm;
+import org.group29.entities.VehicleCategory;
+import org.group29.entities.VehicleClass;
 
 import java.io.IOException;
 import java.util.*;
@@ -40,8 +44,25 @@ public class OperatorController {
     private Button CheckClientRatingsButton;
     @FXML
     private Button CheckStatsOfCarsButton;
+    @FXML
+    private Button AddVehicleButton;
+
+    /*---------------Radio Buttons----------------*/
+    @FXML
+    private RadioButton RadioSmoking;
+    @FXML
+    private RadioButton RadioNonSmoking;
+
+
+    /*---------------ComboBoxes----------------*/
+
+    @FXML
+    private ComboBox<VehicleClass> ClassComboBox;
+    @FXML
+    private ComboBox<VehicleCategory> CategoryComboBox;
 
     /*---------------PANES----------------*/
+
     @FXML
     private AnchorPane RegisterCarPane;
     @FXML
@@ -64,13 +85,20 @@ public class OperatorController {
     private AnchorPane CheckStatsOfCarsPane;
     @FXML
     private AnchorPane MainMenuPane;
-    /*---------------Text fields----------------*/
+
+    /*---------------Text fields ----------------*/
+
     @FXML
     private TextField clientNameTextField;
     @FXML
     private TextField clientPhoneTextField;
 
+    /*---------------Text Areas ----------------*/
 
+    @FXML
+    private TextArea VehicleTextArea;
+
+    /*--------------------Labels----------------*/
     @FXML
     private Label NameText;
 
@@ -93,6 +121,10 @@ public class OperatorController {
         switchToMainMenu();
     }
 
+
+    /*--------------------------------------Functions for buttons-------------------------------------------*/
+
+
     public void exitSceneOnAction(){
         Stage stage = (Stage) OperatorCloseButton.getScene().getWindow();
         stage.close();
@@ -108,6 +140,46 @@ public class OperatorController {
             JavaPostgreSQL.addClient(clientNameTextField.getText(),clientPhoneTextField.getText());
         }
     }
+
+    public void addVehicleOnAction(){
+        if(ClassComboBox.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please select a Class!");
+            alert.show();
+            return;
+        }
+        if(CategoryComboBox.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please select a Category!");
+            alert.show();
+            return;
+        }
+        if(VehicleTextArea.getText().equals("")){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please fill out the vehicle characteristics!");
+            alert.show();
+            return;
+        }
+        if(!RadioSmoking.isSelected() && !RadioNonSmoking.isSelected()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Please select if the vehicle is for smokers or not!");
+            alert.show();
+            return;
+        }
+        boolean isForSmokers;
+        if(RadioSmoking.isSelected()){
+            isForSmokers=true;
+        }else{
+            isForSmokers=false;
+        }
+
+        JavaPostgreSQL.addVehicle(ClassComboBox.getValue().getId(),
+                CategoryComboBox.getValue().getId(),
+                Data.operatorId,
+                VehicleTextArea.getText(),
+                isForSmokers);
+    }
+
     /*-------------------------------Functions for switching between panes-----------------------------------*/
 
 
@@ -132,6 +204,8 @@ public class OperatorController {
     public void switchToRegisterCar(){
         disableAllPanes();
         activatePane(RegisterCarPane);
+        populateClassComboBox();
+        populateCategoryComboBox();
     }
 
     public void switchToRegisterClient(){
@@ -180,4 +254,14 @@ public class OperatorController {
     }
 
 
+    /*-------------------------------Functions for populating ComboBoxes-----------------------------------*/
+    private void populateClassComboBox(){
+        VehicleClass[] strings = JavaPostgreSQL.getClassNames();
+        ClassComboBox.setItems(FXCollections.observableArrayList(strings));
+    }
+
+    private void populateCategoryComboBox(){
+        VehicleCategory[] strings = JavaPostgreSQL.getCategoryNames();
+        CategoryComboBox.setItems(FXCollections.observableArrayList(strings));
+    }
 }
