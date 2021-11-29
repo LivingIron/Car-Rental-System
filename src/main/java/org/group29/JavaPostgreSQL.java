@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import org.group29.entities.*;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -169,8 +170,88 @@ public class JavaPostgreSQL {
         }
     }
 
+    public static  void  rentCar(int carId , int client_id, int condition_id, Date rental_date, int  duration , int firm_id){
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            String insertString = "INSERT INTO rental(car_id,client_id,condition_id,rental_date,duration,firm_id) VALUES (?, ? ,? , ? ,? ,?)";
+            PreparedStatement insertStatement = con.prepareStatement(insertString);
+            insertStatement.setInt(1, carId);
+            insertStatement.setInt(2, client_id);
+            insertStatement.setInt(3, condition_id);
+            insertStatement.setDate(4,rental_date);
+            insertStatement.setInt(5, duration);
+            insertStatement.setInt(6, firm_id);
+            insertStatement.executeUpdate();
 
 
+            checkForRentDays(); // sets car to rented if its rented for the same day
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+    }
+
+    public static String getCarCondition(int carId){
+        String query = "SELECT damages FROM condition WHERE car_id = ?";
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,carId);
+            ResultSet res = statement.executeQuery();
+            while (res.next()){
+                return res.getString("damages");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return "No data";
+    }
+
+
+
+    public static String getCarOdometer(int carId){
+        String query = "SELECT odometer FROM condition WHERE car_id = ?";
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,carId);
+            ResultSet res = statement.executeQuery();
+            while (res.next()){
+                Integer temp = res.getInt("odometer");
+                return temp.toString();
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return "No data";
+    }
+
+    public static void checkForRentDays(){
+
+        String query = "SELECT car_id FROM rental WHERE rental_date = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setDate(1,Date.valueOf(LocalDate.now()));
+            ResultSet res = statement.executeQuery();
+            while (res.next()){
+                    query="UPDATE car SET is_rented=true WHERE id = ?";
+                    PreparedStatement statement1 = con.prepareStatement(query);
+                    statement1.setInt(1,res.getInt("car_id"));
+                    statement1.executeUpdate();
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+    }
     /*================================================================================================================*/
     /*============================== Functions For getting data from comboBoxes ======================================*/
     /*================================================================================================================*/
@@ -233,7 +314,7 @@ public class JavaPostgreSQL {
 
     public static Vehicles[] getVehicles(){
         ArrayList<Vehicles> vehicleArray = new ArrayList<>();
-        String query = "SELECT id,class,category,characteristics,smoking,is_rented FROM car WHERE firm_id = ?";
+        String query = "SELECT id,class,category,characteristics,smoking,is_rented FROM car WHERE firm_id = ? AND is_rented=false";
 
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
@@ -283,7 +364,7 @@ public class JavaPostgreSQL {
 
 
     /*================================================================================================================*/
-    /*================================================ Miscellaneous =================================================*/
+    /*=========================================== Converters of data =================================================*/
     /*================================================================================================================*/
 
     public static int getFirmId(String operatorUsername){
@@ -302,6 +383,28 @@ public class JavaPostgreSQL {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return idToReturn;
+    }
+
+    public static int carIdToConditionId(int carId){
+        int idToReturn=0;
+        String query = "SELECT id FROM condition WHERE car_id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,carId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                idToReturn=res.getInt("id");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+       return idToReturn;
     }
 
 }

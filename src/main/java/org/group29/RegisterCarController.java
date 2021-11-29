@@ -68,6 +68,11 @@ public class RegisterCarController {
                 Data.operatorId,
                 VehicleTextArea.getText(),
                 isForSmokers);
+
+        FxmlLoader.switchPane(Data.operatorMainPane,"OperatorLogged");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("Car is rented !");
+        alert.show();
     }
 
     /*-------------------------------Functions for populating ComboBoxes-----------------------------------*/

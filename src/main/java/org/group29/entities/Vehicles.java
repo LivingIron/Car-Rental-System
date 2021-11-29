@@ -74,7 +74,6 @@ public class Vehicles {
 
     @Override
     public String toString() {
-        return "Vehicle  " +
-                "id :" + id ;
+        return  ""+ id ;
     }
 }
