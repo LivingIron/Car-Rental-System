@@ -174,18 +174,23 @@ public class JavaPostgreSQL {
 
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
 
-            String insertString = "INSERT INTO rental(car_id,client_id,condition_id,rental_date,duration,firm_id) VALUES (?, ? ,? , ? ,? ,?)";
-            PreparedStatement insertStatement = con.prepareStatement(insertString);
-            insertStatement.setInt(1, carId);
-            insertStatement.setInt(2, client_id);
-            insertStatement.setInt(3, condition_id);
-            insertStatement.setDate(4,rental_date);
-            insertStatement.setInt(5, duration);
-            insertStatement.setInt(6, firm_id);
-            insertStatement.executeUpdate();
+            if(!isOverlapping(carId,duration,rental_date)) {
+                String insertString = "INSERT INTO rental(car_id,client_id,condition_id,rental_date,duration,firm_id) VALUES (?, ? ,? , ? ,? ,?)";
+                PreparedStatement insertStatement = con.prepareStatement(insertString);
+                insertStatement.setInt(1, carId);
+                insertStatement.setInt(2, client_id);
+                insertStatement.setInt(3, condition_id);
+                insertStatement.setDate(4, rental_date);
+                insertStatement.setInt(5, duration);
+                insertStatement.setInt(6, firm_id);
+                insertStatement.executeUpdate();
 
-
-            checkForRentDays(); // sets car to rented if its rented for the same day
+                checkForRentDays(); // sets car to rented if its rented for the same day
+            }else{
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Rent days for this car are overlapping !");
+                alert.show();
+            }
         }
         catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
@@ -251,6 +256,35 @@ public class JavaPostgreSQL {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
 
+    }
+
+    public static boolean isOverlapping(int car_id , int duration , Date rental_date){
+        boolean isOverlapped=false;
+        LocalDate enteredRentDay = (rental_date.toLocalDate().plusDays(duration));
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            String insertString = "SELECT car_id,rental_date,duration FROM rental WHERE car_id = ?";
+            PreparedStatement insertStatement = con.prepareStatement(insertString);
+            insertStatement.setInt(1,car_id);
+            ResultSet res = insertStatement.executeQuery();
+
+            while (res.next()){
+                LocalDate checkingDate = res.getDate("rental_date").toLocalDate().plusDays(res.getInt("duration"));
+                if ( (rental_date.toLocalDate().isBefore(checkingDate) ||  rental_date.toLocalDate().equals(checkingDate) ) &&
+                        (enteredRentDay.isAfter(res.getDate("rental_date").toLocalDate()) || enteredRentDay.equals(res.getDate("rental_date")))
+                    ){
+                    isOverlapped=true;
+                    break;
+                }
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return isOverlapped;
     }
     /*================================================================================================================*/
     /*============================== Functions For getting data from comboBoxes ======================================*/
