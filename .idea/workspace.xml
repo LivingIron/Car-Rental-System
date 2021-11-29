@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/entities/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/entities/Vehicles.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/RentCarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/RentCarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/RentCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/RentCar.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,7 +278,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638193091908</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Changed Rent Car screen">
+      <created>1638196520268</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1638196520268</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -293,7 +301,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added unrevisioned files" />
     <MESSAGE value="Fixed merge issues , made admin panel unresizable and undecorated" />
     <MESSAGE value="Fixed some filenames added buttons to Admin FXML" />
     <MESSAGE value="Made exit button on administrator page functional" />
@@ -318,7 +325,8 @@
     <MESSAGE value="Fixed Client register screen" />
     <MESSAGE value="Fixed Car register screen" />
     <MESSAGE value="Added all needed FXML files for operator and connected them with the menu and controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added all needed FXML files for operator and connected them with the menu and controller" />
+    <MESSAGE value="Changed Rent Car screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed Rent Car screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

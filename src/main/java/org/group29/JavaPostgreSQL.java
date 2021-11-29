@@ -1,9 +1,7 @@
 package org.group29;
 
 import javafx.scene.control.Alert;
-import org.group29.entities.Firm;
-import org.group29.entities.VehicleCategory;
-import org.group29.entities.VehicleClass;
+import org.group29.entities.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -231,6 +229,56 @@ public class JavaPostgreSQL {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return classNames.toArray(new VehicleClass[0]);
+    }
+
+    public static Vehicles[] getVehicles(){
+        ArrayList<Vehicles> vehicleArray = new ArrayList<>();
+        String query = "SELECT id,class,category,characteristics,smoking,is_rented FROM car WHERE firm_id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,Data.operatorId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                vehicleArray.add(new Vehicles(  res.getInt("id"),
+                                                res.getInt("class"),
+                                                res.getInt("category"),
+                                                Data.operatorId,
+                                                res.getString("characteristics"),
+                                                res.getBoolean("smoking"),
+                                                res.getBoolean("is_rented")));
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return vehicleArray.toArray(new Vehicles[0]);
+    }
+
+    public static Client[] getClients(){
+        ArrayList<Client> clientArray = new ArrayList<>();
+        String query = "SELECT id,name,phone,rating FROM client WHERE firm_id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,Data.operatorId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+               clientArray.add(new Client(  res.getInt("id"),
+                                            Data.operatorId,
+                                            res.getInt("rating"),
+                                            res.getString("name"),
+                                            res.getString("phone")));
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return clientArray.toArray(new Client[0]);
     }
 
 
