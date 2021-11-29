@@ -216,8 +216,6 @@ public class JavaPostgreSQL {
         return "No data";
     }
 
-
-
     public static String getCarOdometer(int carId){
         String query = "SELECT odometer FROM condition WHERE car_id = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
@@ -286,6 +284,7 @@ public class JavaPostgreSQL {
 
         return isOverlapped;
     }
+
     /*================================================================================================================*/
     /*============================== Functions For getting data from comboBoxes ======================================*/
     /*================================================================================================================*/
@@ -394,6 +393,33 @@ public class JavaPostgreSQL {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return clientArray.toArray(new Client[0]);
+    }
+
+    public static Rental[] getRentals(){
+        ArrayList<Rental> rentalArray = new ArrayList<>();
+        String query = "SELECT id,car_id,client_id,condition_id,rental_date,duration,is_returned FROM rental WHERE is_returned=false AND firm_id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,Data.operatorId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                rentalArray.add(  new Rental( res.getInt("id"),
+                                    res.getInt("car_id"),
+                                    res.getInt("client_id"),
+                                    res.getInt("condition_id"),
+                                    res.getInt("duration"),
+                                    res.getDate("rental_date"),
+                                    res.getBoolean("is_returned"))) ;
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return rentalArray.toArray(new Rental[0]);
     }
 
 
