@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -100,27 +99,6 @@
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-               </children></AnchorPane>
-            <AnchorPane fx:id="RegisterClientPane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" visible="false">
-               <children>
-                  <Label layoutX="162.0" layoutY="117.0" text="Enter client's name :">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="152.0" layoutY="14.0" prefHeight="40.0" prefWidth="197.0" text="Register Client">
-                     <font>
-                        <Font name="System Bold" size="28.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="clientNameTextField" layoutX="152.0" layoutY="157.0" prefHeight="32.0" prefWidth="198.0" promptText="Enter client .." />
-                  <Label layoutX="157.0" layoutY="211.0" prefHeight="30.0" prefWidth="186.0" text="Enter client's phone:">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="clientPhoneTextField" layoutX="151.0" layoutY="252.0" prefHeight="32.0" prefWidth="198.0" promptText="Enter phone.." />
-                  <Button layoutX="214.0" layoutY="314.0" mnemonicParsing="false" onAction="#addClientOnAction" prefHeight="35.0" prefWidth="73.0" text="Add" />
                </children></AnchorPane>
             <AnchorPane fx:id="RentCarPane" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" visible="false">
                <children>

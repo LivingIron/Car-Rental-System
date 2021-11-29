@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/FxmlLoader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/OperatorMenuController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/RegisterClientController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/OperatorMenu.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/RegisterClient.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/OperatorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/OperatorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/RegisterClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/RegisterClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/OperatorLogged.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/OperatorLogged.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/RegisterClient.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/RegisterClient.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638133636790</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Switched from using Panes to switch screen to using new FXML files , added a FxmlLoader class to handle the switching">
+      <created>1638191169741</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1638191169741</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -291,7 +294,8 @@
     <MESSAGE value="Changed name from AddVehicleAdmin to AddVehicle to not be confusing when used in operator panel" />
     <MESSAGE value="Fixed adminPanel imports , added operatorPanel register car graphics , needs added functionality" />
     <MESSAGE value="Added functionality to add Vehicle on operator panel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added functionality to add Vehicle on operator panel" />
+    <MESSAGE value="Switched from using Panes to switch screen to using new FXML files , added a FxmlLoader class to handle the switching" />
+    <option name="LAST_COMMIT_MESSAGE" value="Switched from using Panes to switch screen to using new FXML files , added a FxmlLoader class to handle the switching" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -36,11 +36,7 @@ public class OperatorController {
     @FXML
     private BorderPane mainPane;
 
-    /*---------------Text fields ----------------*/
-    @FXML
-    private TextField clientNameTextField;
-    @FXML
-    private TextField clientPhoneTextField;
+
 
     /*---------------Text Areas ----------------*/
     @FXML
@@ -66,16 +62,6 @@ public class OperatorController {
     public void exitSceneOnAction(){
         Stage stage = (Stage) OperatorCloseButton.getScene().getWindow();
         stage.close();
-    }
-
-    public void addClientOnAction(){
-        if(clientPhoneTextField.getText().equals("")||clientNameTextField.getText().equals("")){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Please fill all the empty fields!");
-            alert.show();
-        }else{
-            JavaPostgreSQL.addClient(clientNameTextField.getText(),clientPhoneTextField.getText());
-        }
     }
 
     public void addVehicleOnAction(){
