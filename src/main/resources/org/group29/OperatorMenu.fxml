@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="MainMenuPane" prefHeight="509.0" prefWidth="514.0" visible="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.OperatorMenuController">
+   <children>
+      <Label layoutX="193.0" layoutY="130.0" text="Select Action">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="93.0" fitWidth="93.0" layoutX="224.0" layoutY="29.0">
+         <image>
+            <Image url="@img/icons_gear.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="RegisterCarButton" layoutX="38.0" layoutY="176.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register car" />
+      <Button fx:id="RegisterClientButton" layoutX="38.0" layoutY="234.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register client" />
+      <Button fx:id="RentCarButton" layoutX="38.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Rent a car" />
+      <Button fx:id="ReturnCarButton" layoutX="38.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Return a car" />
+      <Button fx:id="CalculatePriceButton" layoutX="38.0" layoutY="395.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Calculate price" />
+      <Button fx:id="CheckAvailableCarsButton" layoutX="316.0" layoutY="171.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check available cars" />
+      <Button fx:id="CheckRentingHistoryButton" layoutX="316.0" layoutY="234.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check renting history" />
+      <Button fx:id="CheckOperatorHistoryButton" layoutX="316.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check operator history" />
+      <Button fx:id="CheckClientRatingsButton" layoutX="316.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check client ratings" />
+      <Button fx:id="CheckStatsOfCarsButton" layoutX="316.0" layoutY="395.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check stats of cars" />
+   </children>
+</AnchorPane>

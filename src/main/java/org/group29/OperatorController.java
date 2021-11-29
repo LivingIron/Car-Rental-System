@@ -3,13 +3,11 @@ package org.group29;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.group29.entities.VehicleCategory;
 import org.group29.entities.VehicleClass;
 
-import java.util.Arrays;
-import java.util.Vector;
 
 
 public class OperatorController {
@@ -20,26 +18,6 @@ public class OperatorController {
     @FXML
     private Button OperatorCloseButton;
     @FXML
-    private Button RegisterCarButton;
-    @FXML
-    private Button RegisterClientButton;
-    @FXML
-    private Button RentCarButton;
-    @FXML
-    private Button ReturnCarButton;
-    @FXML
-    private Button CalculatePriceButton;
-    @FXML
-    private Button CheckAvailableCarsButton;
-    @FXML
-    private Button CheckRentingHistoryButton;
-    @FXML
-    private Button CheckOperatorHistoryButton;
-    @FXML
-    private Button CheckClientRatingsButton;
-    @FXML
-    private Button CheckStatsOfCarsButton;
-    @FXML
     private Button AddVehicleButton;
 
     /*---------------Radio Buttons----------------*/
@@ -48,48 +26,23 @@ public class OperatorController {
     @FXML
     private RadioButton RadioNonSmoking;
 
-
     /*---------------ComboBoxes----------------*/
-
     @FXML
     private ComboBox<VehicleClass> ClassComboBox;
     @FXML
     private ComboBox<VehicleCategory> CategoryComboBox;
 
     /*---------------PANES----------------*/
-
     @FXML
-    private AnchorPane RegisterCarPane;
-    @FXML
-    private AnchorPane RegisterClientPane;
-    @FXML
-    private AnchorPane RentCarPane;
-    @FXML
-    private AnchorPane ReturnCarPane;
-    @FXML
-    private AnchorPane CalculatePricePane;
-    @FXML
-    private AnchorPane CheckAvailableCarsPane;
-    @FXML
-    private AnchorPane CheckRentingHistoryPane;
-    @FXML
-    private AnchorPane CheckOperatorHistoryPane;
-    @FXML
-    private AnchorPane CheckClientRatingsPane;
-    @FXML
-    private AnchorPane CheckStatsOfCarsPane;
-    @FXML
-    private AnchorPane MainMenuPane;
+    private BorderPane mainPane;
 
     /*---------------Text fields ----------------*/
-
     @FXML
     private TextField clientNameTextField;
     @FXML
     private TextField clientPhoneTextField;
 
     /*---------------Text Areas ----------------*/
-
     @FXML
     private TextArea VehicleTextArea;
 
@@ -98,31 +51,17 @@ public class OperatorController {
     private Label NameText;
 
 
-    private AnchorPane[] Panes;
-
     public void initialize(){
         NameText.setText(Data.operatorUser);
+        Data.operatorMainPane=mainPane;
 
-        Panes = new AnchorPane[] { RegisterCarPane, RegisterClientPane, RentCarPane,
-                ReturnCarPane, CalculatePricePane, CheckAvailableCarsPane, CheckRentingHistoryPane,
-                CheckOperatorHistoryPane, CheckClientRatingsPane, CheckStatsOfCarsPane, MainMenuPane };
+        HomeButton.setOnAction(e -> FxmlLoader.switchPane(mainPane,"OperatorMenu"));
+        FxmlLoader.switchPane(mainPane,"OperatorMenu");
 
-        HomeButton.setOnAction(e -> switchPane(MainMenuPane));
-        RegisterCarButton.setOnAction(e -> switchPane(RegisterCarPane));
-        RegisterClientButton.setOnAction(e -> switchPane(RegisterClientPane));
-        RentCarButton.setOnAction(e -> switchPane(RentCarPane));
-        ReturnCarButton.setOnAction(e -> switchPane(ReturnCarPane));
-        CalculatePriceButton.setOnAction(e -> switchPane(CalculatePricePane));
-        CheckAvailableCarsButton.setOnAction(e -> switchPane(CheckAvailableCarsPane));
-        CheckRentingHistoryButton.setOnAction(e -> switchPane(CheckRentingHistoryPane));
-        CheckOperatorHistoryButton.setOnAction(e -> switchPane(CheckOperatorHistoryPane));
-        CheckClientRatingsButton.setOnAction(e -> switchPane(CheckClientRatingsPane));
-        CheckStatsOfCarsButton.setOnAction(e -> switchPane(CheckStatsOfCarsPane));
     }
 
 
     /*--------------------------------------Functions for buttons-------------------------------------------*/
-
 
     public void exitSceneOnAction(){
         Stage stage = (Stage) OperatorCloseButton.getScene().getWindow();
@@ -171,30 +110,6 @@ public class OperatorController {
                 Data.operatorId,
                 VehicleTextArea.getText(),
                 isForSmokers);
-    }
-
-    /*-------------------------------Functions for switching between panes-----------------------------------*/
-
-    public void disableAllPanes(){
-        for(AnchorPane pane : Panes){
-            pane.setDisable(true);
-            pane.setVisible(false);
-        }
-    }
-
-    public void activatePane(AnchorPane pane){
-        pane.setVisible(true);
-        pane.setDisable(false);
-
-        if(pane.equals(RegisterCarPane)){
-            populateClassComboBox();
-            populateCategoryComboBox();
-        }
-    }
-
-    public void switchPane(AnchorPane pane){
-        disableAllPanes();
-        activatePane(pane);
     }
 
     /*-------------------------------Functions for populating ComboBoxes-----------------------------------*/

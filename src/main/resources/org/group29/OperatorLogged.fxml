@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.OperatorController">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.OperatorController">
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #24F1CA;" BorderPane.alignment="CENTER">
          <children>
@@ -63,7 +63,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ECECE7;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="RegisterCarPane" prefHeight="500.0" prefWidth="500.0" visible="false" disable="true">
+            <AnchorPane fx:id="RegisterCarPane" disable="true" prefHeight="500.0" prefWidth="500.0" visible="false">
                <children>
                   <ComboBox fx:id="ClassComboBox" layoutX="158.0" layoutY="100.0" prefHeight="31.0" prefWidth="184.0" promptText="Select class .." />
                   <Label layoutX="188.0" layoutY="59.0" prefHeight="31.0" prefWidth="125.0" text="Select vehicle class" textAlignment="CENTER" textFill="#000000c0">
@@ -187,30 +187,6 @@
                      </font>
                   </Label>
                </children></AnchorPane>
-            <AnchorPane fx:id="MainMenuPane" prefHeight="509.0" prefWidth="514.0" visible="true">
-               <children>
-                  <Label layoutX="193.0" layoutY="130.0" text="Select Action">
-                     <font>
-                        <Font name="System Bold" size="25.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="93.0" fitWidth="93.0" layoutX="224.0" layoutY="29.0">
-                     <image>
-                        <Image url="@img/icons_gear.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="RegisterCarButton" layoutX="38.0" layoutY="176.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register car" />
-                  <Button fx:id="RegisterClientButton" layoutX="38.0" layoutY="234.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register client" />
-                  <Button fx:id="RentCarButton" layoutX="38.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Rent a car" />
-                  <Button fx:id="ReturnCarButton" layoutX="38.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Return a car" />
-                  <Button fx:id="CalculatePriceButton" layoutX="38.0" layoutY="395.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Calculate price" />
-                  <Button fx:id="CheckAvailableCarsButton" layoutX="316.0" layoutY="171.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check available cars" />
-                  <Button fx:id="CheckRentingHistoryButton" layoutX="316.0" layoutY="234.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check renting history" />
-                  <Button fx:id="CheckOperatorHistoryButton" layoutX="316.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check operator history" />
-                  <Button fx:id="CheckClientRatingsButton" layoutX="316.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check client ratings" />
-                  <Button fx:id="CheckStatsOfCarsButton" layoutX="316.0" layoutY="395.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check stats of cars" />
-               </children>
-            </AnchorPane>
          </children>
       </AnchorPane>
    </center>

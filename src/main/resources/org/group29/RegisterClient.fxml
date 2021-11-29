@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.RegisterClientController">
+   <children>
+      <AnchorPane fx:id="RegisterClientPane" layoutX="20.0" layoutY="20.0" prefHeight="500.0" prefWidth="500.0">
+         <children>
+            <Label layoutX="162.0" layoutY="117.0" text="Enter client's name :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="152.0" layoutY="14.0" prefHeight="40.0" prefWidth="197.0" text="Register Client">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <TextField fx:id="clientNameTextField" layoutX="152.0" layoutY="157.0" prefHeight="32.0" prefWidth="198.0" promptText="Enter client .." />
+            <Label layoutX="157.0" layoutY="211.0" prefHeight="30.0" prefWidth="186.0" text="Enter client's phone:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="clientPhoneTextField" layoutX="151.0" layoutY="252.0" prefHeight="32.0" prefWidth="198.0" promptText="Enter phone.." />
+            <Button layoutX="214.0" layoutY="314.0" mnemonicParsing="false"  prefHeight="35.0" prefWidth="73.0" text="Add" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
