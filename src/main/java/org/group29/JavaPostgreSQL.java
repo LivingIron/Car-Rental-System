@@ -264,7 +264,7 @@ public class JavaPostgreSQL {
 
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
 
-            String insertString = "SELECT car_id,rental_date,duration FROM rental WHERE car_id = ?";
+            String insertString = "SELECT car_id,rental_date,duration FROM rental WHERE car_id = ? AND is_returned = false";
             PreparedStatement insertStatement = con.prepareStatement(insertString);
             insertStatement.setInt(1,car_id);
             ResultSet res = insertStatement.executeQuery();

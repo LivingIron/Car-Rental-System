@@ -296,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638210940013</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Renting cars fully functional , removed overlapping bug">
+      <created>1638214186858</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1638214186858</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -312,7 +319,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Made exit button on administrator page functional" />
     <MESSAGE value="Added logic for adding a firm button" />
     <MESSAGE value="Switched branches" />
     <MESSAGE value="Merged branches" />
@@ -337,7 +343,8 @@
     <MESSAGE value="Changed Rent Car screen" />
     <MESSAGE value="Made the Rent car comboBoxes populate on load" />
     <MESSAGE value="Made Renting cars functional - there needs to be added a function to check for overlapping renting periods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made Renting cars functional - there needs to be added a function to check for overlapping renting periods" />
+    <MESSAGE value="Renting cars fully functional , removed overlapping bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Renting cars fully functional , removed overlapping bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
