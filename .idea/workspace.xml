@@ -5,24 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/CalculatePriceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/CheckAvailableCarsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/CheckClientRatingsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/CheckOperatorHistoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/CheckRentingHistoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/CheckStatsOfCarsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/RentCarController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/ReturnCarController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/CalculatePrice.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/CheckAvailableCars.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/CheckClientRatings.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/CheckOperatorHistory.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/CheckRentingHistory.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/CheckStatsOfCars.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/RentCar.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/org/group29/ReturnCar.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/OperatorLogged.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/OperatorLogged.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/RentCarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/RentCarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/RentCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/RentCar.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638192184473</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Added all needed FXML files for operator and connected them with the menu and controller">
+      <created>1638193091908</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1638193091908</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -300,7 +293,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Changed directories" />
     <MESSAGE value="Added unrevisioned files" />
     <MESSAGE value="Fixed merge issues , made admin panel unresizable and undecorated" />
     <MESSAGE value="Fixed some filenames added buttons to Admin FXML" />
@@ -325,7 +317,8 @@
     <MESSAGE value="Switched from using Panes to switch screen to using new FXML files , added a FxmlLoader class to handle the switching" />
     <MESSAGE value="Fixed Client register screen" />
     <MESSAGE value="Fixed Car register screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Car register screen" />
+    <MESSAGE value="Added all needed FXML files for operator and connected them with the menu and controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added all needed FXML files for operator and connected them with the menu and controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

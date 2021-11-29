@@ -58,6 +58,20 @@ public class JavaPostgreSQL {
             insertStatement.setBoolean(4,vehicleForSmokers);
             insertStatement.executeUpdate();
 
+
+            String getLastRow = "SELECT MAX(id) AS resId FROM car WHERE firm_id = ?";
+            PreparedStatement getLastRowStatement = con.prepareStatement(getLastRow);
+            getLastRowStatement.setInt(1,vehicleFirmId);
+            ResultSet res = getLastRowStatement.executeQuery();
+
+            while (res.next()){
+                query = "INSERT INTO condition(odometer,damages,car_id) VALUES(0,'', ?)";
+                insertStatement=con.prepareStatement(query);
+                System.out.println(res.getString("resId"));
+                insertStatement.setInt(1,res.getInt("resId"));
+                insertStatement.executeUpdate();
+            }
+
         }catch (SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
