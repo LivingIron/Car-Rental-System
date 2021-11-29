@@ -44,6 +44,8 @@ public class RentCarController {
 
             conditionTextArea.setText(JavaPostgreSQL.getCarCondition(carComboBox.getValue().getId()));
             odometerTextField.setText( JavaPostgreSQL.getCarOdometer(carComboBox.getValue().getId()));
+
+
         }
     }
 

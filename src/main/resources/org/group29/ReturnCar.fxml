@@ -16,14 +16,14 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <ComboBox fx:id="returnCarComboBox" layoutX="159.0" layoutY="117.0" prefHeight="29.0" prefWidth="184.0" promptText="Choose id.." />
-      <DatePicker layoutX="159.0" layoutY="180.0" prefHeight="29.0" prefWidth="184.0" />
-      <TextArea layoutX="159.0" layoutY="250.0" prefHeight="102.0" prefWidth="184.0" />
-      <TextField layoutX="159.0" layoutY="383.0" prefHeight="25.0" prefWidth="184.0" />
+      <ComboBox fx:id="returnCarComboBox" layoutX="159.0" layoutY="117.0" onAction="#enableFullForm" prefHeight="29.0" prefWidth="184.0" promptText="Choose id.." />
+      <DatePicker fx:id="returnDatePicker" disable="true" layoutX="159.0" layoutY="180.0" prefHeight="29.0" prefWidth="184.0" />
+      <TextArea fx:id="returnTextArea" disable="true" layoutX="159.0" layoutY="250.0" prefHeight="102.0" prefWidth="184.0" />
+      <TextField fx:id="odometerTextField" disable="true" layoutX="159.0" layoutY="383.0" prefHeight="25.0" prefWidth="184.0" />
       <Label layoutX="190.0" layoutY="90.0" text="Choose rental order ID" />
       <Label layoutX="197.0" layoutY="153.0" prefHeight="17.0" prefWidth="108.0" text="Choose return date" />
       <Label layoutX="158.0" layoutY="226.0" prefHeight="17.0" prefWidth="184.0" text="Enter any new damages to the car" />
       <Label layoutX="159.0" layoutY="359.0" prefHeight="17.0" prefWidth="184.0" text="Enter new odometer measurement" />
-      <Button layoutX="205.0" layoutY="431.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="Return car" />
+      <Button layoutX="205.0" layoutY="431.0" mnemonicParsing="false" onAction="#rentCarOnAction" prefHeight="25.0" prefWidth="91.0" text="Return car" />
    </children>
 </AnchorPane>

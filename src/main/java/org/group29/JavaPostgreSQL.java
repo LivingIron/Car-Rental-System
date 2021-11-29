@@ -1,6 +1,7 @@
 package org.group29;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import org.group29.entities.*;
 
 import java.sql.*;
@@ -199,6 +200,118 @@ public class JavaPostgreSQL {
 
     }
 
+    public static void returnCar(int rental_id, Date return_date, int condition_id, String damages , int odometer){
+        String query = "SELECT odometer FROM condition WHERE car_id = ?";
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,rentalIdToCarId(rental_id));
+            ResultSet res = statement.executeQuery();
+
+            while (res.next()){
+                if(res.getInt("odometer")>=odometer){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("Please select a new odometer reading!");
+                    alert.show();
+                    break;
+                }else{
+                    query= "SELECT rental_date ,duration FROM rental WHERE id = ?";
+                    statement=con.prepareStatement(query);
+                    statement.setInt(1,rental_id);
+
+                    ResultSet res2=statement.executeQuery();
+                    while (res2.next()){
+
+                        if(     res2.getDate("rental_date").toLocalDate().isAfter(return_date.toLocalDate()) ||
+                                return_date.toLocalDate().equals(res2.getDate("rental_date").toLocalDate())){
+
+                            System.out.println(res2.getDate("rental_date").toLocalDate());
+                            System.out.println(return_date.toLocalDate());
+
+
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setContentText("Please select a date after the rent date!");
+                            alert.show();
+                            break;
+
+                        }else{
+
+                            query="INSERT INTO return(rental_id,return_date,condition_id) VALUES (?, ?, ?)";
+                            statement=con.prepareStatement(query);
+
+                            System.out.println(condition_id);
+                            statement.setInt(1,rental_id);
+                            statement.setDate(2,return_date);
+                            statement.setInt(3,condition_id);
+
+                            statement.executeUpdate();
+                            updateCondition(condition_id,damages,odometer);
+
+                            query = "UPDATE  car SET is_rented=false WHERE id = ?";
+                            statement = con.prepareStatement(query);
+                            statement.setInt(1,rentalIdToCarId(rental_id));
+                            statement.executeUpdate();
+
+                            query = "UPDATE  rental SET is_returned=true WHERE id = ?";
+                            statement = con.prepareStatement(query);
+                            statement.setInt(1,rental_id);
+                            statement.executeUpdate();
+
+                            if(res2.getDate("rental_date").toLocalDate().plusDays(res2.getInt("duration")).isBefore(return_date.toLocalDate())){
+
+
+                                query = "SELECT rating FROM client  WHERE id = ?";
+                                statement = con.prepareStatement(query);
+                                statement.setInt(1,rentalIdToClientId(rental_id));
+                                ResultSet res3 = statement.executeQuery();
+                                while (res3.next()){
+                                    if(res3.getInt("rating")==0){
+                                        break;
+                                    }else{
+
+                                        query = "UPDATE  client SET rating = ? WHERE id = ?";
+                                        statement = con.prepareStatement(query);
+                                        statement.setInt(1,res3.getInt("rating")-1);
+                                        statement.setInt(2,rentalIdToClientId(rental_id));
+                                        statement.executeUpdate();
+
+                                    }
+                                }
+                            }else{
+                                query = "SELECT rating FROM client  WHERE id = ?";
+                                statement = con.prepareStatement(query);
+                                statement.setInt(1,rentalIdToClientId(rental_id));
+                                ResultSet res3 = statement.executeQuery();
+                                while (res3.next()){
+                                    if(res3.getInt("rating")==10){
+                                        break;
+                                    }else{
+
+                                        query = "UPDATE  client SET rating = ? WHERE id = ?";
+                                        statement = con.prepareStatement(query);
+                                        statement.setInt(1,res3.getInt("rating")+1);
+                                        statement.setInt(2,rentalIdToClientId(rental_id));
+                                        statement.executeUpdate();
+
+                                    }
+                                }
+
+                            }
+
+                        }
+                    }
+                }
+            }
+
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+    }
+
+
     public static String getCarCondition(int carId){
         String query = "SELECT damages FROM condition WHERE car_id = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
@@ -285,6 +398,22 @@ public class JavaPostgreSQL {
         return isOverlapped;
     }
 
+    public static void updateCondition(int condition_id,String damages ,int odometer){
+        String query = "UPDATE condition SET damages = ? , odometer = ?  WHERE id= ? ";
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1,damages);
+            statement.setInt(2,odometer);
+            statement.setInt(3,condition_id);
+            statement.executeUpdate();
+
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
     /*================================================================================================================*/
     /*============================== Functions For getting data from comboBoxes ======================================*/
     /*================================================================================================================*/
@@ -465,6 +594,50 @@ public class JavaPostgreSQL {
         }
 
        return idToReturn;
+    }
+
+    public static int rentalIdToCarId(int rentalId){
+        int idToReturn=0;
+        String query = "SELECT car_id FROM rental WHERE id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,rentalId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                idToReturn=res.getInt("car_id");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return idToReturn;
+    }
+
+    public static int rentalIdToClientId(int rentalId){
+        int idToReturn=0;
+        String query = "SELECT client_id FROM rental WHERE id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,rentalId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                idToReturn=res.getInt("client_id");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return idToReturn;
     }
 
 }

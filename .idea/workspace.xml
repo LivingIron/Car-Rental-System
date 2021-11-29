@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/entities/Rental.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/RentCarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/RentCarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/ReturnCarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/ReturnCarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/ReturnCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/ReturnCar.fxml" afterDir="false" />
     </list>
@@ -313,7 +313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638214603760</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Added graphics for return car , and populated rental comboBox">
+      <created>1638216181315</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1638216181315</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -329,7 +336,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Switched branches" />
     <MESSAGE value="Merged branches" />
     <MESSAGE value="Made buttons functional so you can switch between admin operations" />
     <MESSAGE value="Made Add Operator functional" />
@@ -354,7 +360,8 @@
     <MESSAGE value="Made Renting cars functional - there needs to be added a function to check for overlapping renting periods" />
     <MESSAGE value="Renting cars fully functional , removed overlapping bug" />
     <MESSAGE value="Added new column to rental table" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added new column to rental table" />
+    <MESSAGE value="Added graphics for return car , and populated rental comboBox" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added graphics for return car , and populated rental comboBox" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
