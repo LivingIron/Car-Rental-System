@@ -369,7 +369,6 @@ public class JavaPostgreSQL {
 
     }
 
-
     public static String getCarCondition(int carId){
         String query = "SELECT damages FROM condition WHERE car_id = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
@@ -428,6 +427,7 @@ public class JavaPostgreSQL {
 
     }
 
+    //Checks if two dates are overlapping
     public static boolean isOverlapping(int car_id , int duration , Date rental_date){
         boolean isOverlapped=false;
         LocalDate enteredRentDay = (rental_date.toLocalDate().plusDays(duration));
@@ -457,6 +457,7 @@ public class JavaPostgreSQL {
         return isOverlapped;
     }
 
+    //updated a condition by id
     public static void updateCondition(int condition_id,String damages ,int odometer){
         String query = "UPDATE condition SET damages = ? , odometer = ?  WHERE id= ? ";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
