@@ -7,9 +7,6 @@
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/RentCarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/RentCarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/ReturnCarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/ReturnCarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/ReturnCar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/ReturnCar.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -320,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638216181315</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Made car return fully functional , added client rating system depending if they are early or not , also added helper functions">
+      <created>1638222880778</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1638222880778</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -336,7 +340,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Merged branches" />
     <MESSAGE value="Made buttons functional so you can switch between admin operations" />
     <MESSAGE value="Made Add Operator functional" />
     <MESSAGE value="Removed deprecated function for registering operators" />
@@ -361,7 +364,8 @@
     <MESSAGE value="Renting cars fully functional , removed overlapping bug" />
     <MESSAGE value="Added new column to rental table" />
     <MESSAGE value="Added graphics for return car , and populated rental comboBox" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added graphics for return car , and populated rental comboBox" />
+    <MESSAGE value="Made car return fully functional , added client rating system depending if they are early or not , also added helper functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made car return fully functional , added client rating system depending if they are early or not , also added helper functions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

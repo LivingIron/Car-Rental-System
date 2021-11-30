@@ -209,18 +209,27 @@ public class JavaPostgreSQL {
             ResultSet res = statement.executeQuery();
 
             while (res.next()){
+
+                //checks to see if the new odometer reading is the same as the original reading
+                //if the odometer reading hasnt changed sends an error
+
                 if(res.getInt("odometer")>=odometer){
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setContentText("Please select a new odometer reading!");
                     alert.show();
                     break;
+
                 }else{
+
                     query= "SELECT rental_date ,duration FROM rental WHERE id = ?";
                     statement=con.prepareStatement(query);
                     statement.setInt(1,rental_id);
 
                     ResultSet res2=statement.executeQuery();
                     while (res2.next()){
+
+                         // Checks if the return date is before the original rental date
+                         // or if its on the same day , in both those cases sends an error
 
                         if(     res2.getDate("rental_date").toLocalDate().isAfter(return_date.toLocalDate()) ||
                                 return_date.toLocalDate().equals(res2.getDate("rental_date").toLocalDate())){
@@ -236,29 +245,40 @@ public class JavaPostgreSQL {
 
                         }else{
 
+                            //Adds the data into return table
+
                             query="INSERT INTO return(rental_id,return_date,condition_id) VALUES (?, ?, ?)";
                             statement=con.prepareStatement(query);
-
-                            System.out.println(condition_id);
                             statement.setInt(1,rental_id);
                             statement.setDate(2,return_date);
                             statement.setInt(3,condition_id);
-
                             statement.executeUpdate();
+
+                            // Updates the condition for the car
+
                             updateCondition(condition_id,damages,odometer);
+
+                            //Updated the car rented status to false
 
                             query = "UPDATE  car SET is_rented=false WHERE id = ?";
                             statement = con.prepareStatement(query);
                             statement.setInt(1,rentalIdToCarId(rental_id));
                             statement.executeUpdate();
 
+                            //Updates the rental returned status to true
+
                             query = "UPDATE  rental SET is_returned=true WHERE id = ?";
                             statement = con.prepareStatement(query);
                             statement.setInt(1,rental_id);
                             statement.executeUpdate();
 
+                            // Checks if the car is returned after the duration
+
                             if(res2.getDate("rental_date").toLocalDate().plusDays(res2.getInt("duration")).isBefore(return_date.toLocalDate())){
 
+                                //If the car is returned after the original duration the
+                                //client rating goes down by 1
+                                //Nothing happens if the client rating is already at 0
 
                                 query = "SELECT rating FROM client  WHERE id = ?";
                                 statement = con.prepareStatement(query);
@@ -278,6 +298,11 @@ public class JavaPostgreSQL {
                                     }
                                 }
                             }else{
+
+                                //If the car is returned before the original duration the
+                                //client rating goes up by 1
+                                //Nothing happens if the client rating is already at 10
+
                                 query = "SELECT rating FROM client  WHERE id = ?";
                                 statement = con.prepareStatement(query);
                                 statement.setInt(1,rentalIdToClientId(rental_id));
@@ -347,6 +372,7 @@ public class JavaPostgreSQL {
         return "No data";
     }
 
+    //Function checks  if any rentals start at the current date and updates the car to be rented
     public static void checkForRentDays(){
 
         String query = "SELECT car_id FROM rental WHERE rental_date = ?";
