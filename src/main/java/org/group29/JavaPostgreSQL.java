@@ -613,6 +613,31 @@ public class JavaPostgreSQL {
         return rentalArray.toArray(new Rental[0]);
     }
 
+    public static Return[] getReturns(){
+        ArrayList<Return> returnArray = new ArrayList<>();
+        String query = "SELECT id,rental_id,return_date,condition_id,id_price FROM return";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()) {
+                returnArray.add(new Return( res.getInt("id"),
+                                            res.getInt("rental_id"),
+                                            res.getInt("condition_id"),
+                                            res.getInt("id_price"),
+                                            res.getDate("return_date")));
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return returnArray.toArray(new Return[0]);
+    }
+
+
 
     /*================================================================================================================*/
     /*=========================================== Converters of data =================================================*/

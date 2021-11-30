@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/entities/Return.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/CalculatePriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/CalculatePriceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/CalculatePrice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/CalculatePrice.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -331,7 +334,21 @@
       <option name="project" value="LOCAL" />
       <updated>1638258367361</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Added new table &quot;price&quot; used for calculating the price in the future , also added comments and made Rent a car return you to the main menu with a message when successful">
+      <created>1638263361736</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1638263361736</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Added a few comments">
+      <created>1638263437687</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1638263437687</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,8 +364,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Made Add Operator functional" />
-    <MESSAGE value="Removed deprecated function for registering operators" />
     <MESSAGE value="Switched default login to be &quot;Add firm&quot; screen" />
     <MESSAGE value="Added a new function to search for the Firm ID" />
     <MESSAGE value="Changed getFirmNames to exclude AdminCompany from the combobox" />
@@ -372,7 +387,9 @@
     <MESSAGE value="Added graphics for return car , and populated rental comboBox" />
     <MESSAGE value="Made car return fully functional , added client rating system depending if they are early or not , also added helper functions" />
     <MESSAGE value="Added comments to make code clearer" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added comments to make code clearer" />
+    <MESSAGE value="Added new table &quot;price&quot; used for calculating the price in the future , also added comments and made Rent a car return you to the main menu with a message when successful" />
+    <MESSAGE value="Added a few comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a few comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
