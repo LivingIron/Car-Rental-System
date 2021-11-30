@@ -324,7 +324,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638222880778</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Added comments to make code clearer">
+      <created>1638258367361</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1638258367361</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -340,7 +347,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Made buttons functional so you can switch between admin operations" />
     <MESSAGE value="Made Add Operator functional" />
     <MESSAGE value="Removed deprecated function for registering operators" />
     <MESSAGE value="Switched default login to be &quot;Add firm&quot; screen" />
@@ -365,7 +371,8 @@
     <MESSAGE value="Added new column to rental table" />
     <MESSAGE value="Added graphics for return car , and populated rental comboBox" />
     <MESSAGE value="Made car return fully functional , added client rating system depending if they are early or not , also added helper functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made car return fully functional , added client rating system depending if they are early or not , also added helper functions" />
+    <MESSAGE value="Added comments to make code clearer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added comments to make code clearer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

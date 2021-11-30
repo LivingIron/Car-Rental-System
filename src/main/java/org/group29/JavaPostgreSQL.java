@@ -6,6 +6,7 @@ import org.group29.entities.*;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -245,13 +246,39 @@ public class JavaPostgreSQL {
 
                         }else{
 
-                            //Adds the data into return table
+                            //Adds a price row
 
-                            query="INSERT INTO return(rental_id,return_date,condition_id) VALUES (?, ?, ?)";
+                            Long days = ChronoUnit.DAYS.between(res2.getDate("rental_date").toLocalDate(),return_date.toLocalDate()); // Gets days the car was taken
+                            String[] words = damages.split("\\s+"); // gets damage count
+                            int damage_count = words.length;
+
+                            query = "INSERT INTO price (days,kilometers,dmg_count,car_class_id) VALUES (? , ? , ? , ? )";
+                            statement=con.prepareStatement(query);
+                            statement.setInt(1,days.intValue());
+                            statement.setInt(2,odometer - Integer.parseInt(getCarOdometer(rentalIdToCarId(rental_id))));
+                            statement.setInt(3,damage_count);
+                            statement.setInt(4,carIdToClassId( rentalIdToCarId(rental_id) ));
+                            statement.executeUpdate();
+
+
+                            //Gets the id of the last added price
+                            query = "SELECT MAX(id) FROM price";
+                            statement=con.prepareStatement(query);
+                            ResultSet lastPriceId = statement.executeQuery();
+                            int priceId = 0 ;
+
+                            while (lastPriceId.next()){
+                                priceId=lastPriceId.getInt("max");
+                            }
+
+
+                            //Adds the data into return table
+                            query="INSERT INTO return(rental_id,return_date,condition_id,id_price) VALUES (?, ?, ?, ?)";
                             statement=con.prepareStatement(query);
                             statement.setInt(1,rental_id);
                             statement.setDate(2,return_date);
                             statement.setInt(3,condition_id);
+                            statement.setInt(4,priceId);
                             statement.executeUpdate();
 
                             // Updates the condition for the car
@@ -271,6 +298,8 @@ public class JavaPostgreSQL {
                             statement = con.prepareStatement(query);
                             statement.setInt(1,rental_id);
                             statement.executeUpdate();
+
+
 
                             // Checks if the car is returned after the duration
 
@@ -328,6 +357,10 @@ public class JavaPostgreSQL {
                 }
             }
 
+            FxmlLoader.switchPane(Data.operatorMainPane,"OperatorMenu");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setContentText("Car returned !");
+            alert.show();
         }
         catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
@@ -440,6 +473,8 @@ public class JavaPostgreSQL {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
+
+
     /*================================================================================================================*/
     /*============================== Functions For getting data from comboBoxes ======================================*/
     /*================================================================================================================*/
@@ -656,6 +691,28 @@ public class JavaPostgreSQL {
 
             while(res.next()){
                 idToReturn=res.getInt("client_id");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return idToReturn;
+    }
+
+    public static int carIdToClassId(int carId){
+        int idToReturn=0;
+        String query = "SELECT class FROM car WHERE id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,carId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                idToReturn=res.getInt("class");
             }
         }
         catch(SQLException ex){
