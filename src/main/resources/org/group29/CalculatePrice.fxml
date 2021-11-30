@@ -14,7 +14,7 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
-      <Button layoutX="195.0" layoutY="316.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="111.0" text="Calculate" />
+      <Button layoutX="195.0" layoutY="316.0" mnemonicParsing="false" onAction="#calculateOnAction" prefHeight="33.0" prefWidth="111.0" text="Calculate" />
       <ComboBox fx:id="returnComboBox" layoutX="170.0" layoutY="153.0" prefHeight="33.0" prefWidth="162.0" promptText="Select id.." />
       <TextField fx:id="priceTextField" disable="true" layoutX="169.0" layoutY="240.0" prefHeight="33.0" prefWidth="162.0" promptText="Price will apear in here .." />
       <Label layoutX="186.0" layoutY="123.0" prefHeight="17.0" prefWidth="131.0" text="Select returned order id" />

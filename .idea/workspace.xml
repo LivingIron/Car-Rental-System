@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/group29/entities/Return.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/CalculatePriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/CalculatePriceController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
@@ -348,7 +347,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638263437687</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Added new helper class &quot;Return&quot; and added function to populate Calculate Price comboBox">
+      <created>1638265551704</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1638265551704</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -364,7 +370,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Switched default login to be &quot;Add firm&quot; screen" />
     <MESSAGE value="Added a new function to search for the Firm ID" />
     <MESSAGE value="Changed getFirmNames to exclude AdminCompany from the combobox" />
     <MESSAGE value="Added vehicle page , need to fix updates to the comboboxes" />
@@ -389,7 +394,8 @@
     <MESSAGE value="Added comments to make code clearer" />
     <MESSAGE value="Added new table &quot;price&quot; used for calculating the price in the future , also added comments and made Rent a car return you to the main menu with a message when successful" />
     <MESSAGE value="Added a few comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a few comments" />
+    <MESSAGE value="Added new helper class &quot;Return&quot; and added function to populate Calculate Price comboBox" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new helper class &quot;Return&quot; and added function to populate Calculate Price comboBox" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

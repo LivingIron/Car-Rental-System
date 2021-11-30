@@ -2,6 +2,7 @@ package org.group29;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import org.group29.entities.*;
 
 import java.sql.*;
@@ -369,40 +370,40 @@ public class JavaPostgreSQL {
 
     }
 
-    public static String getCarCondition(int carId){
-        String query = "SELECT damages FROM condition WHERE car_id = ?";
+    public static void calculatePrice(TextField result, int days , int kilometers, int count_damages, int id_class ){
+
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,carId);
-            ResultSet res = statement.executeQuery();
-            while (res.next()){
-                return res.getString("damages");
+            // price per km for Urban - 1 , Family - 2 , Luxury -3
+            // price per day for Urban - 15 , Family - 25 , Luxury - 55
+            // price per damage for Urban - 10 , Family - 35, Luxury - 60
+
+            System.out.println((id_class));
+
+            switch (id_class){
+                case 1:  // Luxury
+                {
+                    result.setText(Integer.toString(kilometers*3+days*55+count_damages*60).concat(" lv "));
+                }
+                break;
+                case 2: // Family
+                {
+                    result.setText(Integer.toString(kilometers*2+days*25+count_damages*35).concat(" lv "));
+                }
+                break;
+                case 3: // Urban
+                {
+                    result.setText(Integer.toString(kilometers*1+days*15+count_damages*10).concat(" lv "));
+                }
+                break;
             }
+
         }
         catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        return "No data";
     }
 
-    public static String getCarOdometer(int carId){
-        String query = "SELECT odometer FROM condition WHERE car_id = ?";
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,carId);
-            ResultSet res = statement.executeQuery();
-            while (res.next()){
-                Integer temp = res.getInt("odometer");
-                return temp.toString();
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-        return "No data";
-    }
 
     //Function checks  if any rentals start at the current date and updates the car to be rented
     public static void checkForRentDays(){
@@ -643,6 +644,41 @@ public class JavaPostgreSQL {
     /*=========================================== Converters of data =================================================*/
     /*================================================================================================================*/
 
+    public static String getCarCondition(int carId){
+        String query = "SELECT damages FROM condition WHERE car_id = ?";
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,carId);
+            ResultSet res = statement.executeQuery();
+            while (res.next()){
+                return res.getString("damages");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return "No data";
+    }
+
+    public static String getCarOdometer(int carId){
+        String query = "SELECT odometer FROM condition WHERE car_id = ?";
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,carId);
+            ResultSet res = statement.executeQuery();
+            while (res.next()){
+                Integer temp = res.getInt("odometer");
+                return temp.toString();
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return "No data";
+    }
+
     public static int getFirmId(String operatorUsername){
         String query = "SELECT id_firm, username FROM users WHERE username= ?";
         int idToReturn=0;
@@ -739,6 +775,94 @@ public class JavaPostgreSQL {
 
             while(res.next()){
                 idToReturn=res.getInt("class");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return idToReturn;
+    }
+
+    public static int priceIdToDays(int priceId){
+        int idToReturn=0;
+        String query = "SELECT days FROM price WHERE id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,priceId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                idToReturn=res.getInt("days");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return idToReturn;
+    }
+
+    public static int priceIdToKilometers(int priceId){
+        int idToReturn=0;
+        String query = "SELECT kilometers FROM price WHERE id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,priceId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                idToReturn=res.getInt("kilometers");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return idToReturn;
+    }
+
+    public static int priceIdToDmgCount(int priceId){
+        int idToReturn=0;
+        String query = "SELECT dmg_count FROM price WHERE id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,priceId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                idToReturn=res.getInt("dmg_count");
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+
+        return idToReturn;
+    }
+
+    public static int priceIdToClassId(int priceId){
+        int idToReturn=0;
+        String query = "SELECT car_class_id FROM price WHERE id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,priceId);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                idToReturn=res.getInt("car_class_id");
             }
         }
         catch(SQLException ex){
