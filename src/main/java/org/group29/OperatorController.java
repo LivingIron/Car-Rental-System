@@ -1,13 +1,14 @@
 package org.group29;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.group29.entities.VehicleCategory;
-import org.group29.entities.VehicleClass;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class OperatorController {
@@ -20,7 +21,7 @@ public class OperatorController {
 
     /*---------------PANES----------------*/
     @FXML
-    private BorderPane mainPane;
+    public Pane content;
 
     /*--------------------Labels----------------*/
     @FXML
@@ -31,9 +32,28 @@ public class OperatorController {
         NameText.setText(Data.operatorUser);
         Data.operatorMainPane=mainPane;
 
-        HomeButton.setOnAction(e -> FxmlLoader.switchPane(mainPane,"OperatorMenu"));
-        FxmlLoader.switchPane(mainPane,"OperatorMenu");
+        HomeButton.setOnAction(e -> switchContent("OperatorMenu"));
+        switchContent("OperatorMenu");
+    }
 
+    public void switchContent(String fileName){
+        try {
+            content.getChildren().clear();
+            if(fileName.equals("OperatorMenu")) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fileName + ".fxml"));
+                content.getChildren().add(loader.load());
+
+                OperatorMenuController controller = loader.getController();
+                controller.valueProperty().addListener((observable, oldValue, newValue) -> switchContent(newValue));
+            }
+            else{
+                content.getChildren().add(FXMLLoader.load(getClass().getResource(fileName + ".fxml")));
+            }
+        }
+        catch(IOException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
     }
 
     /*--------------------------------------Functions for buttons-------------------------------------------*/

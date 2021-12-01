@@ -1,5 +1,7 @@
 package org.group29;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -26,16 +28,22 @@ public class OperatorMenuController {
     @FXML
     private Button CheckStatsOfCarsButton;
 
+    private final StringProperty selectedMenu = new SimpleStringProperty();
+
+    public StringProperty valueProperty() {
+        return selectedMenu;
+    }
+
     public void initialize(){
-        RegisterCarButton.setOnAction(e -> FxmlLoader.switchPane(Data.operatorMainPane,"RegisterCar"));
-        RegisterClientButton.setOnAction(e -> FxmlLoader.switchPane(Data.operatorMainPane,"RegisterClient"));
-        RentCarButton.setOnAction(e -> FxmlLoader.switchPane(Data.operatorMainPane,"RentCar"));
-        ReturnCarButton.setOnAction(e -> FxmlLoader.switchPane(Data.operatorMainPane,"ReturnCar"));
-        CalculatePriceButton.setOnAction(e -> FxmlLoader.switchPane(Data.operatorMainPane,"CalculatePrice"));
-        CheckAvailableCarsButton.setOnAction(e -> FxmlLoader.switchPane(Data.operatorMainPane,"CheckAvailableCars"));
-        CheckRentingHistoryButton.setOnAction(e -> FxmlLoader.switchPane(Data.operatorMainPane,"CheckRentingHistory"));
-        CheckOperatorHistoryButton.setOnAction(e -> FxmlLoader.switchPane(Data.operatorMainPane,"CheckOperatorHistory"));
-        CheckClientRatingsButton.setOnAction(e -> FxmlLoader.switchPane(Data.operatorMainPane,"CheckClientRatings"));
-        CheckStatsOfCarsButton.setOnAction(e -> FxmlLoader.switchPane(Data.operatorMainPane,"CheckStatsOfCars"));
+        RegisterCarButton.setOnAction(e -> selectedMenu.set("RegisterCar"));
+        RegisterClientButton.setOnAction(e -> selectedMenu.set("RegisterClient"));
+        RentCarButton.setOnAction(e -> selectedMenu.set("RentCar"));
+        ReturnCarButton.setOnAction(e -> selectedMenu.set("ReturnCar"));
+        CalculatePriceButton.setOnAction(e -> selectedMenu.set("CalculatePrice"));
+        CheckAvailableCarsButton.setOnAction(e -> selectedMenu.set("CheckAvailableCars"));
+        CheckRentingHistoryButton.setOnAction(e -> selectedMenu.set("CheckRentingHistory"));
+        CheckOperatorHistoryButton.setOnAction(e -> selectedMenu.set("CheckOperatorHistory"));
+        CheckClientRatingsButton.setOnAction(e -> selectedMenu.set("CheckClientRatings"));
+        CheckStatsOfCarsButton.setOnAction(e -> selectedMenu.set("CheckStatsOfCars"));
     }
 }
