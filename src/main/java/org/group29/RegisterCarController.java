@@ -69,9 +69,9 @@ public class RegisterCarController {
                 VehicleTextArea.getText(),
                 isForSmokers);
 
-        FxmlLoader.switchPane(Data.operatorMainPane,"OperatorLogged");
+        FxmlLoader.switchPane(Data.operatorMainPane,"OperatorMenu");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("Car is rented !");
+        alert.setContentText("Car is registered!");
         alert.show();
     }
 
