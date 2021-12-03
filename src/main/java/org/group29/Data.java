@@ -1,10 +1,7 @@
 package org.group29;
 
-import javafx.scene.layout.BorderPane;
+import org.group29.entities.Operator;
 
 public class Data {
-    public static int operatorId;
-    public static String operatorUser;
-    public static String operatorPass;
-    public static BorderPane operatorMainPane;
+    public static Operator operator;
 }
