@@ -1,8 +1,10 @@
 package org.group29.entities;
 
+import org.group29.JavaPostgreSQL;
+
 public class Client {
 
-    private int id,firm_id,rating;
+    private int id, firm_id, rating;
     private String name,phone;
 
     public Client(int id, int firm_id, int rating, String name, String phone) {
@@ -11,6 +13,22 @@ public class Client {
         this.rating = rating;
         this.name = name;
         this.phone = phone;
+    }
+
+    public Client(int id){
+        this.id = id;
+    }
+
+    public void commit(){
+        if(id == -1)
+            id = JavaPostgreSQL.addClient(this);
+        else
+            JavaPostgreSQL.updateClient(this);
+    }
+
+    public void pull(){
+        if(id != -1)
+            JavaPostgreSQL.getClient(this);
     }
 
     public int getId() {

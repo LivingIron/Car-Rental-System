@@ -1,47 +1,74 @@
 package org.group29.entities;
 
+import org.group29.JavaPostgreSQL;
+
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Rental {
-    private int id,car_id,client_id,condition_id,duration;
+    private int id, duration, firm_id;
+    private Vehicle vehicle;
+    private Client client;
+    private Condition condition;
     private Date rental_date;
     private boolean is_returned;
 
-    public Rental(int id, int car_id, int client_id, int condition_id, int duration, Date rental_date, boolean is_returned) {
+    public Rental(int id, int firm_id, Vehicle vehicle, Client client, Condition condition, int duration, Date rental_date, boolean is_returned){
         this.id = id;
-        this.car_id = car_id;
-        this.client_id = client_id;
-        this.condition_id = condition_id;
+        this.firm_id = firm_id;
+        this.vehicle = vehicle;
+        this.client = client;
+        this.condition = condition;
         this.duration = duration;
         this.rental_date = rental_date;
         this.is_returned = is_returned;
+    }
+
+    public Rental(int id) {
+        this.id = id;
+    }
+
+    public void commit(){
+        if(id == -1)
+            id = JavaPostgreSQL.addRental(this);
+        else
+            JavaPostgreSQL.updateRental(this);
+    }
+
+    public void pull(){
+        if(id != -1)
+            JavaPostgreSQL.getRental(this);
     }
 
     public int getId() {
         return id;
     }
 
-    public int getCar_id() {
-        return car_id;
-    }
-
-    public int getClient_id() {
-        return client_id;
-    }
-
-    public int getCondition_id() {
-        return condition_id;
+    public int getFirm_id(){
+        return firm_id;
     }
 
     public int getDuration() {
         return duration;
     }
 
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
     public Date getRental_date() {
         return rental_date;
     }
 
-    public boolean isIs_returned() {
+    public boolean isReturned() {
         return is_returned;
     }
 
@@ -49,27 +76,31 @@ public class Rental {
         this.id = id;
     }
 
-    public void setCar_id(int car_id) {
-        this.car_id = car_id;
-    }
-
-    public void setClient_id(int client_id) {
-        this.client_id = client_id;
-    }
-
-    public void setCondition_id(int condition_id) {
-        this.condition_id = condition_id;
+    public void setFirm_id(int firm_id){
+        this.firm_id = firm_id;
     }
 
     public void setDuration(int duration) {
         this.duration = duration;
     }
 
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Condition getCondition() {
+        return condition;
+    }
+
+    public void setCondition(Condition condition) {
+        this.condition = condition;
+    }
+
     public void setRental_date(Date rental_date) {
         this.rental_date = rental_date;
     }
 
-    public void setIs_returned(boolean is_returned) {
+    public void setReturned(boolean is_returned) {
         this.is_returned = is_returned;
     }
 
