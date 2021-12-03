@@ -1,7 +1,6 @@
 package org.group29;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.group29.entities.*;
 
@@ -22,62 +21,237 @@ public class JavaPostgreSQL {
     /*================================================================================================================*/
 
 
-    public static boolean loginToDatabase(String userName, String userPassword) {
-        String query = "SELECT password FROM users WHERE username = ?";
+    public static int loginToDatabase(String userName, String userPassword) {
+        String query = "SELECT id, password FROM users WHERE username = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
             statement.setString(1, userName);
             ResultSet res = statement.executeQuery();
 
-            if(!res.isBeforeFirst()){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Provided Credentials are incorrect");
-                alert.show();
-            }
-            else{
-                while (res.next()){
-                    String retrievedPassword = res.getString("password");
-                    if(retrievedPassword.equals(userPassword)) return true;
-                }
+            if(res.next()){
+                String retrievedPassword = res.getString("password");
+                if(retrievedPassword.equals(userPassword)) return res.getInt("id");
             }
         }
         catch(SQLException ex){
             Logger lgr = Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        return false;
+        return -1;
     }
 
-
-    public static void addVehicle(int vehicleClass,int vehicleCategory, int vehicleFirmId,String vehicleCharacteristics,boolean vehicleForSmokers){
+    public static int addVehicle(Vehicle vehicle){
         try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
-            String query = "INSERT INTO car(class,category,characteristics,smoking,firm_id) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement insertStatement=con.prepareStatement(query);
-            insertStatement.setInt(1,vehicleClass);
-            insertStatement.setInt(2,vehicleCategory);
-            insertStatement.setInt(5,vehicleFirmId);
-            insertStatement.setString(3,vehicleCharacteristics);
-            insertStatement.setBoolean(4,vehicleForSmokers);
+            String query = "INSERT INTO car(class, category, characteristics, smoking, firm_id) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement insertStatement=con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            insertStatement.setInt(1,vehicle.getClassification());
+            insertStatement.setInt(2,vehicle.getCategory());
+            insertStatement.setString(3, vehicle.getCharacteristics());
+            insertStatement.setBoolean(4, vehicle.isSmoking());
+            insertStatement.setInt(5,vehicle.getFirm_id());
             insertStatement.executeUpdate();
 
-
-            String getLastRow = "SELECT MAX(id) AS resId FROM car WHERE firm_id = ?";
-            PreparedStatement getLastRowStatement = con.prepareStatement(getLastRow);
-            getLastRowStatement.setInt(1,vehicleFirmId);
-            ResultSet res = getLastRowStatement.executeQuery();
-
-            while (res.next()){
-                query = "INSERT INTO condition(odometer,damages,car_id) VALUES(0,'', ?)";
-                insertStatement=con.prepareStatement(query);
-                System.out.println(res.getString("resId"));
-                insertStatement.setInt(1,res.getInt("resId"));
-                insertStatement.executeUpdate();
+            ResultSet res = insertStatement.getGeneratedKeys();
+            if(res.next()){
+                return res.getInt(1);
             }
-
-        }catch (SQLException ex){
+        }
+        catch (SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
+        return -1;
+    }
+
+    public static void updateVehicle(Vehicle vehicle){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "UPDATE car SET class = ?, category = ?, characteristics = ?, smoking = ?, firm_id = ? WHERE id = ?";
+
+            PreparedStatement updateStatement = con.prepareStatement(query);
+            updateStatement.setInt(1,vehicle.getClassification());
+            updateStatement.setInt(2,vehicle.getCategory());
+            updateStatement.setString(3, vehicle.getCharacteristics());
+            updateStatement.setBoolean(4, vehicle.isSmoking());
+            updateStatement.setInt(5, vehicle.getFirm_id());
+            updateStatement.setInt(6, vehicle.getId());
+            updateStatement.executeUpdate();
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static void getVehicle(Vehicle vehicle){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "SELECT class, category, characteristics, smoking, firm_id FROM car WHERE id = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,vehicle.getId());
+            ResultSet res = statement.executeQuery();
+
+            if(res.next()) {
+                vehicle.setCategory(res.getInt("category"));
+                vehicle.setClassification(res.getInt("class"));
+                vehicle.setCharacteristics(res.getString("characteristics"));
+                vehicle.setSmoking(res.getBoolean("smoking"));
+                vehicle.setFirm_id(res.getInt("firm_id"));
+            }
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static void getClient(Client client){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "SELECT name, phone, firm_id, rating FROM client WHERE id = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,client.getId());
+            ResultSet res = statement.executeQuery();
+
+            if(res.next()) {
+                client.setName(res.getString("name"));
+                client.setPhone(res.getString("phone"));
+                client.setFirm_id(res.getInt("firm_id"));
+                client.setRating(res.getInt("rating"));
+            }
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static void getCondition(Condition condition){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "SELECT odometer, damages, car_id FROM condition WHERE id = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,condition.getId());
+            ResultSet res = statement.executeQuery();
+
+            if(res.next()) {
+                condition.setOdometer(res.getInt("odometer"));
+                condition.setDamages(res.getString("damages"));
+                condition.setVehicle_id(res.getInt("car_id"));
+            }
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static Condition getCarCondition(int vehicle_id){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "SELECT id, odometer, damages, car_id FROM condition WHERE car_id = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,vehicle_id);
+            ResultSet res = statement.executeQuery();
+
+            if(res.next())
+                return resultToCondition(res);
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return null;
+    }
+
+    public static void updateCondition(Condition condition){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "UPDATE condition SET odometer = ?, damages = ?, car_id = ? WHERE id = ?";
+
+            PreparedStatement updateStatement = con.prepareStatement(query);
+            updateStatement.setInt(1, condition.getOdometer());
+            updateStatement.setString(2, condition.getDamages());
+            updateStatement.setInt(3, condition.getVehicle_id());
+            updateStatement.setInt(4, condition.getId());
+            updateStatement.executeUpdate();
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static void getRental(Rental rental){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "SELECT car_id, client_id, condition_id, rental_date, duration, firm_id, is_returned FROM rental WHERE id = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,rental.getId());
+            ResultSet res = statement.executeQuery();
+
+            if(res.next()) {
+                rental.setClient(new Client(res.getInt("client_id")));
+                rental.setVehicle(new Vehicle(res.getInt("car_id")));
+                rental.setCondition(new Condition(res.getInt("condition_id")));
+                rental.setRental_date(res.getDate("rental_date"));
+                rental.setDuration(res.getInt("duration"));
+                rental.setFirm_id(res.getInt("firm_id"));
+                rental.setReturned(res.getBoolean("is_returned"));
+            }
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static void getReturn(Return returnal){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "SELECT rental_id, return_date, condition_id, id_price FROM return WHERE id = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,returnal.getId());
+            ResultSet res = statement.executeQuery();
+
+            if(res.next()){
+                returnal.setRental(new Rental(res.getInt("rental_id")));
+                returnal.setReturn_date(res.getDate("return_date"));
+            }
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static void getOperator(Operator operator){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "SELECT username, id_firm FROM users WHERE id = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,operator.getId());
+            ResultSet res = statement.executeQuery();
+
+            if(res.next()) {
+                operator.setUsername(res.getString("username"));
+                operator.setFirm_id(res.getInt("id_firm"));
+            }
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static double getPrice(Return returnal){
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            String callString = "{ ? = call get_price(?) }";
+            CallableStatement checkStatement = con.prepareCall(callString);
+
+            checkStatement.registerOutParameter(1, Types.DOUBLE);
+            checkStatement.setInt(2, returnal.getId());
+
+            checkStatement.execute();
+
+            return checkStatement.getDouble(1);
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return -1;
     }
 
     /*================================================================================================================*/
@@ -85,368 +259,118 @@ public class JavaPostgreSQL {
     /*================================================================================================================*/
 
 
-    public static void addFirm(String firmName){
+    public static int addFirm(Firm firm){
         String query = "SELECT 1 FROM firm WHERE firm_name = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setString(1, firmName);
+            statement.setString(1, firm.getName());
             ResultSet res = statement.executeQuery();
 
-            if(!res.isBeforeFirst()){
+            if(!res.next()){
                 String insertString = "INSERT INTO firm(firm_name) VALUES (?)";
-                PreparedStatement insertStatement = con.prepareStatement(insertString);
-                insertStatement.setString(1, firmName);
+                PreparedStatement insertStatement = con.prepareStatement(insertString, Statement.RETURN_GENERATED_KEYS);
+                insertStatement.setString(1, firm.getName());
                 insertStatement.executeUpdate();
-            }
-            else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Firm name is taken");
-                alert.show();
+
+                res = insertStatement.getGeneratedKeys();
+                if(res.next()) {
+                    return res.getInt(1);
+                }
             }
         }
         catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
+        return -1;
     }
 
-    public static void addOperator(String operatorUsername, String operatorPassword, int operatorFirmId){
+    public static void updateFirm(Firm firm){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "UPDATE firm SET name = ? WHERE id = ?";
+
+            PreparedStatement updateStatement = con.prepareStatement(query);
+            updateStatement.setString(1, firm.getName());
+            updateStatement.setInt(2, firm.getId());
+            updateStatement.executeUpdate();
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static int addOperator(Operator operator){
         String query = "SELECT 1 FROM users WHERE username = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setString(1, operatorUsername);
+            statement.setString(1, operator.getUsername());
             ResultSet res = statement.executeQuery();
 
-            if(!res.isBeforeFirst()){
+            if(!res.next()){
                 String insertString = "INSERT INTO users (username, password, id_firm) VALUES (?, ?, ?)";
-                PreparedStatement insertStatement = con.prepareStatement(insertString);
-                insertStatement.setString(1, operatorUsername);
-                insertStatement.setString(2, operatorPassword);
-                insertStatement.setInt(3, operatorFirmId);
+                PreparedStatement insertStatement = con.prepareStatement(insertString, Statement.RETURN_GENERATED_KEYS);
+                insertStatement.setString(1, operator.getUsername());
+                insertStatement.setString(2, operator.getPassword());
+                insertStatement.setInt(3, operator.getFirm_id());
                 insertStatement.executeUpdate();
-            }
-            else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Username is already taken!");
-                alert.show();
+
+                res = insertStatement.getGeneratedKeys();
+                if(res.next()){
+                    return res.getInt(1);
+                }
             }
         }
         catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
+        return -1;
     }
 
+    public static void updateOperator(Operator operator){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "UPDATE users SET username = ?, password = ?, firm_id = ? WHERE id = ?";
 
+            PreparedStatement updateStatement = con.prepareStatement(query);
+            updateStatement.setString(1, operator.getUsername());
+            updateStatement.setString(2, operator.getPassword());
+            updateStatement.setInt(3, operator.getFirm_id());
+            updateStatement.setInt(4, operator.getId());
+            updateStatement.executeUpdate();
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
 
     /*================================================================================================================*/
     /*============================ Operator panel functions for interacting with DB ==================================*/
     /*================================================================================================================*/
 
 
-    public static void addClient(String clientName,String clientPhone){
+    public static int addClient(Client client){
         String query = "SELECT 1 FROM client WHERE name = ? AND phone = ? AND firm_id = ?";
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setString(1, clientName);
-            statement.setString(2, clientPhone);
-            statement.setInt(3, Data.operatorId);
+            statement.setString(1, client.getName());
+            statement.setString(2, client.getPhone());
+            statement.setInt(3, client.getFirm_id());
             ResultSet res = statement.executeQuery();
 
-            if(!res.isBeforeFirst()){
-                String insertString = "INSERT INTO client(name,phone,firm_id) VALUES (?, ? ,?)";
-                PreparedStatement insertStatement = con.prepareStatement(insertString);
-                insertStatement.setString(1, clientName);
-                insertStatement.setString(2, clientPhone);
-                insertStatement.setInt(3, Data.operatorId);
-                insertStatement.executeUpdate();
-            }
-            else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Client already exists");
-                alert.show();
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-    }
-
-    public static  void  rentCar(int carId , int client_id, int condition_id, Date rental_date, int  duration , int firm_id){
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            if(!isOverlapping(carId,duration,rental_date)) {
-                String insertString = "INSERT INTO rental(car_id,client_id,condition_id,rental_date,duration,firm_id) VALUES (?, ? ,? , ? ,? ,?)";
-                PreparedStatement insertStatement = con.prepareStatement(insertString);
-                insertStatement.setInt(1, carId);
-                insertStatement.setInt(2, client_id);
-                insertStatement.setInt(3, condition_id);
-                insertStatement.setDate(4, rental_date);
-                insertStatement.setInt(5, duration);
-                insertStatement.setInt(6, firm_id);
+            if(!res.next()){
+                String insertString = "INSERT INTO client(name, phone, firm_id) VALUES (?, ? ,?)";
+                PreparedStatement insertStatement = con.prepareStatement(insertString, Statement.RETURN_GENERATED_KEYS);
+                insertStatement.setString(1, client.getName());
+                insertStatement.setString(2, client.getPhone());
+                insertStatement.setInt(3, client.getFirm_id());
                 insertStatement.executeUpdate();
 
-                checkForRentDays(); // sets car to rented if its rented for the same day
-            }else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Rent days for this car are overlapping !");
-                alert.show();
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
+                res = insertStatement.getGeneratedKeys();
 
-    }
-
-    public static void returnCar(int rental_id, Date return_date, int condition_id, String damages , int odometer){
-        String query = "SELECT odometer FROM condition WHERE car_id = ?";
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,rentalIdToCarId(rental_id));
-            ResultSet res = statement.executeQuery();
-
-            while (res.next()){
-
-                //checks to see if the new odometer reading is the same as the original reading
-                //if the odometer reading hasnt changed sends an error
-
-                if(res.getInt("odometer")>=odometer){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Please select a new odometer reading!");
-                    alert.show();
-                    break;
-
-                }else{
-
-                    query= "SELECT rental_date ,duration FROM rental WHERE id = ?";
-                    statement=con.prepareStatement(query);
-                    statement.setInt(1,rental_id);
-
-                    ResultSet res2=statement.executeQuery();
-                    while (res2.next()){
-
-                         // Checks if the return date is before the original rental date
-                         // or if its on the same day , in both those cases sends an error
-
-                        if(     res2.getDate("rental_date").toLocalDate().isAfter(return_date.toLocalDate()) ||
-                                return_date.toLocalDate().equals(res2.getDate("rental_date").toLocalDate())){
-
-                            System.out.println(res2.getDate("rental_date").toLocalDate());
-                            System.out.println(return_date.toLocalDate());
-
-
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("Please select a date after the rent date!");
-                            alert.show();
-                            break;
-
-                        }else{
-
-                            //Adds a price row
-
-                            Long days = ChronoUnit.DAYS.between(res2.getDate("rental_date").toLocalDate(),return_date.toLocalDate()); // Gets days the car was taken
-                            String[] words = damages.split("\\s+"); // gets damage count
-                            int damage_count = words.length;
-
-                            query = "INSERT INTO price (days,kilometers,dmg_count,car_class_id) VALUES (? , ? , ? , ? )";
-                            statement=con.prepareStatement(query);
-                            statement.setInt(1,days.intValue());
-                            statement.setInt(2,odometer - Integer.parseInt(getCarOdometer(rentalIdToCarId(rental_id))));
-                            statement.setInt(3,damage_count);
-                            statement.setInt(4,carIdToClassId( rentalIdToCarId(rental_id) ));
-                            statement.executeUpdate();
-
-
-                            //Gets the id of the last added price
-                            query = "SELECT MAX(id) FROM price";
-                            statement=con.prepareStatement(query);
-                            ResultSet lastPriceId = statement.executeQuery();
-                            int priceId = 0 ;
-
-                            while (lastPriceId.next()){
-                                priceId=lastPriceId.getInt("max");
-                            }
-
-
-                            //Adds the data into return table
-                            query="INSERT INTO return(rental_id,return_date,condition_id,id_price) VALUES (?, ?, ?, ?)";
-                            statement=con.prepareStatement(query);
-                            statement.setInt(1,rental_id);
-                            statement.setDate(2,return_date);
-                            statement.setInt(3,condition_id);
-                            statement.setInt(4,priceId);
-                            statement.executeUpdate();
-
-                            // Updates the condition for the car
-
-                            updateCondition(condition_id,damages,odometer);
-
-                            //Updated the car rented status to false
-
-                            query = "UPDATE  car SET is_rented=false WHERE id = ?";
-                            statement = con.prepareStatement(query);
-                            statement.setInt(1,rentalIdToCarId(rental_id));
-                            statement.executeUpdate();
-
-                            //Updates the rental returned status to true
-
-                            query = "UPDATE  rental SET is_returned=true WHERE id = ?";
-                            statement = con.prepareStatement(query);
-                            statement.setInt(1,rental_id);
-                            statement.executeUpdate();
-
-
-
-                            // Checks if the car is returned after the duration
-
-                            if(res2.getDate("rental_date").toLocalDate().plusDays(res2.getInt("duration")).isBefore(return_date.toLocalDate())){
-
-                                //If the car is returned after the original duration the
-                                //client rating goes down by 1
-                                //Nothing happens if the client rating is already at 0
-
-                                query = "SELECT rating FROM client  WHERE id = ?";
-                                statement = con.prepareStatement(query);
-                                statement.setInt(1,rentalIdToClientId(rental_id));
-                                ResultSet res3 = statement.executeQuery();
-                                while (res3.next()){
-                                    if(res3.getInt("rating")==0){
-                                        break;
-                                    }else{
-
-                                        query = "UPDATE  client SET rating = ? WHERE id = ?";
-                                        statement = con.prepareStatement(query);
-                                        statement.setInt(1,res3.getInt("rating")-1);
-                                        statement.setInt(2,rentalIdToClientId(rental_id));
-                                        statement.executeUpdate();
-
-                                    }
-                                }
-                            }else{
-
-                                //If the car is returned before the original duration the
-                                //client rating goes up by 1
-                                //Nothing happens if the client rating is already at 10
-
-                                query = "SELECT rating FROM client  WHERE id = ?";
-                                statement = con.prepareStatement(query);
-                                statement.setInt(1,rentalIdToClientId(rental_id));
-                                ResultSet res3 = statement.executeQuery();
-                                while (res3.next()){
-                                    if(res3.getInt("rating")==10){
-                                        break;
-                                    }else{
-
-                                        query = "UPDATE  client SET rating = ? WHERE id = ?";
-                                        statement = con.prepareStatement(query);
-                                        statement.setInt(1,res3.getInt("rating")+1);
-                                        statement.setInt(2,rentalIdToClientId(rental_id));
-                                        statement.executeUpdate();
-
-                                    }
-                                }
-
-                            }
-
-                        }
-                    }
-                }
-            }
-
-            FxmlLoader.switchPane(Data.operatorMainPane,"OperatorMenu");
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setContentText("Car returned !");
-            alert.show();
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-    }
-
-    public static void calculatePrice(TextField result, int days , int kilometers, int count_damages, int id_class ){
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-            // price per km for Urban - 1 , Family - 2 , Luxury -3
-            // price per day for Urban - 15 , Family - 25 , Luxury - 55
-            // price per damage for Urban - 10 , Family - 35, Luxury - 60
-
-            System.out.println((id_class));
-
-            switch (id_class){
-                case 1:  // Luxury
-                {
-                    result.setText(Integer.toString(kilometers*3+days*55+count_damages*60).concat(" lv "));
-                }
-                break;
-                case 2: // Family
-                {
-                    result.setText(Integer.toString(kilometers*2+days*25+count_damages*35).concat(" lv "));
-                }
-                break;
-                case 3: // Urban
-                {
-                    result.setText(Integer.toString(kilometers*1+days*15+count_damages*10).concat(" lv "));
-                }
-                break;
-            }
-
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-    }
-
-
-    //Function checks  if any rentals start at the current date and updates the car to be rented
-    public static void checkForRentDays(){
-
-        String query = "SELECT car_id FROM rental WHERE rental_date = ?";
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setDate(1,Date.valueOf(LocalDate.now()));
-            ResultSet res = statement.executeQuery();
-            while (res.next()){
-                    query="UPDATE car SET is_rented=true WHERE id = ?";
-                    PreparedStatement statement1 = con.prepareStatement(query);
-                    statement1.setInt(1,res.getInt("car_id"));
-                    statement1.executeUpdate();
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-    }
-
-    //Checks if two dates are overlapping
-    public static boolean isOverlapping(int car_id , int duration , Date rental_date){
-        boolean isOverlapped=false;
-        LocalDate enteredRentDay = (rental_date.toLocalDate().plusDays(duration));
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            String insertString = "SELECT car_id,rental_date,duration FROM rental WHERE car_id = ? AND is_returned = false";
-            PreparedStatement insertStatement = con.prepareStatement(insertString);
-            insertStatement.setInt(1,car_id);
-            ResultSet res = insertStatement.executeQuery();
-
-            while (res.next()){
-                LocalDate checkingDate = res.getDate("rental_date").toLocalDate().plusDays(res.getInt("duration"));
-                if ( (rental_date.toLocalDate().isBefore(checkingDate) ||  rental_date.toLocalDate().equals(checkingDate) ) &&
-                        (enteredRentDay.isAfter(res.getDate("rental_date").toLocalDate()) || enteredRentDay.equals(res.getDate("rental_date")))
-                    ){
-                    isOverlapped=true;
-                    break;
+                if(res.next()){
+                    return res.getInt(1);
                 }
             }
         }
@@ -454,43 +378,133 @@ public class JavaPostgreSQL {
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
-
-        return isOverlapped;
+        return -1;
     }
 
-    //updated a condition by id
-    public static void updateCondition(int condition_id,String damages ,int odometer){
-        String query = "UPDATE condition SET damages = ? , odometer = ?  WHERE id= ? ";
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+    public static void updateClient(Client client){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "UPDATE client SET name = ?, phone = ?, firm_id = ?, rating = ? WHERE id = ?";
 
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setString(1,damages);
-            statement.setInt(2,odometer);
-            statement.setInt(3,condition_id);
-            statement.executeUpdate();
-
+            PreparedStatement updateStatement = con.prepareStatement(query);
+            updateStatement.setString(1, client.getName());
+            updateStatement.setString(2, client.getPhone());
+            updateStatement.setInt(3, client.getFirm_id());
+            updateStatement.setInt(4, client.getRating());
+            updateStatement.setInt(5, client.getId());
+            updateStatement.executeUpdate();
         }
-        catch(SQLException ex){
+        catch (SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
 
+    public static int addRental(Rental rental){
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            String callString = "{ ? = call is_rental_overlapped(?, ?, ?) }";
+            CallableStatement overlapStatement = con.prepareCall(callString);
+
+            overlapStatement.registerOutParameter(1, Types.BOOLEAN);
+            overlapStatement.setInt(2, rental.getVehicle().getId());
+            overlapStatement.setDate(3, rental.getRental_date());
+            overlapStatement.setInt(4, rental.getDuration());
+
+            overlapStatement.execute();
+
+            boolean isOverlapping = overlapStatement.getBoolean(1);
+            if(!isOverlapping) {
+                String insertString = "INSERT INTO rental(car_id, client_id, condition_id, rental_date, duration, firm_id) VALUES (?, ?, ?, ?, ?, ?)";
+                PreparedStatement insertStatement = con.prepareStatement(insertString, Statement.RETURN_GENERATED_KEYS);
+                insertStatement.setInt(1, rental.getVehicle().getId());
+                insertStatement.setInt(2, rental.getClient().getId());
+                insertStatement.setInt(3, rental.getCondition().getId());
+                insertStatement.setDate(4, rental.getRental_date());
+                insertStatement.setInt(5, rental.getDuration());
+                insertStatement.setInt(6, rental.getFirm_id());
+                insertStatement.executeUpdate();
+
+                ResultSet res = insertStatement.getGeneratedKeys();
+                if(res.next()){
+                    return res.getInt(1);
+                }
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return -1;
+    }
+
+    public static void updateRental(Rental rental){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "UPDATE rental SET car_id = ?, client_id = ?, condition_id = ?, rental_date = ?, duration = ?, firm_id = ?, is_returned = ? WHERE id = ?";
+
+            PreparedStatement updateStatement = con.prepareStatement(query);
+            updateStatement.setInt(1,rental.getVehicle().getId());
+            updateStatement.setInt(2,rental.getClient().getId());
+            updateStatement.setInt(3, rental.getCondition().getId());
+            updateStatement.setDate(4, rental.getRental_date());
+            updateStatement.setInt(5, rental.getDuration());
+            updateStatement.setInt(6, rental.getFirm_id());
+            updateStatement.setBoolean(7, rental.isReturned());
+            updateStatement.setInt(8, rental.getId());
+            updateStatement.executeUpdate();
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static int addReturn(Return returnal){
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            String callString = "{ ? = call is_return_after_rental(?, ?) }";
+            CallableStatement checkStatement = con.prepareCall(callString);
+
+            checkStatement.registerOutParameter(1, Types.BOOLEAN);
+            checkStatement.setDate(2, returnal.getReturn_date());
+            checkStatement.setInt(3, returnal.getRental().getId());
+
+            checkStatement.execute();
+
+            boolean isValid = checkStatement.getBoolean(1);
+            if(isValid){
+                String insertString = "INSERT INTO return(rental_id, return_date) VALUES (?, ?)";
+                PreparedStatement insertStatement = con.prepareStatement(insertString, Statement.RETURN_GENERATED_KEYS);
+                insertStatement.setInt(1, returnal.getRental().getId());
+                insertStatement.setDate(2, returnal.getReturn_date());
+                insertStatement.executeUpdate();
+
+                ResultSet res = insertStatement.getGeneratedKeys();
+                if(res.next()){
+                    return res.getInt(1);
+                }
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return -1;
+    }
 
     /*================================================================================================================*/
     /*============================== Functions For getting data from comboBoxes ======================================*/
     /*================================================================================================================*/
 
+
     public static Firm[] getFirms(){
         ArrayList<Firm> firms = new ArrayList<>();
         String query = "SELECT id, firm_name FROM firm";
+
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
-                if(res.getInt("id") != 1){
-                    firms.add(new Firm(res.getInt("id"), res.getString("firm_name")));
+                if(res.getInt("id") != 0){
+                    firms.add(resultToFirm(res));
                 }
             }
         }
@@ -503,13 +517,14 @@ public class JavaPostgreSQL {
 
     public static VehicleCategory[] getCategoryNames(){
         ArrayList<VehicleCategory> categoryNames = new ArrayList<>();
-        String query = "SELECT id_category,name_category FROM car_category";
+        String query = "SELECT id_category, name_category FROM car_category";
+
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
-                    categoryNames.add(new VehicleCategory(res.getInt("id_category"),res.getString("name_category")));
+                categoryNames.add(resultToCategory(res));
             }
         }
         catch(SQLException ex){
@@ -521,13 +536,14 @@ public class JavaPostgreSQL {
 
     public static VehicleClass[] getClassNames(){
         ArrayList<VehicleClass> classNames = new ArrayList<>();
-        String query = "SELECT id_class,name_class FROM car_class";
+        String query = "SELECT id_class, name_class FROM car_class";
+
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
-                classNames.add(new VehicleClass(res.getInt("id_class"),res.getString("name_class")));
+                classNames.add(resultToClass(res));
             }
         }
         catch(SQLException ex){
@@ -537,47 +553,37 @@ public class JavaPostgreSQL {
         return classNames.toArray(new VehicleClass[0]);
     }
 
-    public static Vehicles[] getVehicles(){
-        ArrayList<Vehicles> vehicleArray = new ArrayList<>();
-        String query = "SELECT id,class,category,characteristics,smoking,is_rented FROM car WHERE firm_id = ? AND is_rented=false";
+    public static Vehicle[] getVehicles(){
+        ArrayList<Vehicle> vehicleArray = new ArrayList<>();
+        String query = "SELECT id, class, category, firm_id, characteristics, smoking FROM car WHERE firm_id = ?";
 
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,Data.operatorId);
+            statement.setInt(1,Data.operator.getFirm_id());
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
-                vehicleArray.add(new Vehicles(  res.getInt("id"),
-                                                res.getInt("class"),
-                                                res.getInt("category"),
-                                                Data.operatorId,
-                                                res.getString("characteristics"),
-                                                res.getBoolean("smoking"),
-                                                res.getBoolean("is_rented")));
+                vehicleArray.add(resultToVehicle(res));
             }
         }
         catch(SQLException ex){
             Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
-        return vehicleArray.toArray(new Vehicles[0]);
+        return vehicleArray.toArray(new Vehicle[0]);
     }
 
     public static Client[] getClients(){
         ArrayList<Client> clientArray = new ArrayList<>();
-        String query = "SELECT id,name,phone,rating FROM client WHERE firm_id = ?";
+        String query = "SELECT id, name, phone, rating, firm_id FROM client WHERE firm_id = ?";
 
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,Data.operatorId);
+            statement.setInt(1,Data.operator.getFirm_id());
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
-               clientArray.add(new Client(  res.getInt("id"),
-                                            Data.operatorId,
-                                            res.getInt("rating"),
-                                            res.getString("name"),
-                                            res.getString("phone")));
+               clientArray.add(resultToClient(res));
             }
         }
         catch(SQLException ex){
@@ -589,22 +595,16 @@ public class JavaPostgreSQL {
 
     public static Rental[] getRentals(){
         ArrayList<Rental> rentalArray = new ArrayList<>();
-        String query = "SELECT id,car_id,client_id,condition_id,rental_date,duration,is_returned FROM rental WHERE is_returned=false AND firm_id = ?";
+        String query = "SELECT id, car_id, client_id, condition_id, rental_date, duration, is_returned, firm_id FROM rental WHERE firm_id = ?";
 
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
 
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,Data.operatorId);
+            statement.setInt(1,Data.operator.getFirm_id());
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
-                rentalArray.add(  new Rental( res.getInt("id"),
-                                    res.getInt("car_id"),
-                                    res.getInt("client_id"),
-                                    res.getInt("condition_id"),
-                                    res.getInt("duration"),
-                                    res.getDate("rental_date"),
-                                    res.getBoolean("is_returned"))) ;
+                rentalArray.add(resultToRental(res));
             }
         }
         catch(SQLException ex){
@@ -616,19 +616,15 @@ public class JavaPostgreSQL {
 
     public static Return[] getReturns(){
         ArrayList<Return> returnArray = new ArrayList<>();
-        String query = "SELECT id,rental_id,return_date,condition_id,id_price FROM return";
+        String query = "SELECT return.id AS id, rental_id, return_date FROM return INNER JOIN rental ON rental.id = rental_id WHERE firm_id = ?";
 
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
             PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1, Data.operator.getFirm_id());
             ResultSet res = statement.executeQuery();
 
             while(res.next()) {
-                returnArray.add(new Return( res.getInt("id"),
-                                            res.getInt("rental_id"),
-                                            res.getInt("condition_id"),
-                                            res.getInt("id_price"),
-                                            res.getDate("return_date")));
+                returnArray.add(resultToReturn(res));
             }
         }
         catch(SQLException ex){
@@ -638,239 +634,66 @@ public class JavaPostgreSQL {
         return returnArray.toArray(new Return[0]);
     }
 
-
-
     /*================================================================================================================*/
     /*=========================================== Converters of data =================================================*/
     /*================================================================================================================*/
 
-    public static String getCarCondition(int carId){
-        String query = "SELECT damages FROM condition WHERE car_id = ?";
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,carId);
-            ResultSet res = statement.executeQuery();
-            while (res.next()){
-                return res.getString("damages");
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-        return "No data";
+
+    public static Vehicle resultToVehicle(ResultSet res) throws SQLException {
+        return new Vehicle(res.getInt("id"),
+            res.getInt("class"),
+            res.getInt("category"),
+            res.getInt("firm_id"),
+            res.getString("characteristics"),
+            res.getBoolean("smoking"));
     }
 
-    public static String getCarOdometer(int carId){
-        String query = "SELECT odometer FROM condition WHERE car_id = ?";
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,carId);
-            ResultSet res = statement.executeQuery();
-            while (res.next()){
-                Integer temp = res.getInt("odometer");
-                return temp.toString();
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-        return "No data";
+    public static Client resultToClient(ResultSet res) throws SQLException {
+        return new Client(res.getInt("id"),
+                res.getInt("firm_id"),
+                res.getInt("rating"),
+                res.getString("name"),
+                res.getString("phone"));
     }
 
-    public static int getFirmId(String operatorUsername){
-        String query = "SELECT id_firm, username FROM users WHERE username= ?";
-        int idToReturn=0;
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setString(1,operatorUsername);
-            ResultSet res = statement.executeQuery();
-            while(res.next()){
-               idToReturn=res.getInt("id_firm");
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-        return idToReturn;
+    public static Condition resultToCondition(ResultSet res) throws SQLException{
+        return new Condition(res.getInt("id"),
+                res.getInt("odometer"),
+                res.getInt("car_id"),
+                res.getString("damages"));
     }
 
-    public static int carIdToConditionId(int carId){
-        int idToReturn=0;
-        String query = "SELECT id FROM condition WHERE car_id = ?";
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,carId);
-            ResultSet res = statement.executeQuery();
-
-            while(res.next()){
-                idToReturn=res.getInt("id");
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-       return idToReturn;
+    public static Rental resultToRental(ResultSet res) throws SQLException{
+        Vehicle newVehicle = new Vehicle(res.getInt("car_id"));
+        Client newClient = new Client(res.getInt("client_id"));
+        Condition newCondition = new Condition(res.getInt("condition_id"));
+        return new Rental(res.getInt("id"),
+                res.getInt("firm_id"),
+                newVehicle, newClient, newCondition,
+                res.getInt("duration"),
+                res.getDate("rental_date"),
+                res.getBoolean("is_returned"));
     }
 
-    public static int rentalIdToCarId(int rentalId){
-        int idToReturn=0;
-        String query = "SELECT car_id FROM rental WHERE id = ?";
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,rentalId);
-            ResultSet res = statement.executeQuery();
-
-            while(res.next()){
-                idToReturn=res.getInt("car_id");
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-        return idToReturn;
+    public static Return resultToReturn(ResultSet res) throws SQLException{
+        Rental newRental = new Rental(res.getInt("rental_id"));
+        return new Return(res.getInt("id"),
+                newRental,
+                res.getDate("return_date"));
     }
 
-    public static int rentalIdToClientId(int rentalId){
-        int idToReturn=0;
-        String query = "SELECT client_id FROM rental WHERE id = ?";
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,rentalId);
-            ResultSet res = statement.executeQuery();
-
-            while(res.next()){
-                idToReturn=res.getInt("client_id");
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-        return idToReturn;
+    public static VehicleClass resultToClass(ResultSet res) throws SQLException{
+        return new VehicleClass(res.getInt("id_class"),
+                res.getString("name_class"));
     }
 
-    public static int carIdToClassId(int carId){
-        int idToReturn=0;
-        String query = "SELECT class FROM car WHERE id = ?";
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,carId);
-            ResultSet res = statement.executeQuery();
-
-            while(res.next()){
-                idToReturn=res.getInt("class");
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-        return idToReturn;
+    public static VehicleCategory resultToCategory(ResultSet res) throws SQLException{
+        return new VehicleCategory(res.getInt("id_category"),
+                res.getString("name_category"));
     }
 
-    public static int priceIdToDays(int priceId){
-        int idToReturn=0;
-        String query = "SELECT days FROM price WHERE id = ?";
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,priceId);
-            ResultSet res = statement.executeQuery();
-
-            while(res.next()){
-                idToReturn=res.getInt("days");
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-        return idToReturn;
+    public static Firm resultToFirm(ResultSet res) throws SQLException{
+        return new Firm(res.getInt("id"),
+                res.getString("firm_name"));
     }
-
-    public static int priceIdToKilometers(int priceId){
-        int idToReturn=0;
-        String query = "SELECT kilometers FROM price WHERE id = ?";
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,priceId);
-            ResultSet res = statement.executeQuery();
-
-            while(res.next()){
-                idToReturn=res.getInt("kilometers");
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-        return idToReturn;
-    }
-
-    public static int priceIdToDmgCount(int priceId){
-        int idToReturn=0;
-        String query = "SELECT dmg_count FROM price WHERE id = ?";
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,priceId);
-            ResultSet res = statement.executeQuery();
-
-            while(res.next()){
-                idToReturn=res.getInt("dmg_count");
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-        return idToReturn;
-    }
-
-    public static int priceIdToClassId(int priceId){
-        int idToReturn=0;
-        String query = "SELECT car_class_id FROM price WHERE id = ?";
-
-        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
-
-            PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,priceId);
-            ResultSet res = statement.executeQuery();
-
-            while(res.next()){
-                idToReturn=res.getInt("car_class_id");
-            }
-        }
-        catch(SQLException ex){
-            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
-            lgr.log(Level.SEVERE, ex.getMessage(), ex);
-        }
-
-        return idToReturn;
-    }
-
 }
