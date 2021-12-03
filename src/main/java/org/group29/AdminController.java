@@ -5,9 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.group29.entities.Firm;
-import org.group29.entities.VehicleCategory;
-import org.group29.entities.VehicleClass;
+import org.group29.entities.*;
 
 public class AdminController {
 
@@ -54,6 +52,16 @@ public class AdminController {
     @FXML
     private ComboBox<Firm> VehicleFirmComboBox;
 
+    private void disablePane(AnchorPane pane){
+        pane.setDisable(true);
+        pane.setVisible(false);
+    }
+
+    private void enablePane(AnchorPane pane){
+        pane.setDisable(false);
+        pane.setVisible(true);
+    }
+
     private void populateFirmComboBox(){
         Firm[] firms = JavaPostgreSQL.getFirms();
         FirmComboBox.setItems(FXCollections.observableArrayList(firms));
@@ -79,8 +87,21 @@ public class AdminController {
         stage.close();
     }
 
+
     public void addFirmOnAction(){
-        JavaPostgreSQL.addFirm(FirmNameTextField.getText());
+        Firm newFirm = new Firm(-1, FirmNameTextField.getText());
+        newFirm.commit();
+
+        if(newFirm.getId() != -1){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("New firm added!");
+            alert.show();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Name is taken!");
+            alert.show();
+        }
     }
 
     public void addOperatorOnAction(){
@@ -96,23 +117,40 @@ public class AdminController {
             alert.show();
             return;
         }
-        JavaPostgreSQL.addOperator(OperatorUsername.getText(),OperatorPassword.getText(),FirmComboBox.getValue().getId());
+
+        Operator newOperator = new Operator(-1,
+                FirmComboBox.getValue().getId(),
+                OperatorUsername.getText(),
+                OperatorPassword.getText());
+
+        newOperator.commit();
+
+        if(newOperator.getId() != -1){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("New operator added!");
+            alert.show();
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Name is taken!");
+            alert.show();
+        }
     }
 
     public void addVehicleOnAction(){
-        if(ClassComboBox.getValue()==null){
+        if(ClassComboBox.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Please select a Class!");
             alert.show();
             return;
         }
-        if(CategoryComboBox.getValue()==null){
+        if(CategoryComboBox.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Please select a Category!");
             alert.show();
             return;
         }
-        if(VehicleFirmComboBox.getValue()==null){
+        if(VehicleFirmComboBox.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Please select a firm!");
             alert.show();
@@ -130,51 +168,46 @@ public class AdminController {
             alert.show();
             return;
         }
-        boolean isForSmokers;
-        if(RadioSmoking.isSelected()){
-            isForSmokers=true;
-        }else{
-            isForSmokers=false;
+        boolean isForSmokers = RadioSmoking.isSelected();
+
+        Vehicle newVehicle = new Vehicle(-1,
+                ClassComboBox.getValue().getId(),
+                CategoryComboBox.getValue().getId(),
+                VehicleFirmComboBox.getValue().getId(),
+                VehicleTextArea.getText(),
+                isForSmokers);
+
+        newVehicle.commit();
+
+        if(newVehicle.getId() != -1){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("New vehicle added!");
+            alert.show();
         }
-
-        JavaPostgreSQL.addVehicle(ClassComboBox.getValue().getId(),
-                                       CategoryComboBox.getValue().getId(),
-                                       VehicleFirmComboBox.getValue().getId(),
-                                       VehicleTextArea.getText(),
-                                       isForSmokers);
-
     }
 
-    public  void SwitchToFirmOnAction(){
-        FirmPane.setDisable(false);
-        FirmPane.setVisible(true);
-        OperatorPane.setDisable(true);
-        OperatorPane.setVisible(false);
-        VehiclePane.setDisable(true);
-        VehiclePane.setVisible(false);
+
+    public void SwitchToFirmOnAction(){
+        disablePane(OperatorPane);
+        disablePane(VehiclePane);
+        enablePane(FirmPane);
     }
 
-    public  void SwitchToOperatorOnAction(){
+    public void SwitchToOperatorOnAction(){
         populateFirmComboBox();
 
-        FirmPane.setDisable(true);
-        FirmPane.setVisible(false);
-        OperatorPane.setDisable(false);
-        OperatorPane.setVisible(true);
-        VehiclePane.setDisable(true);
-        VehiclePane.setVisible(false);
+        disablePane(FirmPane);
+        disablePane(VehiclePane);
+        enablePane(OperatorPane);
     }
 
-    public  void SwitchToVehicleOnAction(){
+    public void SwitchToVehicleOnAction(){
         populateClassComboBox();
         populateCategoryComboBox();
         populateVehicleFirmComboBox();
-        FirmPane.setDisable(true);
-        FirmPane.setVisible(false);
-        OperatorPane.setDisable(true);
-        OperatorPane.setVisible(false);
-        VehiclePane.setDisable(false);
-        VehiclePane.setVisible(true);
-    }
 
+        disablePane(OperatorPane);
+        disablePane(FirmPane);
+        enablePane(VehiclePane);
+    }
 }

@@ -29,8 +29,7 @@ public class OperatorController {
 
 
     public void initialize(){
-        NameText.setText(Data.operatorUser);
-        Data.operatorMainPane=mainPane;
+        NameText.setText(Data.operator.getUsername());
 
         HomeButton.setOnAction(e -> switchContent("OperatorMenu"));
         switchContent("OperatorMenu");

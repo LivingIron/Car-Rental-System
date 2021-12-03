@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
+import org.group29.entities.Vehicle;
 import org.group29.entities.VehicleCategory;
 import org.group29.entities.VehicleClass;
 
@@ -63,13 +64,15 @@ public class RegisterCarController {
         }
         boolean isForSmokers = RadioSmoking.isSelected();
 
-        JavaPostgreSQL.addVehicle(ClassComboBox.getValue().getId(),
+        Vehicle newVehicle = new Vehicle(-1,
+                ClassComboBox.getValue().getId(),
                 CategoryComboBox.getValue().getId(),
-                Data.operatorId,
+                Data.operator.getFirm_id(),
                 VehicleTextArea.getText(),
                 isForSmokers);
 
-        FxmlLoader.switchPane(Data.operatorMainPane,"OperatorMenu");
+        newVehicle.commit();
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Car is registered!");
         alert.show();

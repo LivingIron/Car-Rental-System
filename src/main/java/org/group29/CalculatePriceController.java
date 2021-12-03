@@ -20,24 +20,26 @@ public class CalculatePriceController {
     }
 
     public void calculateOnAction(){
-        if(returnComboBox.getValue()==null){
+        if(returnComboBox.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Please select a return id to calculate !");
+            alert.setContentText("Please select a return id to calculate!");
             alert.show();
             return;
         }
 
-        JavaPostgreSQL.calculatePrice(  priceTextField,
-                                        JavaPostgreSQL.priceIdToDays(returnComboBox.getValue().getId_price()),
-                                        JavaPostgreSQL.priceIdToKilometers(returnComboBox.getValue().getId_price()),
-                                        JavaPostgreSQL.priceIdToDmgCount(returnComboBox.getValue().getId_price()),
-                                        JavaPostgreSQL.priceIdToClassId(returnComboBox.getValue().getId_price()));
+        Return selectedReturn = returnComboBox.getValue();
+        double price = JavaPostgreSQL.getPrice(selectedReturn);
+        if(price == -1){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("An error has occured");
+            alert.show();
+        }
+        else
+            priceTextField.setText(Double.toString(price));
     }
 
     private void populateReturnComboBox(){
-        Return[] strings = JavaPostgreSQL.getReturns();
-        returnComboBox.setItems(FXCollections.observableArrayList(strings));
+        Return[] returns = JavaPostgreSQL.getReturns();
+        returnComboBox.setItems(FXCollections.observableArrayList(returns));
     }
-
-
 }
