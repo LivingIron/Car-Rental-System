@@ -489,6 +489,30 @@ public class JavaPostgreSQL {
         return -1;
     }
 
+    public static Vehicle[] getAvailableVehicles(Date startDate, Date endDate){
+        ArrayList<Vehicle> vehicleArray = new ArrayList<>();
+        String query = "SELECT car.id AS id, car.class AS class, car.category AS category, car.firm_id AS firm_id, car.characteristics AS characteristics, car.smoking AS smoking " +
+                "FROM car LEFT JOIN rental ON rental.car_id = car.id " +
+                "WHERE car.firm_id = ? AND (rental.car_id IS NULL OR NOT ((CAST(? AS Date), CAST(? AS Date)) OVERLAPS (rental.rental_date, rental.duration * interval '1 day')))";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,Data.operator.getFirm_id());
+            statement.setDate(2, startDate);
+            statement.setDate(3, endDate);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                vehicleArray.add(resultToVehicle(res));
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return vehicleArray.toArray(new Vehicle[0]);
+    }
+
     /*================================================================================================================*/
     /*============================== Functions For getting data from comboBoxes ======================================*/
     /*================================================================================================================*/
