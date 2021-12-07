@@ -1,33 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="MainMenuPane" prefHeight="509.0" prefWidth="514.0" visible="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.OperatorMenuController">
+<AnchorPane fx:id="MainMenuPane" prefHeight="500.0" prefWidth="500.0" visible="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.OperatorMenuController">
    <children>
-      <Label layoutX="193.0" layoutY="130.0" text="Select Action">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="93.0" fitWidth="93.0" layoutX="224.0" layoutY="29.0">
-         <image>
-            <Image url="@img/icons_gear.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="RegisterCarButton" layoutX="38.0" layoutY="176.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register car" />
-      <Button fx:id="RegisterClientButton" layoutX="38.0" layoutY="234.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register client" />
-      <Button fx:id="RentCarButton" layoutX="38.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Rent a car" />
-      <Button fx:id="ReturnCarButton" layoutX="38.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Return a car" />
-      <Button fx:id="CalculatePriceButton" layoutX="38.0" layoutY="395.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Calculate price" />
-      <Button fx:id="CheckAvailableCarsButton" layoutX="316.0" layoutY="171.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check available cars" />
-      <Button fx:id="CheckRentingHistoryButton" layoutX="316.0" layoutY="234.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check renting history" />
-      <Button fx:id="CheckOperatorHistoryButton" layoutX="316.0" layoutY="288.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check operator history" />
-      <Button fx:id="CheckClientRatingsButton" layoutX="316.0" layoutY="341.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check client ratings" />
-      <Button fx:id="CheckStatsOfCarsButton" layoutX="316.0" layoutY="395.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check stats of cars" />
+      <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="500.0" spacing="10.0">
+         <children>
+            <ImageView fitHeight="93.0" fitWidth="93.0">
+               <image>
+                  <Image url="@img/icons_gear.png" />
+               </image>
+            </ImageView>
+            <Label text="Select Action">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+              <tabs>
+                <Tab text="Registrations">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0">
+                                 <children>
+                                    <Button fx:id="RegisterCarButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register car" />
+                                    <Button fx:id="RegisterClientButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register client" />
+                                 </children>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Rentals">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0">
+                                 <children>
+                                    <Button fx:id="CheckAvailableCarsButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check available cars" VBox.vgrow="ALWAYS" />
+                                    <Button fx:id="RentCarButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Rent a car" />
+                                    <Button fx:id="ReturnCarButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Return a car" />
+                                    <Button fx:id="CalculatePriceButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Calculate price" />
+                                 </children>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Checks">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0">
+                                 <children>
+                                    <Button fx:id="CheckRentingHistoryButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check renting history" VBox.vgrow="ALWAYS" />
+                                    <Button fx:id="CheckOperatorHistoryButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check operator history" VBox.vgrow="ALWAYS" />
+                                    <Button fx:id="CheckClientRatingsButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check client ratings" VBox.vgrow="ALWAYS" />
+                                    <Button fx:id="CheckStatsOfCarsButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check stats of cars" VBox.vgrow="ALWAYS" />
+                                 </children>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>
