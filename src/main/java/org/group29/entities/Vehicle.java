@@ -84,6 +84,6 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return  ""+ id ;
+        return String.format("%d | %s | %s", id, characteristics, (smoking ? "Smoking" : "Non-smoking"));
     }
 }
