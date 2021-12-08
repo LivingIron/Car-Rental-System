@@ -1,12 +1,8 @@
 package org.group29;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
 import org.group29.entities.*;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -511,6 +507,30 @@ public class JavaPostgreSQL {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return vehicleArray.toArray(new Vehicle[0]);
+    }
+
+    public static Rental[] getRentalsByVehicle(Vehicle vehicle, Date startDate, Date endDate){
+        ArrayList<Rental> rentalArray = new ArrayList<>();
+        String query = "SELECT id, car_id, client_id, condition_id, rental_date, duration, is_returned, firm_id FROM rental WHERE firm_id = ? AND car_id = ? " +
+                "AND rental_date >= CAST(? AS Date) AND rental_date <= CAST(? AS Date)";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,Data.operator.getFirm_id());
+            statement.setInt(2, vehicle.getId());
+            statement.setDate(3, startDate);
+            statement.setDate(4, endDate);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                rentalArray.add(resultToRental(res));
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return rentalArray.toArray(new Rental[0]);
     }
 
     /*================================================================================================================*/
