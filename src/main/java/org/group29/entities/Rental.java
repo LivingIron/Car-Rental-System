@@ -3,7 +3,6 @@ package org.group29.entities;
 import org.group29.JavaPostgreSQL;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 public class Rental {
     private int id, duration, firm_id;
@@ -106,6 +105,7 @@ public class Rental {
 
     @Override
     public String toString() {
-        return ""+id;
+        client.pull();
+        return String.format("%d | %s | %s | %d days", id, client.getName(), rental_date.toString(), duration);
     }
 }
