@@ -10,8 +10,6 @@ import org.group29.entities.Vehicle;
 import org.group29.entities.VehicleCategory;
 import org.group29.entities.VehicleClass;
 
-import java.net.URL;
-
 public class RegisterCarController {
 
     /*---------------Radio Buttons----------------*/

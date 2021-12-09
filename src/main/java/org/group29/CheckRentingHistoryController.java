@@ -10,8 +10,6 @@ import org.group29.entities.Rental;
 import org.group29.entities.Vehicle;
 
 import java.sql.Date;
-import java.time.LocalDate;
-import java.util.Arrays;
 
 public class CheckRentingHistoryController {
 
