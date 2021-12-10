@@ -1,5 +1,6 @@
 package org.group29;
 
+import javafx.util.Pair;
 import org.group29.entities.*;
 
 import java.sql.*;
@@ -341,6 +342,49 @@ public class JavaPostgreSQL {
         }
     }
 
+    public static HistoryEntry[] getOperatorHistory(Operator operator, Date startDate, Date endDate){
+        ArrayList<HistoryEntry> historyEntries = new ArrayList<>();
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            String query = "SELECT car_id, client_id, rental_date, duration FROM rental WHERE operator_id = ?" +
+                    "AND rental_date >= CAST(? AS Date) AND rental_date <= CAST(? AS Date)";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,operator.getId());
+            statement.setDate(2, startDate);
+            statement.setDate(3, endDate);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                HistoryEntry newEntry = new HistoryEntry(res.getDate("rental_date"),
+                        res.getInt("car_id"),
+                        res.getInt("client_id"),
+                        res.getInt("duration"));
+                historyEntries.add(newEntry);
+            }
+
+            query = "SELECT rental.car_id, rental.client_id, return_date FROM return INNER JOIN rental ON rental.id = return.rental_id WHERE return.operator_id = ?" +
+                    "AND return.return_date >= CAST(? AS Date) AND return.return_date <= CAST(? AS Date)";
+            statement = con.prepareStatement(query);
+            statement.setInt(1,operator.getId());
+            statement.setDate(2, startDate);
+            statement.setDate(3, endDate);
+            res = statement.executeQuery();
+
+            while(res.next()){
+                HistoryEntry newEntry = new HistoryEntry(res.getDate("return_date"),
+                        res.getInt("car_id"),
+                        res.getInt("client_id"),
+                        0);
+                historyEntries.add(newEntry);
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return historyEntries.toArray(new HistoryEntry[0]);
+    }
+
     /*================================================================================================================*/
     /*============================ Operator panel functions for interacting with DB ==================================*/
     /*================================================================================================================*/
@@ -676,6 +720,29 @@ public class JavaPostgreSQL {
             lgr.log(Level.SEVERE, ex.getMessage(), ex);
         }
         return returnArray.toArray(new Return[0]);
+    }
+
+    public static Operator[] getOperators(){
+        ArrayList<Operator> operatorArray = new ArrayList<>();
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "SELECT id, username, id_firm FROM users";
+            PreparedStatement statement = con.prepareStatement(query);
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()) {
+                if(res.getInt("id") != 0){
+                    Operator newOperator = new Operator(res.getInt("id"));
+                    newOperator.setUsername(res.getString("username"));
+                    newOperator.setFirm_id(res.getInt("id_firm"));
+                    operatorArray.add(newOperator);
+                }
+            }
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return operatorArray.toArray(new Operator[0]);
     }
 
     /*================================================================================================================*/
