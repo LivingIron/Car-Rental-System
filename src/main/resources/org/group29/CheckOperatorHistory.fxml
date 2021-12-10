@@ -1,15 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="CheckOperatorHistoryPane" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.CheckOperatorHistoryController">
    <children>
-      <Label layoutX="96.0" layoutY="8.0" prefHeight="40.0" prefWidth="309.0" text="Check operator history">
-         <font>
-            <Font name="System Bold" size="28.0" />
-         </font>
-      </Label>
+      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="500.0" text="Check operator history" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="500.0" spacing="50.0">
+               <children>
+                  <Label alignment="CENTER" prefWidth="174.0" text="Start Date" />
+                  <Label alignment="CENTER" prefWidth="174.0" text="End Date" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="500.0" spacing="50.0">
+               <children>
+                  <DatePicker fx:id="startDatePicker" />
+                  <DatePicker fx:id="endDatePicker" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="500.0" spacing="50.0">
+               <children>
+                  <ComboBox fx:id="operatorComboBox" prefWidth="174.0" promptText="Select Operator">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ComboBox>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#checkButtonAction" prefWidth="174.0" text="Check" />
+               </children>
+            </HBox>
+            <ListView fx:id="historyList" prefHeight="293.0" prefWidth="500.0">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </ListView>
+         </children>
+         <padding>
+            <Insets bottom="20.0" top="20.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>
