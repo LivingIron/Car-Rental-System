@@ -70,7 +70,6 @@
                               <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0">
                                  <children>
                                     <Button fx:id="CheckRentingHistoryButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check renting history" VBox.vgrow="ALWAYS" />
-                                    <Button fx:id="CheckOperatorHistoryButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check operator history" VBox.vgrow="ALWAYS" />
                                     <Button fx:id="CheckClientRatingsButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check client ratings" VBox.vgrow="ALWAYS" />
                                     <Button fx:id="CheckStatsOfCarsButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check stats of cars" VBox.vgrow="ALWAYS" />
                                  </children>

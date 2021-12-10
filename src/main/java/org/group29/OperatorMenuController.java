@@ -42,7 +42,6 @@ public class OperatorMenuController {
         CalculatePriceButton.setOnAction(e -> selectedMenu.set("CalculatePrice"));
         CheckAvailableCarsButton.setOnAction(e -> selectedMenu.set("CheckAvailableCars"));
         CheckRentingHistoryButton.setOnAction(e -> selectedMenu.set("CheckRentingHistory"));
-        CheckOperatorHistoryButton.setOnAction(e -> selectedMenu.set("CheckOperatorHistory"));
         CheckClientRatingsButton.setOnAction(e -> selectedMenu.set("CheckClientRatings"));
         CheckStatsOfCarsButton.setOnAction(e -> selectedMenu.set("CheckStatsOfCars"));
     }
