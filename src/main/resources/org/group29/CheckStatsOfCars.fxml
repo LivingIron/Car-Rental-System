@@ -1,15 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="CheckStatsOfCarsPane" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.CheckStatsOfCarsController">
    <children>
-      <Label layoutX="123.0" prefHeight="40.0" prefWidth="255.0" text="Check stats of cars">
-         <font>
-            <Font name="System Bold" size="28.0" />
-         </font>
-      </Label>
+      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="255.0" text="Check stats of cars">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <MenuButton fx:id="classMenuButton" mnemonicParsing="false" prefWidth="80.0" text="Class" />
+                  <MenuButton fx:id="categoryMenuButton" mnemonicParsing="false" prefWidth="80.0" text="Category" />
+                  <MenuButton fx:id="smokingMenuButton" mnemonicParsing="false" prefWidth="80.0" text="Smoking">
+                     <items>
+                        <CheckMenuItem mnemonicParsing="false" selected="true" text="true" />
+                        <CheckMenuItem mnemonicParsing="false" selected="true" text="false" />
+                     </items>
+                  </MenuButton>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#searchOnAction" prefWidth="184.0" text="Search" />
+            <TableView fx:id="vehicleTable" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="classColumn" prefWidth="60.0" text="Class" />
+                <TableColumn fx:id="categoryColumn" prefWidth="60.0" text="Category" />
+                  <TableColumn fx:id="characteristicsColumn" prefWidth="100.0" text="Characteristics" />
+                  <TableColumn fx:id="smokingColumn" prefWidth="50.0" text="Smoke" />
+                  <TableColumn fx:id="odometerColumn" prefWidth="70.0" text="Odometer" />
+                  <TableColumn fx:id="damagesColumn" prefWidth="158.0" text="Damages" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
