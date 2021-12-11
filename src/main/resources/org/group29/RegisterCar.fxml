@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -7,44 +8,77 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="RegisterCarPane" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.RegisterCarController">
    <children>
-      <ComboBox fx:id="ClassComboBox" layoutX="158.0" layoutY="100.0" prefHeight="31.0" prefWidth="184.0" promptText="Select class .." />
-      <Label layoutX="188.0" layoutY="59.0" prefHeight="31.0" prefWidth="125.0" text="Select vehicle class" textAlignment="CENTER" textFill="#000000c0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="CategoryComboBox" layoutX="159.0" layoutY="186.0" prefHeight="31.0" prefWidth="184.0" promptText="Select category .." />
-      <Label layoutX="171.0" layoutY="146.0" prefHeight="31.0" prefWidth="160.0" text="Select vehicle category" textAlignment="CENTER" textFill="#000000c0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <TextArea fx:id="VehicleTextArea" layoutX="156.0" layoutY="272.0" prefHeight="67.0" prefWidth="188.0" promptText="Enter characteristics" />
-      <Label layoutX="170.0" layoutY="235.0" prefHeight="31.0" prefWidth="160.0" text="Vehicle characteristics" textAlignment="CENTER" textFill="#000000c0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <RadioButton fx:id="RadioSmoking" layoutX="154.0" layoutY="390.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="68.0" selected="true" text="Smoking">
-         <toggleGroup>
-            <ToggleGroup fx:id="Smoker" />
-         </toggleGroup>
-      </RadioButton>
-      <RadioButton fx:id="RadioNonSmoking" layoutX="263.0" layoutY="390.0" mnemonicParsing="false" text="Non smoking" toggleGroup="$Smoker" />
-      <Button fx:id="AddVehicleButton" layoutX="193.0" layoutY="432.0" mnemonicParsing="false" onAction="#addVehicleOnAction" prefHeight="25.0" prefWidth="116.0" text="Add Vehicle" />
-      <Label layoutX="173.0" layoutY="350.0" prefHeight="31.0" prefWidth="171.0" text="Allowed to smoke or not" textAlignment="CENTER" textFill="#000000c0">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="173.0" layoutY="9.0" prefHeight="40.0" prefWidth="170.0" text="Register Car">
-         <font>
-            <Font name="System Bold" size="28.0" />
-         </font>
-      </Label>
+      <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Add Vehicle" textAlignment="CENTER" textFill="#000000c0" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <VBox maxWidth="184.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Select vehicle class" textAlignment="CENTER" textFill="#000000c0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="ClassComboBox" prefHeight="30.0" prefWidth="184.0" promptText="Select class .." />
+               </children>
+            </VBox>
+            <VBox fillWidth="false" maxWidth="184.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Select vehicle category" textAlignment="CENTER" textFill="#000000c0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="CategoryComboBox" prefHeight="30.0" prefWidth="184.0" promptText="Select category .." />
+               </children>
+            </VBox>
+            <VBox fillWidth="false" maxWidth="184.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Vehicle characteristics" textAlignment="CENTER" textFill="#000000c0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="VehicleTextArea" maxWidth="184.0" prefHeight="70.0" prefWidth="184.0" promptText="Enter characteristics" />
+               </children>
+            </VBox>
+            <VBox fillWidth="false" maxWidth="184.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Allowed to smoke or not" textAlignment="CENTER" textFill="#000000c0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER" maxWidth="184.0" spacing="20.0">
+                     <children>
+                        <RadioButton fx:id="RadioSmoking" mnemonicParsing="false" prefHeight="17.0" prefWidth="68.0" text="Smoking">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="smoking" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="RadioNonSmoking" mnemonicParsing="false" text="Non smoking" toggleGroup="$smoking" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="AddBehicleButton" alignment="CENTER" mnemonicParsing="false" onAction="#addVehicleOnAction" prefHeight="30.0" prefWidth="184.0" text="Add Vehicle" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
