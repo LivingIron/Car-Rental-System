@@ -327,7 +327,7 @@ public class JavaPostgreSQL {
 
     public static void updateOperator(Operator operator){
         try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
-            String query = "UPDATE users SET username = ?, password = ?, firm_id = ? WHERE id = ?";
+            String query = "UPDATE users SET username = ?, password = ?, id_firm = ? WHERE id = ?";
 
             PreparedStatement updateStatement = con.prepareStatement(query);
             updateStatement.setString(1, operator.getUsername());
