@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.ModifyFirmController">
+   <children>
+      <VBox alignment="CENTER" fillWidth="false" prefHeight="400.0" prefWidth="600.0" spacing="30.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <ImageView fitHeight="89.0" fitWidth="89.0">
+               <image>
+                  <Image url="@img/Firm.png" />
+               </image>
+            </ImageView>
+            <ComboBox fx:id="firmComboBox" onAction="#onFirmSelection" prefWidth="150.0" promptText="Select Firm" />
+            <TextField fx:id="newNameField" disable="true" prefHeight="35.0" prefWidth="185.0" promptText="Enter new firm name" />
+            <Button mnemonicParsing="false" onAction="#onUpdateAction" text="Update" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
