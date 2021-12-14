@@ -10,6 +10,7 @@ import org.group29.entities.Vehicle;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 public class RentCarController {
 
@@ -110,11 +111,13 @@ public class RentCarController {
     }
 
     private void populateVehiclesComboBox(){
-        Vehicle[] strings = JavaPostgreSQL.getVehicles();
-        carComboBox.setItems(FXCollections.observableArrayList(strings));
+        Vehicle[] vehicles = JavaPostgreSQL.getVehicles();
+        vehicles = Arrays.stream(vehicles).filter(v -> v.getFirm_id() == Data.operator.getFirm_id()).toArray(Vehicle[]::new);
+        carComboBox.setItems(FXCollections.observableArrayList(vehicles));
     }
     private void populateClientComboBox(){
-        Client[] strings = JavaPostgreSQL.getClients();
-        clientComboBox.setItems(FXCollections.observableArrayList(strings));
+        Client[] clients = JavaPostgreSQL.getClients();
+        clients = Arrays.stream(clients).filter(c -> c.getFirm_id() == Data.operator.getFirm_id()).toArray(Client[]::new);
+        clientComboBox.setItems(FXCollections.observableArrayList(clients));
     }
 }

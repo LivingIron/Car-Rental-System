@@ -643,11 +643,10 @@ public class JavaPostgreSQL {
 
     public static Vehicle[] getVehicles(){
         ArrayList<Vehicle> vehicleArray = new ArrayList<>();
-        String query = "SELECT id, class, category, firm_id, characteristics, smoking FROM car WHERE firm_id = ?";
+        String query = "SELECT id, class, category, firm_id, characteristics, smoking FROM car";
 
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,Data.operator.getFirm_id());
             ResultSet res = statement.executeQuery();
 
             while(res.next()){
@@ -663,11 +662,10 @@ public class JavaPostgreSQL {
 
     public static Client[] getClients(){
         ArrayList<Client> clientArray = new ArrayList<>();
-        String query = "SELECT id, name, phone, rating, firm_id FROM client WHERE firm_id = ?";
+        String query = "SELECT id, name, phone, rating, firm_id FROM client";
 
         try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
             PreparedStatement statement = con.prepareStatement(query);
-            statement.setInt(1,Data.operator.getFirm_id());
             ResultSet res = statement.executeQuery();
 
             while(res.next()){

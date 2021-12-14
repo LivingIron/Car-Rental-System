@@ -10,6 +10,7 @@ import org.group29.entities.Rental;
 import org.group29.entities.Vehicle;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class CheckRentingHistoryController {
 
@@ -55,6 +56,7 @@ public class CheckRentingHistoryController {
 
     private void populateVehicleComboBox(){
         Vehicle[] vehicles = JavaPostgreSQL.getVehicles();
+        vehicles = Arrays.stream(vehicles).filter(v -> v.getFirm_id() == Data.operator.getFirm_id()).toArray(Vehicle[]::new);
         vehicleComboBox.setItems(FXCollections.observableArrayList(vehicles));
     }
 }
