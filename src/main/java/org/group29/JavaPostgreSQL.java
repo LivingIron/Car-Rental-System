@@ -284,7 +284,7 @@ public class JavaPostgreSQL {
 
     public static void updateFirm(Firm firm){
         try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
-            String query = "UPDATE firm SET name = ? WHERE id = ?";
+            String query = "UPDATE firm SET firm_name = ? WHERE id = ?";
 
             PreparedStatement updateStatement = con.prepareStatement(query);
             updateStatement.setString(1, firm.getName());
