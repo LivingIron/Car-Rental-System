@@ -1,6 +1,5 @@
 package org.group29;
 
-import javafx.util.Pair;
 import org.group29.entities.*;
 
 import java.sql.*;
@@ -216,13 +215,14 @@ public class JavaPostgreSQL {
 
     public static void getOperator(Operator operator){
         try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
-            String query = "SELECT username, id_firm FROM users WHERE id = ?";
+            String query = "SELECT username, password, id_firm FROM users WHERE id = ?";
             PreparedStatement statement = con.prepareStatement(query);
             statement.setInt(1,operator.getId());
             ResultSet res = statement.executeQuery();
 
             if(res.next()) {
                 operator.setUsername(res.getString("username"));
+                operator.setPassword(res.getString("password"));
                 operator.setFirm_id(res.getInt("id_firm"));
             }
         }
@@ -725,7 +725,7 @@ public class JavaPostgreSQL {
     public static Operator[] getOperators(){
         ArrayList<Operator> operatorArray = new ArrayList<>();
         try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
-            String query = "SELECT id, username, id_firm FROM users";
+            String query = "SELECT id, username, password, id_firm FROM users";
             PreparedStatement statement = con.prepareStatement(query);
             ResultSet res = statement.executeQuery();
 
@@ -733,6 +733,7 @@ public class JavaPostgreSQL {
                 if(res.getInt("id") != 0){
                     Operator newOperator = new Operator(res.getInt("id"));
                     newOperator.setUsername(res.getString("username"));
+                    newOperator.setPassword(res.getString("password"));
                     newOperator.setFirm_id(res.getInt("id_firm"));
                     operatorArray.add(newOperator);
                 }
