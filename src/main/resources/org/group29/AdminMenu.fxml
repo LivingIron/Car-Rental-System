@@ -70,7 +70,9 @@
                                                 <Insets top="10.0" />
                                             </padding>
                                  <children>
-                                    <Label text="This page intentionally left blank" />
+                                    <Button fx:id="ModifyOperatorButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Modify operator" />
+                                    <Button fx:id="ModifyCarButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Modify car" />
+                                    <Button fx:id="ModifyFirmButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Modify firm" />
                                  </children>
                                         </VBox>
                                     </children>

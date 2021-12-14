@@ -15,6 +15,12 @@ public class AdminMenuController {
     private Button CheckOperatorHistoryButton;
     @FXML
     private Button RegisterFirmButton;
+    @FXML
+    private Button ModifyFirmButton;
+    @FXML
+    private Button ModifyOperatorButton;
+    @FXML
+    private Button ModifyCarButton;
 
     private final StringProperty selectedMenu = new SimpleStringProperty();
 
@@ -27,5 +33,8 @@ public class AdminMenuController {
         RegisterCarButton.setOnAction(e -> selectedMenu.set("AdminRegisterCar"));
         RegisterOperatorButton.setOnAction(e -> selectedMenu.set("RegisterOperator"));
         CheckOperatorHistoryButton.setOnAction(e -> selectedMenu.set("CheckOperatorHistory"));
+        ModifyFirmButton.setOnAction(e -> selectedMenu.set("ModifyFirm"));
+        ModifyOperatorButton.setOnAction(e -> selectedMenu.set("ModifyOperator"));
+        ModifyCarButton.setOnAction(e -> selectedMenu.set("ModifyCar"));
     }
 }
