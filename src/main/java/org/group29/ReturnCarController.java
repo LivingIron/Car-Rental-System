@@ -45,7 +45,7 @@ public class ReturnCarController {
     public void returnCarOnAction(){
         if(returnCarComboBox.getValue() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Please select a rental id !");
+            alert.setContentText("Please select a rental id!");
             alert.show();
             return;
         }
@@ -61,7 +61,7 @@ public class ReturnCarController {
             alert.show();
             return;
         }
-        if(Integer.parseInt(odometerTextField.getText()) == oldOdometer){
+        if(Integer.parseInt(odometerTextField.getText()) <= oldOdometer){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Please select a new odometer reading!");
             alert.show();
@@ -77,7 +77,7 @@ public class ReturnCarController {
             alert.setContentText("Please select a date after the rent date!");
         }
         else{
-            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Car returned!");
 
             // Update vehicle condition
