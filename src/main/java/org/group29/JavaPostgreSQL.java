@@ -59,6 +59,58 @@ public class JavaPostgreSQL {
         return -1;
     }
 
+    public static int addPhoto(VehiclePhoto photo){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "INSERT INTO photo(car_id, data) VALUES (?, ?)";
+            PreparedStatement insertStatement=con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            insertStatement.setInt(1,photo.getCar_id());
+            insertStatement.setBytes(2, photo.getByteArray());
+            insertStatement.executeUpdate();
+
+            ResultSet res = insertStatement.getGeneratedKeys();
+            if(res.next()){
+                return res.getInt(1);
+            }
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return -1;
+    }
+
+    public static void getPhoto(VehiclePhoto photo){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "SELECT id, car_id, data FROM photo WHERE id = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,photo.getId());
+            ResultSet res = statement.executeQuery();
+
+            if(res.next()) {
+                photo.setId(res.getInt("id"));
+                photo.setCar_id(res.getInt("car_id"));
+                photo.setByteArray(res.getBytes("data"));
+            }
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
+    public static void deletePhoto(VehiclePhoto photo){
+        try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
+            String query = "DELETE FROM photo WHERE id = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,photo.getId());
+            statement.executeUpdate();
+        }
+        catch (SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+    }
+
     public static void updateVehicle(Vehicle vehicle){
         try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
             String query = "UPDATE car SET class = ?, category = ?, characteristics = ?, smoking = ?, firm_id = ? WHERE id = ?";
@@ -577,6 +629,26 @@ public class JavaPostgreSQL {
         return rentalArray.toArray(new Rental[0]);
     }
 
+    public static VehiclePhoto[] getPhotosByVehicle(Vehicle vehicle){
+        ArrayList<VehiclePhoto> photoArray = new ArrayList<>();
+        String query = "SELECT id, car_id, data FROM photo WHERE car_id = ?";
+
+        try(Connection con = DriverManager.getConnection(databaseUrl, databaseUser, databasePassword)){
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,vehicle.getId());
+            ResultSet res = statement.executeQuery();
+
+            while(res.next()){
+                photoArray.add(resultToPhoto(res));
+            }
+        }
+        catch(SQLException ex){
+            Logger lgr=Logger.getLogger(JavaPostgreSQL.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        return photoArray.toArray(new VehiclePhoto[0]);
+    }
+
     /*================================================================================================================*/
     /*============================== Functions For getting data from comboBoxes ======================================*/
     /*================================================================================================================*/
@@ -805,5 +877,11 @@ public class JavaPostgreSQL {
     public static Firm resultToFirm(ResultSet res) throws SQLException{
         return new Firm(res.getInt("id"),
                 res.getString("firm_name"));
+    }
+
+    public static VehiclePhoto resultToPhoto(ResultSet res) throws SQLException{
+        return new VehiclePhoto(res.getInt("id"),
+                res.getInt("car_id"),
+                res.getBytes("data"));
     }
 }
