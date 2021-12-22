@@ -1,19 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 
 <AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.ModifyCarController">
    <children>
       <VBox alignment="CENTER" fillWidth="false" layoutX="20.0" layoutY="20.0" prefHeight="520.0" prefWidth="630.0" spacing="30.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
          <children>
             <ComboBox fx:id="vehicleComboBox" onAction="#onVehicleSelection" prefWidth="150.0" promptText="Select vehicle" />
-            <TextArea fx:id="characteristicsField" disable="true" prefHeight="60.0" prefWidth="185.0" promptText="Characteristics" />
-            <TextArea fx:id="damagesField" disable="true" prefHeight="60.0" prefWidth="185.0" promptText="Damages" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="400.0" spacing="20.0">
+               <children>
+                  <TextArea fx:id="characteristicsField" disable="true" prefHeight="60.0" prefWidth="185.0" promptText="Characteristics" />
+                  <TextArea fx:id="damagesField" disable="true" prefHeight="60.0" prefWidth="185.0" promptText="Damages" />
+               </children>
+            </HBox>
+            <VBox prefHeight="200.0" prefWidth="400.0">
+               <children>
+                  <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <FlowPane fx:id="ImagePane" prefHeight="180.0" prefWidth="400.0" style="-fx-background-color: #dddddd;" />
+                     </content>
+                  </ScrollPane>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="40.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#addImageOnAction" prefWidth="80.0" text="Add image" />
+                        <Button fx:id="viewImgButton" disable="true" mnemonicParsing="false" onAction="#viewImageOnAction" text="View selected" />
+                        <Button fx:id="deleteImgButton" disable="true" mnemonicParsing="false" onAction="#deleteImageOnAction" text="Delete selected" />
+                     </children>
+                     <padding>
+                        <Insets top="6.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
             <ComboBox fx:id="firmComboBox" disable="true" prefHeight="35.0" prefWidth="185.0" promptText="Firm" />
             <Button mnemonicParsing="false" onAction="#onUpdateAction" text="Update" />
          </children>
