@@ -5,9 +5,11 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -44,16 +46,44 @@
                   <ComboBox fx:id="CategoryComboBox" prefHeight="30.0" prefWidth="184.0" promptText="Select category .." />
                </children>
             </VBox>
-            <VBox fillWidth="false" maxWidth="184.0" VBox.vgrow="ALWAYS">
+            <HBox prefHeight="200.0" prefWidth="460.0" spacing="20.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Vehicle characteristics" textAlignment="CENTER" textFill="#000000c0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="VehicleTextArea" maxWidth="184.0" prefHeight="70.0" prefWidth="184.0" promptText="Enter characteristics" />
+                  <VBox fillWidth="false" maxWidth="184.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Vehicle characteristics" textAlignment="CENTER" textFill="#000000c0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="VehicleTextArea" maxWidth="184.0" prefHeight="165.0" prefWidth="184.0" promptText="Enter characteristics" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="280.0">
+                     <children>
+                        <Label alignment="CENTER" minHeight="30.0" prefHeight="30.0" prefWidth="184.0" text="Photos" textAlignment="CENTER" textFill="#000000c0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0">
+                           <content>
+                              <FlowPane fx:id="ImagePane" prefHeight="180.0" prefWidth="280.0" style="-fx-background-color: #dddddd;" />
+                           </content>
+                        </ScrollPane>
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#addImageOnAction" prefWidth="80.0" text="Add image" />
+                              <Button fx:id="viewImgButton" disable="true" mnemonicParsing="false" onAction="#viewImageOnAction" text="View" />
+                              <Button fx:id="deleteImgButton" disable="true" mnemonicParsing="false" onAction="#deleteImageOnAction" text="Delete selected" />
+                           </children>
+                           <padding>
+                              <Insets top="6.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
             <VBox fillWidth="false" maxWidth="184.0" VBox.vgrow="ALWAYS">
                <children>
                   <Label alignment="CENTER" prefHeight="30.0" prefWidth="184.0" text="Allowed to smoke or not" textAlignment="CENTER" textFill="#000000c0">
