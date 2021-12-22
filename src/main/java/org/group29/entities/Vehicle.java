@@ -2,11 +2,15 @@ package org.group29.entities;
 
 import org.group29.JavaPostgreSQL;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Vehicle {
 
     private int id, classification, category, firm_id;
     private String characteristics;
     private boolean smoking;
+    private List<VehiclePhoto> photos = new ArrayList<>();
 
     public Vehicle(int id, int classification, int category, int firm_id, String characteristics, boolean smoking) {
         this.id = id;
@@ -24,14 +28,45 @@ public class Vehicle {
     public void commit(){
         if(id == -1){
             id = JavaPostgreSQL.addVehicle(this);
+            for(VehiclePhoto photo : photos){
+                photo.setCar_id(id);
+                photo.commit();
+            }
         }
-        else
+        else{
             JavaPostgreSQL.updateVehicle(this);
+            for(VehiclePhoto photo : photos){
+                if(photo.getId() == -1){
+                    photo.setCar_id(id);
+                    photo.commit();
+                }
+            }
+        }
     }
 
     public void pull(){
         if(id != -1)
             JavaPostgreSQL.getVehicle(this);
+    }
+
+    public void addPhoto(VehiclePhoto photo){
+        photos.add(photo);
+    }
+
+    public void removePhoto(int id){
+        VehiclePhoto foundPhoto = photos.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
+        if(foundPhoto != null){
+            foundPhoto.delete();
+            photos.remove(foundPhoto);
+        }
+    }
+
+    public void setPhotos(List<VehiclePhoto> photos){
+        this.photos = new ArrayList<>(photos);
+    }
+
+    public List<VehiclePhoto> getPhotos(){
+        return photos;
     }
 
     public int getId() {
