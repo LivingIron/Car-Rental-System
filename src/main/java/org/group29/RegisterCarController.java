@@ -1,14 +1,27 @@
 package org.group29;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.group29.entities.Vehicle;
 import org.group29.entities.VehicleCategory;
 import org.group29.entities.VehicleClass;
+import org.group29.entities.VehiclePhoto;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 
 public class RegisterCarController {
 
@@ -27,12 +40,89 @@ public class RegisterCarController {
     /*---------------Text Areas ----------------*/
     @FXML
     private TextArea VehicleTextArea;
+    @FXML
+    private FlowPane ImagePane;
+    @FXML
+    private Button deleteImgButton;
+    @FXML
+    private Button viewImgButton;
+
+    private final ObjectProperty<StackPane> selectedImg = new SimpleObjectProperty<>();
+
+    private final HashMap<Integer, VehiclePhoto> photos = new HashMap<>();
+    private final HashMap<StackPane, Integer> thumbnails = new HashMap<>();
+    private int idCounter = 0;
 
 
     @FXML
     protected void initialize() {
         populateClassComboBox();
         populateCategoryComboBox();
+        selectedImg.addListener((obs, oldImg, newImg) -> {
+            if (oldImg != null) {
+                oldImg.setStyle("");
+            }
+            if (newImg != null) {
+                viewImgButton.setDisable(false);
+                newImg.setStyle("-fx-border-style: solid; -fx-border-color: grey; -fx-border-width: 5;");
+            }
+        });
+    }
+
+    @FXML
+    public void addImageOnAction() throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Image File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+
+        File selectedFile = fileChooser.showOpenDialog(ImagePane.getScene().getWindow());
+        if (selectedFile != null) {
+            VehiclePhoto photo = new VehiclePhoto(-1);
+            photo.setByteArray(selectedFile);
+            photos.put(++idCounter, photo);
+
+            ImageView imgView = new ImageView(photo.toImage(0, 80, true));
+            StackPane.setAlignment(imgView, Pos.CENTER);
+
+            StackPane imgContainer = new StackPane();
+            imgContainer.getChildren().add(imgView);
+            imgView.setOnMouseClicked(e -> selectedImg.set(imgContainer));
+
+            thumbnails.put(imgContainer, idCounter);
+            ImagePane.getChildren().add(imgContainer);
+            deleteImgButton.setDisable(false);
+        }
+    }
+
+    @FXML
+    public void deleteImageOnAction(){
+        if(selectedImg.getValue() != null){
+            photos.remove(thumbnails.get(selectedImg.getValue()));
+            thumbnails.remove(selectedImg.getValue());
+
+            ImagePane.getChildren().remove(selectedImg.getValue());
+            selectedImg.set(null);
+            viewImgButton.setDisable(true);
+
+            if(ImagePane.getChildren().size() == 0) deleteImgButton.setDisable(true);
+        }
+    }
+
+    @FXML
+    public void viewImageOnAction(){
+        Stage stage = new Stage();
+        StackPane myPane = new StackPane();
+        StackPane selected = selectedImg.getValue();
+        Image image = photos.get(thumbnails.get(selected)).toImage(0, 720, true);
+        myPane.getChildren().add(new ImageView(image));
+        Scene scene = new Scene(myPane);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initOwner(VehicleTextArea.getScene().getWindow());
+
+        stage.show();
     }
 
     public void addVehicleOnAction(){
@@ -68,6 +158,10 @@ public class RegisterCarController {
                 Data.operator.getFirm_id(),
                 VehicleTextArea.getText(),
                 isForSmokers);
+
+        for(VehiclePhoto photo : photos.values()){
+            newVehicle.addPhoto(photo);
+        }
 
         newVehicle.commit();
 
