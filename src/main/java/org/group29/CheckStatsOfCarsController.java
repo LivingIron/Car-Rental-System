@@ -42,13 +42,14 @@ public class CheckStatsOfCarsController {
 
     private final HashMap<Integer, String> classes = new HashMap<>();
     private final HashMap<Integer, String> categories = new HashMap<>();
-    private final Vehicle[] vehicles = JavaPostgreSQL.getVehicles();
+    private Vehicle[] vehicles;
     private final HashMap<Vehicle, Condition> conditions = new HashMap<>();
 
     @FXML
     private void initialize(){
         populateClassComboBox();
         populateCategoryComboBox();
+        vehicles = Arrays.stream(JavaPostgreSQL.getVehicles()).filter(v -> v.getFirm_id() == Data.operator.getFirm_id()).toArray(Vehicle[]::new);
         for(Vehicle v : vehicles){
             conditions.put(v, Condition.getConditionByCar(v));
         }
