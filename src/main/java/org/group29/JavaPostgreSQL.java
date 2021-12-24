@@ -583,7 +583,7 @@ public class JavaPostgreSQL {
 
     public static Vehicle[] getAvailableVehicles(Date startDate, Date endDate){
         ArrayList<Vehicle> vehicleArray = new ArrayList<>();
-        String query = "SELECT car.id AS id, car.class AS class, car.category AS category, car.firm_id AS firm_id, car.characteristics AS characteristics, car.smoking AS smoking " +
+        String query = "SELECT DISTINCT car.id AS id, car.class AS class, car.category AS category, car.firm_id AS firm_id, car.characteristics AS characteristics, car.smoking AS smoking " +
                 "FROM car LEFT JOIN rental ON rental.car_id = car.id " +
                 "WHERE car.firm_id = ? AND (rental.car_id IS NULL OR NOT ((CAST(? AS Date), CAST(? AS Date)) OVERLAPS (rental.rental_date, rental.duration * interval '1 day')))";
 
