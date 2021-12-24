@@ -1,14 +1,17 @@
 package org.group29;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import org.group29.entities.Condition;
-import org.group29.entities.Vehicle;
-import org.group29.entities.VehicleCategory;
-import org.group29.entities.VehicleClass;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import org.group29.entities.*;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -86,6 +89,55 @@ public class CheckStatsOfCarsController {
         }
 
         vehicleTable.setItems(FXCollections.observableList(filteredVehicles));
+        vehicleTable.setRowFactory(tv -> {
+            TableRow<Vehicle> row = new TableRow<>();
+
+            ContextMenu contextMenu = new ContextMenu();
+
+            MenuItem viewItem = new MenuItem();
+            viewItem.textProperty().bind(Bindings.format("View photos"));
+            viewItem.setOnAction(event -> {
+                Vehicle item = row.getItem();
+                VehiclePhoto[] photos = JavaPostgreSQL.getPhotosByVehicle(item);
+                if(photos.length == 0){
+                    Alert newAlert = new Alert(Alert.AlertType.INFORMATION);
+                    newAlert.setContentText("Selected vehicle has no photos");
+                    newAlert.show();
+                }
+                else createGalleryWindow(photos);
+            });
+            contextMenu.getItems().add(viewItem);
+
+            row.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
+                if (isNowEmpty) {
+                    row.setContextMenu(null);
+                } else {
+                    row.setContextMenu(contextMenu);
+                }
+            });
+            return row;
+        });
+    }
+
+    private void createGalleryWindow(VehiclePhoto[] photos){
+        Stage stage = new Stage();
+        FlowPane flowPane = new FlowPane();
+        for(VehiclePhoto photo : photos) {
+            flowPane.getChildren().add(new ImageView(photo.toImage(0, 420, true)));
+        }
+        ScrollPane scroll = new ScrollPane(flowPane);
+        scroll.setPrefWidth(1280);
+        scroll.setPrefHeight(720);
+        scroll.fitToWidthProperty().set(true);
+        Scene scene = new Scene(scroll);
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Photo gallery");
+        stage.initStyle(StageStyle.UTILITY);
+        stage.initOwner(vehicleTable.getScene().getWindow());
+
+        stage.show();
     }
 
     private void populateClassComboBox(){
