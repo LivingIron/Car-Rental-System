@@ -26,6 +26,8 @@ public class RentCarController {
     private TextArea conditionTextArea;
     @FXML
     private DatePicker dateDatePicker;
+    @FXML
+    private Label riskLabel;
 
     @FXML
     protected void initialize(){
@@ -33,18 +35,21 @@ public class RentCarController {
         populateClientComboBox();
     }
 
+    public void checkRisk(){
+        Client selectedClient = clientComboBox.getValue();
+        riskLabel.setVisible(selectedClient.getRating() <= 3);
+    }
+
     public void enableFullForm(){
-        if(clientComboBox.getValue() != null && carComboBox.getValue() != null){
-            odometerTextField.setDisable(false);
-            durationTextField.setDisable(false);
-            conditionTextArea.setDisable(false);
-            dateDatePicker.setDisable(false);
+        odometerTextField.setDisable(false);
+        durationTextField.setDisable(false);
+        conditionTextArea.setDisable(false);
+        dateDatePicker.setDisable(false);
 
-            Condition selectedCondition = Condition.getConditionByCar(carComboBox.getValue());
+        Condition selectedCondition = Condition.getConditionByCar(carComboBox.getValue());
 
-            conditionTextArea.setText(selectedCondition.getDamages());
-            odometerTextField.setText(Integer.toString(selectedCondition.getOdometer()));
-        }
+        conditionTextArea.setText(selectedCondition.getDamages());
+        odometerTextField.setText(Integer.toString(selectedCondition.getOdometer()));
     }
 
     public void rentButtonOnAction(){
