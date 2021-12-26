@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -47,12 +48,15 @@ public class OperatorController {
 
     public void checkExpiry(){
         Rental[] alertRentals = Arrays.stream(JavaPostgreSQL.getRentals())
-                .filter(r -> !r.isReturned() && LocalDate.now().equals(r.getRental_date().toLocalDate().plusDays(r.getDuration())))
+                .filter(r -> !r.isReturned()
+                        &&
+                        (LocalDate.now().equals(r.getRental_date().toLocalDate().plusDays(r.getDuration()))
+                        || LocalDate.now().isAfter(r.getRental_date().toLocalDate().plusDays(r.getDuration()))))
                 .toArray(Rental[]::new);
         if(alertRentals.length == 0) return;
 
         Alert expiryAlert = new Alert(Alert.AlertType.WARNING);
-        expiryAlert.setHeaderText("Rentals expiring today");
+        expiryAlert.setHeaderText("Expired/expiring rentals");
         expiryAlert.initStyle(StageStyle.UNDECORATED);
         expiryAlert.initModality(Modality.WINDOW_MODAL);
 
@@ -62,7 +66,12 @@ public class OperatorController {
 
         for(Rental r : alertRentals){
             r.getClient().pull();
-            alertList.getChildren().add(new Label(String.format("#%d Client (%s) phone number: %s", r.getId(), r.getClient().getName(), r.getClient().getPhone())));
+            if(LocalDate.now().isAfter(r.getRental_date().toLocalDate().plusDays(r.getDuration()))){
+                Label label = new Label(String.format("EXPIRED! #%d Client (%s) phone number: %s", r.getId(), r.getClient().getName(), r.getClient().getPhone()));
+                label.setTextFill(Color.RED);
+                alertList.getChildren().add(label);
+            }
+            else alertList.getChildren().add(new Label(String.format("#%d Client (%s) phone number: %s", r.getId(), r.getClient().getName(), r.getClient().getPhone())));
         }
 
         Window currWindow = HomeButton.getScene().getWindow();
