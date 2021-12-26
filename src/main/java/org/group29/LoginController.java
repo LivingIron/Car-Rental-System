@@ -52,8 +52,8 @@ public class LoginController {
             Data.operator.pull();
 
             Stage stage = new Stage();
-            Pane myPane;
-            myPane = FXMLLoader.load(getClass().getResource("OperatorLogged.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OperatorLogged.fxml"));
+            Pane myPane = loader.load();
             Scene scene = new Scene(myPane);
 
             stage.setTitle("Operator Panel");
@@ -62,6 +62,7 @@ public class LoginController {
             stage.initStyle(StageStyle.UNDECORATED);
 
             closeStage();
+            stage.setOnShown(e -> ((OperatorController) loader.getController()).checkExpiry());
             stage.show();
         }
     }
