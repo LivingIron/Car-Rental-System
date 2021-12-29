@@ -7,6 +7,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.group29.entities.Client;
 
+import java.util.Arrays;
+
 public class CheckClientRatingsController {
     @FXML
     private TableView<Client> ratingsTable;
@@ -18,6 +20,7 @@ public class CheckClientRatingsController {
     @FXML
     private void initialize(){
         Client[] clients = JavaPostgreSQL.getClients();
+        clients = Arrays.stream(clients).filter(c -> c.getFirm_id() == Data.operator.getFirm_id()).toArray(Client[]::new);
 
         clientColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(p.getValue().getName()));
         ratingColumn.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(Integer.toString(p.getValue().getRating())));
