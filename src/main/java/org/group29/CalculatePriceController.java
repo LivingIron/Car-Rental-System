@@ -34,7 +34,7 @@ public class CalculatePriceController {
         double price = JavaPostgreSQL.getPrice(selectedReturn);
         if(price == -1){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("An error has occured");
+            alert.setContentText("An error has occurred");
             alert.show();
         }
         else

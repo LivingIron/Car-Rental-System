@@ -11,41 +11,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.AdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.AdminController">
    <right>
       <AnchorPane opacity="0.87" prefHeight="503.0" prefWidth="237.0" style="-fx-background-color: #24F1CA;" BorderPane.alignment="CENTER">
-         <VBox prefHeight="493.0" prefWidth="237.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-               <VBox alignment="CENTER" fillWidth="false" prefWidth="237.0" spacing="5.0">
-                  <children>
-                     <ImageView>
-                        <Image url="@img/admin_icon.png" />
-                     </ImageView>
-                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome" wrappingWidth="167.43724821121526">
-                        <font>
-                           <Font name="SansSerif" size="39.0" />
-                        </font>
-                     </Text>
-                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator">
-                        <font>
-                           <Font name="SansSerif" size="21.0" />
-                        </font>
-                     </Text>
-                  </children>
-                  <padding>
-                     <Insets bottom="20.0" top="20.0" />
-                  </padding>
-                  <VBox.margin>
-                     <Insets top="20.0" />
-                  </VBox.margin>
-               </VBox>
-               <VBox alignment="CENTER" spacing="40.0" VBox.vgrow="ALWAYS">
-                  <children>
-                     <Button fx:id="HomeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="133.0" text="Home" />
-                     <Button fx:id="AdminCloseButton" mnemonicParsing="false" onAction="#exitSceneOnAction" prefHeight="30.0" prefWidth="133.0" text="Exit" />
-                  </children>
-               </VBox>
-            </children>
+         <VBox prefHeight="493.0" prefWidth="237.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="CENTER" fillWidth="false" prefWidth="237.0" spacing="5.0">
+               <padding>
+                  <Insets bottom="20.0" top="20.0"/>
+               </padding>
+               <VBox.margin>
+                  <Insets top="20.0"/>
+               </VBox.margin>
+               <ImageView>
+                  <Image url="@img/admin_icon.png"/>
+               </ImageView>
+               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome"
+                     wrappingWidth="167.43724821121526">
+                  <font>
+                     <Font name="SansSerif" size="39.0"/>
+                  </font>
+               </Text>
+               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator">
+                  <font>
+                     <Font name="SansSerif" size="21.0"/>
+                  </font>
+               </Text>
+            </VBox>
+            <VBox alignment="CENTER" spacing="40.0" VBox.vgrow="ALWAYS">
+               <Button fx:id="HomeButton" mnemonicParsing="false" prefHeight="30.0" prefWidth="133.0" text="Home"/>
+               <Button fx:id="AdminCloseButton" mnemonicParsing="false" onAction="#exitSceneOnAction"
+                       prefHeight="30.0" prefWidth="133.0" text="Exit"/>
+            </VBox>
          </VBox>
       </AnchorPane>
    </right>

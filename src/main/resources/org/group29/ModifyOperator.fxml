@@ -10,21 +10,21 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.ModifyOperatorController">
-   <children>
-      <VBox alignment="CENTER" fillWidth="false" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="610.0" spacing="30.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
-         <children>
-            <ImageView fitHeight="89.0" fitWidth="89.0">
-               <image>
-                  <Image url="@img/operator_icon.png" />
-               </image>
-            </ImageView>
-            <ComboBox fx:id="operatorComboBox" onAction="#onOperatorSelection" prefWidth="150.0" promptText="Select Operator" />
-            <TextField fx:id="newNameField" disable="true" prefHeight="35.0" prefWidth="185.0" promptText="Enter new username" />
-            <PasswordField fx:id="newPasswordField" disable="true" prefHeight="35.0" prefWidth="185.0" promptText="Enter new password" />
-            <ComboBox fx:id="firmComboBox" disable="true" prefHeight="35.0" prefWidth="185.0" promptText="Firm" />
-            <Button mnemonicParsing="false" onAction="#onUpdateAction" text="Update" />
-         </children>
-      </VBox>
-   </children>
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.group29.ModifyOperatorController">
+    <VBox alignment="CENTER" fillWidth="false" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="610.0"
+          spacing="30.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="20.0">
+        <ImageView fitHeight="89.0" fitWidth="89.0">
+            <Image url="@img/operator_icon.png"/>
+        </ImageView>
+        <ComboBox fx:id="operatorComboBox" onAction="#onOperatorSelection" prefWidth="150.0"
+                  promptText="Select Operator"/>
+        <TextField fx:id="newNameField" disable="true" prefHeight="35.0" prefWidth="185.0"
+                   promptText="Enter new username"/>
+        <PasswordField fx:id="newPasswordField" disable="true" prefHeight="35.0" prefWidth="185.0"
+                       promptText="Enter new password"/>
+        <ComboBox fx:id="firmComboBox" disable="true" prefHeight="35.0" prefWidth="185.0" promptText="Firm"/>
+        <Button mnemonicParsing="false" onAction="#onUpdateAction" text="Update"/>
+    </VBox>
 </AnchorPane>

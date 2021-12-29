@@ -24,12 +24,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class RegisterCarController {
-
     /*---------------Radio Buttons----------------*/
     @FXML
-    private RadioButton RadioSmoking;
-    @FXML
-    private RadioButton RadioNonSmoking;
+    public ToggleGroup smoking;
 
     /*---------------ComboBoxes----------------*/
     @FXML
@@ -144,13 +141,13 @@ public class RegisterCarController {
             alert.show();
             return;
         }
-        if(!RadioSmoking.isSelected() && !RadioNonSmoking.isSelected()){
+        if(smoking.getSelectedToggle() == null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Please select if the vehicle is for smokers or not!");
             alert.show();
             return;
         }
-        boolean isForSmokers = RadioSmoking.isSelected();
+        boolean isForSmokers = Boolean.parseBoolean((String)smoking.getSelectedToggle().getUserData());
 
         Vehicle newVehicle = new Vehicle(-1,
                 ClassComboBox.getValue().getId(),

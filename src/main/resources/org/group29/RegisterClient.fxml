@@ -7,37 +7,35 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.RegisterClientController">
-   <children>
-      <VBox alignment="CENTER" fillWidth="false" prefHeight="500.0" prefWidth="500.0" spacing="30.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
-         <children>
-            <Label prefHeight="40.0" prefWidth="197.0" text="Register Client">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.group29.RegisterClientController">
+    <VBox alignment="CENTER" fillWidth="false" prefHeight="500.0" prefWidth="500.0" spacing="30.0"
+          AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="20.0">
+        <Label prefHeight="40.0" prefWidth="197.0" text="Register Client">
+            <font>
+                <Font name="System Bold" size="28.0"/>
+            </font>
+        </Label>
+        <VBox prefWidth="184.0" spacing="10.0">
+            <Label text="Enter client's name :">
+                <font>
+                    <Font size="20.0"/>
+                </font>
             </Label>
-            <VBox prefWidth="184.0" spacing="10.0">
-               <children>
-                  <Label text="Enter client's name :">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="clientNameTextField" prefHeight="32.0" prefWidth="198.0" promptText="Enter client .." />
-               </children>
-            </VBox>
-            <VBox prefWidth="184.0" spacing="10.0">
-               <children>
-                  <Label prefHeight="30.0" prefWidth="186.0" text="Enter client's phone:">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="clientPhoneTextField" prefHeight="32.0" prefWidth="198.0" promptText="Enter phone.." />
-               </children>
-            </VBox>
-            <Button mnemonicParsing="false" onAction="#addClientOnAction" prefHeight="35.0" prefWidth="73.0" text="Add" />
-         </children>
-      </VBox>
-   </children>
+            <TextField fx:id="clientNameTextField" prefHeight="32.0" prefWidth="198.0"
+                       promptText="Enter client .."/>
+        </VBox>
+        <VBox prefWidth="184.0" spacing="10.0">
+            <Label prefHeight="30.0" prefWidth="186.0" text="Enter client's phone:">
+                <font>
+                    <Font size="20.0"/>
+                </font>
+            </Label>
+            <TextField fx:id="clientPhoneTextField" prefHeight="32.0" prefWidth="198.0"
+                       promptText="Enter phone.."/>
+        </VBox>
+        <Button mnemonicParsing="false" onAction="#addClientOnAction" prefHeight="35.0" prefWidth="73.0"
+                text="Add"/>
+    </VBox>
 </AnchorPane>

@@ -11,80 +11,63 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.group29.AdminMenuController">
-    <children>
-        <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="500.0" spacing="10.0">
-            <children>
-                <ImageView fitHeight="93.0" fitWidth="93.0">
-                    <image>
-                        <Image url="@img/icons_gear.png" />
-                    </image>
-                </ImageView>
-                <Label text="Select Action">
-                    <font>
-                        <Font name="System Bold" size="25.0" />
-                    </font>
-                </Label>
-                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-                    <tabs>
-                        <Tab text="Registrations">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="200.0">
-                                    <children>
-                                        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0">
-                                            <children>
-                                    <Button fx:id="RegisterFirmButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register firm" />
-                                                <Button fx:id="RegisterCarButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register car" />
-                                                <Button fx:id="RegisterOperatorButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Register operator" />
-                                            </children>
-                                            <padding>
-                                                <Insets top="10.0" />
-                                            </padding>
-                                        </VBox>
-                                    </children>
-                                </AnchorPane>
-                            </content>
-                        </Tab>
-                        <Tab text="Queries">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <children>
-                                        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0">
-                                            <children>
-                                                <Button fx:id="CheckOperatorHistoryButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Check operator history" VBox.vgrow="ALWAYS" />
-                                            </children>
-                                            <padding>
-                                                <Insets top="10.0" />
-                                            </padding>
-                                        </VBox>
-                                    </children>
-                                </AnchorPane>
-                            </content>
-                        </Tab>
-                        <Tab text="Adjustments">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                    <children>
-                                        <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0">
-                                            <padding>
-                                                <Insets top="10.0" />
-                                            </padding>
-                                 <children>
-                                    <Button fx:id="ModifyOperatorButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Modify operator" />
-                                    <Button fx:id="ModifyCarButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Modify car" />
-                                    <Button fx:id="ModifyFirmButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="172.0" text="Modify firm" />
-                                 </children>
-                                        </VBox>
-                                    </children>
-                                </AnchorPane>
-                            </content>
-                        </Tab>
-                    </tabs>
-                </TabPane>
-            </children>
-            <padding>
-                <Insets top="20.0" />
-            </padding>
-        </VBox>
-    </children>
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.group29.AdminMenuController">
+    <VBox alignment="TOP_CENTER" prefHeight="500.0" prefWidth="500.0" spacing="10.0">
+        <padding>
+            <Insets top="20.0"/>
+        </padding>
+        <ImageView fitHeight="93.0" fitWidth="93.0">
+            <Image url="@img/icons_gear.png"/>
+        </ImageView>
+        <Label text="Select Action">
+            <font>
+                <Font name="System Bold" size="25.0"/>
+            </font>
+        </Label>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+            <Tab text="Registrations">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="200.0">
+                    <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0">
+                        <padding>
+                            <Insets top="10.0"/>
+                        </padding>
+                        <Button fx:id="RegisterFirmButton" mnemonicParsing="false" prefHeight="42.0"
+                                prefWidth="172.0" text="Register firm"/>
+                        <Button fx:id="RegisterCarButton" mnemonicParsing="false" prefHeight="42.0"
+                                prefWidth="172.0" text="Register car"/>
+                        <Button fx:id="RegisterOperatorButton" mnemonicParsing="false"
+                                prefHeight="42.0" prefWidth="172.0" text="Register operator"/>
+                    </VBox>
+                </AnchorPane>
+            </Tab>
+            <Tab text="Queries">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0">
+                        <padding>
+                            <Insets top="10.0"/>
+                        </padding>
+                        <Button fx:id="CheckOperatorHistoryButton" mnemonicParsing="false"
+                                prefHeight="42.0" prefWidth="172.0" text="Check operator history"
+                                VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </AnchorPane>
+            </Tab>
+            <Tab text="Adjustments">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0">
+                        <padding>
+                            <Insets top="10.0"/>
+                        </padding>
+                        <Button fx:id="ModifyOperatorButton" mnemonicParsing="false"
+                                prefHeight="42.0" prefWidth="172.0" text="Modify operator"/>
+                        <Button fx:id="ModifyCarButton" mnemonicParsing="false" prefHeight="42.0"
+                                prefWidth="172.0" text="Modify car"/>
+                        <Button fx:id="ModifyFirmButton" mnemonicParsing="false" prefHeight="42.0"
+                                prefWidth="172.0" text="Modify firm"/>
+                    </VBox>
+                </AnchorPane>
+            </Tab>
+        </TabPane>
+    </VBox>
 </AnchorPane>

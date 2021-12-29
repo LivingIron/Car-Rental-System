@@ -22,8 +22,6 @@ public class OperatorMenuController {
     @FXML
     private Button CheckRentingHistoryButton;
     @FXML
-    private Button CheckOperatorHistoryButton;
-    @FXML
     private Button CheckClientRatingsButton;
     @FXML
     private Button CheckStatsOfCarsButton;

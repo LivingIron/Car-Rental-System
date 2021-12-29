@@ -13,21 +13,15 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = loadFXML("login");
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login.fxml"));
+        Parent root = fxmlLoader.load();
         primaryStage.setTitle("Car Rental System");
         primaryStage.setScene(new Scene(root, 520, 400));
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
     }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
-
     public static void main(String[] args) {
         launch();
     }
-
 }

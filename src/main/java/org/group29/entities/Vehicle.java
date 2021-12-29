@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vehicle {
-
     private int id, classification, category, firm_id;
     private String characteristics;
     private boolean smoking;

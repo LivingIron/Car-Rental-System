@@ -28,7 +28,7 @@ public class RegisterOperatorController {
     public void addOperatorOnAction(){
         if(!OperatorPassword.getText().equals(OperatorConfirmPassword.getText())){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Passwords dont match!");
+            alert.setContentText("Passwords don't match!");
             alert.show();
             return;
         }
