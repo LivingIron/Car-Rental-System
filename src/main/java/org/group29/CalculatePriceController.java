@@ -7,6 +7,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import org.group29.entities.Return;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class CalculatePriceController {
 
     @FXML
@@ -35,7 +38,7 @@ public class CalculatePriceController {
             alert.show();
         }
         else
-            priceTextField.setText(Double.toString(price));
+            priceTextField.setText(price + " лв.");
     }
 
     private void populateReturnComboBox(){
@@ -44,6 +47,7 @@ public class CalculatePriceController {
             r.getRental().pull();
             r.getRental().getClient().pull();
         }
+        Collections.reverse(Arrays.asList(returns));
         returnComboBox.setItems(FXCollections.observableArrayList(returns));
     }
 }
