@@ -51,6 +51,8 @@ public class Return {
 
     @Override
     public String toString() {
-        return "" + id ;
+        rental.pull();
+        rental.getClient().pull();
+        return String.format("#%d | %s | Vehicle #%d | %s", id, rental.getClient().getName(), rental.getVehicle().getId(), return_date.toString());
     }
 }
