@@ -51,6 +51,7 @@ public class CheckRentingHistoryController {
 
         Vehicle selectedVehicle = vehicleComboBox.getValue();
         Rental[] rentals = JavaPostgreSQL.getRentalsByVehicle(selectedVehicle, Date.valueOf(startDatePicker.getValue()), Date.valueOf(endDatePicker.getValue()));
+        for(Rental r : rentals) r.getClient().pull();
         rentalList.setItems(FXCollections.observableArrayList(rentals));
     }
 

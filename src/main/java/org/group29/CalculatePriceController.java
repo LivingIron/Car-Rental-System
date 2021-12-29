@@ -40,6 +40,10 @@ public class CalculatePriceController {
 
     private void populateReturnComboBox(){
         Return[] returns = JavaPostgreSQL.getReturns();
+        for(Return r : returns) {
+            r.getRental().pull();
+            r.getRental().getClient().pull();
+        }
         returnComboBox.setItems(FXCollections.observableArrayList(returns));
     }
 }

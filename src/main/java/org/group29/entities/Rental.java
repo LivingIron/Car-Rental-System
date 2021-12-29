@@ -105,7 +105,6 @@ public class Rental {
 
     @Override
     public String toString() {
-        client.pull();
         return String.format("%d | %s | %s | %d days", id, client.getName(), rental_date.toString(), duration);
     }
 }

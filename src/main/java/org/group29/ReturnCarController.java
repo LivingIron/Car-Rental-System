@@ -93,6 +93,7 @@ public class ReturnCarController {
     private void populateRentalComboBox(){
         Rental[] rentals = JavaPostgreSQL.getRentals();
         rentals = Arrays.stream(rentals).filter(x -> !x.isReturned()).toArray(Rental[]::new);
+        for(Rental r : rentals) r.getClient().pull();
         returnCarComboBox.setItems(FXCollections.observableArrayList(rentals));
     }
 }
