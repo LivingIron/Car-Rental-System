@@ -249,7 +249,7 @@ public class JavaPostgreSQL {
 
     public static void getReturn(Return returnal){
         try(Connection con = DriverManager.getConnection(databaseUrl,databaseUser,databasePassword)){
-            String query = "SELECT rental_id, return_date, condition_id, id_price FROM return WHERE id = ?";
+            String query = "SELECT rental_id, return_date FROM return WHERE id = ?";
             PreparedStatement statement = con.prepareStatement(query);
             statement.setInt(1,returnal.getId());
             ResultSet res = statement.executeQuery();
