@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fecf90-d57d-438f-81d0-ddb982d2b4a1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/CalculatePriceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/CalculatePriceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/JavaPostgreSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/org/group29/CalculatePrice.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/org/group29/CalculatePrice.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/group29/ModifyCarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/group29/ModifyCarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Документация по Java проект по ООП част 2 , Тема Система за коли под наем , Изработено от Живко Желязков и Александър Петков, СИТ1б , 3 Курс  (1).docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +54,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../SceneBuilder/SceneBuilder.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Projects/Java/Java Project" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.39425287" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -396,16 +400,5 @@
     <MESSAGE value="Added a few comments" />
     <MESSAGE value="Added new helper class &quot;Return&quot; and added function to populate Calculate Price comboBox" />
     <option name="LAST_COMMIT_MESSAGE" value="Added new helper class &quot;Return&quot; and added function to populate Calculate Price comboBox" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/group29/AdminController.java</url>
-          <line>102</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

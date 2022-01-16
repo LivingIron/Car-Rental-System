@@ -40,7 +40,6 @@ public class ModifyCarController {
     private Button viewImgButton;
 
     private final ObjectProperty<StackPane> selectedImg = new SimpleObjectProperty<>();
-
     private final HashMap<Integer, VehiclePhoto> photos = new HashMap<>();
     private final HashMap<StackPane, Integer> thumbnails = new HashMap<>();
     private final List<Integer> photosToRemove = new ArrayList<>();
