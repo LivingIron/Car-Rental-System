@@ -8,14 +8,10 @@ A fully Working Car Rental System made as a Project for University
 
 1) Admin Panel for adding new Firms and Operators
 2) Operator Screen
-3) 
-4.1) Adding Vehicle
-
-2.1) Renting Vehicle
-
-2.1) Notification system for expirations
-
-2.1) Client Rating System
+2.1) Adding Vehicle
+2.2) Renting Vehicle
+2.3) Notification system for expirations
+2.4) Client Rating System
 
 # Database Structure 
 ![image](https://user-images.githubusercontent.com/29221743/168470836-1ccb83ee-9a71-4f1f-9c7e-711f71d1f1c1.png)
